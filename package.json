@@ -1,0 +1,25 @@
+{
+  "name": "explai",
+  "version": "1.0.0",
+  "description": "AI Visualizer",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/ExplAI.git"
+  },
+  "author": "explAIn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/ExplAI/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/ExplAI#readme",
+  "dependencies": {
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "react": "^18.2.0",
+    "webpack": "^5.90.3"
+  }
+}
