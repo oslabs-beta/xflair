@@ -1,13 +1,68 @@
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
-.description {
+.majorDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* border: 1px solid white; */
+  height: 595px;
+  width: 900px;
+  margin-left: 5%;
+}
+
+.title {
+  font-size: xx-large;
+  background-color: #f3ec78;
+  background-image: linear-gradient(15deg, #af4261, #f3ec78);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  /* border: 1px solid white; */
+  margin-bottom: 10%;
+}
+
+.inputBox {
+  border: 1px solid white;
+  background-image: linear-gradient(45deg, rgb(255, 89, 0), rgb(248, 172, 50));
+  box-shadow: 0px 0px 40px white;
+  height: 425px;
+  width: 800px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dataVis {
+  font-family: 'Hanken Grotesk', sans-serif;
+  text-align: left;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.fileBrowser {
+  font-family: 'Hanken Grotesk', sans-serif;
+  text-align: left;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* .description {
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
@@ -32,9 +87,9 @@
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
-}
+} */
 
-.code {
+/* .code {
   font-weight: 700;
   font-family: var(--font-mono);
 }
@@ -98,16 +153,13 @@
 
 .center::before,
 .center::after {
-  content: "";
+  content: '';
   left: 50%;
   position: absolute;
   filter: blur(45px);
   transform: translateZ(0);
-}
+} */
 
-.logo {
-  position: relative;
-}
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -207,16 +259,6 @@
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
     grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
-  }
-
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
 }
 
