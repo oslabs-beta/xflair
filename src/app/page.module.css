@@ -39,7 +39,32 @@
 
 .inputBox {
   border: 1px solid white;
-  background-image: linear-gradient(45deg, rgb(255, 89, 0), rgb(248, 172, 50));
+  /* background-image: linear-gradient(45deg, rgb(255, 89, 0), rgb(248, 172, 50)); */
+  background-image: linear-gradient(
+    130deg,
+    hsl(28deg 52% 53%) 0%,
+    hsl(26deg 51% 53%) 8%,
+    hsl(24deg 48% 54%) 15%,
+    hsl(21deg 46% 54%) 22%,
+    hsl(19deg 44% 54%) 28%,
+    hsl(17deg 41% 54%) 34%,
+    hsl(15deg 38% 54%) 40%,
+    hsl(13deg 35% 53%) 45%,
+    hsl(11deg 32% 53%) 50%,
+    hsl(9deg 29% 52%) 55%,
+    hsl(7deg 26% 52%) 59%,
+    hsl(6deg 25% 51%) 63%,
+    hsl(5deg 24% 52%) 67%,
+    hsl(4deg 23% 52%) 71%,
+    hsl(4deg 22% 52%) 75%,
+    hsl(3deg 21% 52%) 78%,
+    hsl(3deg 20% 52%) 82%,
+    hsl(2deg 19% 52%) 86%,
+    hsl(2deg 18% 52%) 89%,
+    hsl(1deg 17% 52%) 93%,
+    hsl(1deg 16% 53%) 96%,
+    hsl(0deg 15% 53%) 100%
+  );
   box-shadow: 0px 0px 40px white;
   height: 425px;
   width: 800px;
@@ -50,20 +75,87 @@
   justify-content: space-evenly;
 }
 
-.button {
+.hide {
+  display: none;
+}
+
+.placeholderText {
+  font-size: 70px;
+  font-weight: bolder;
+  background-color: #f3ec78;
+  /* background-image: linear-gradient(15deg, #af4261, #f3ec78); */
+  background-image: linear-gradient(
+    40deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 36%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  margin-bottom: 2%;
+  /* -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black; */
+}
+
+.primaryBtn {
   font-family: 'Hanken Grotesk', sans-serif;
   text-align: left;
   color: black;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 10px;
   margin: 10px;
+}
+
+.primaryBtn:hover {
+  color: white;
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.primaryBtn:active {
+  color: white;
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.altBtn {
+  font-family: 'Hanken Grotesk', sans-serif;
+  text-align: left;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 10px;
+  margin: 10px;
+}
+
+.altBtn:hover {
+  color: white;
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.altBtn:active {
+  color: white;
+  background-color: rgba(100, 100, 100, 0.5);
 }
 
 .uploadImg {
   height: 150px;
   width: 150px;
   object-fit: contain;
+}
+
+.imgInput {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 15px 30px;
+  cursor: pointer;
 }
 
 /* .description {
@@ -275,66 +367,13 @@
   }
 }
 
-/* WELL READ IMPORT */
+/* MODAL */
 
-.articledisplayoutercontainer {
-  cursor: pointer;
-}
-
-.articleinnercontainer {
-  display: flex;
-  align-items: center;
-}
-
-.articleinnercontainer:hover {
-  text-decoration: underline;
-}
-
-.articleimage {
-  width: 125px;
-  height: 125px;
-  margin-right: 25px;
-}
-
-.articledisplaycontainer {
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 25px;
-}
-
-.aotdheader {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  font-weight: 700;
-  color: white;
-  text-shadow: 2px 1px 2px rgba(56, 56, 56, 0.5);
-  /* text-transform: uppercase; */
-}
-
-.aotdbodytext {
-  color: white;
-  text-shadow: 2px 1px 2px rgba(56, 56, 56, 0.5);
-}
-
-.aotddescription {
-  color: white;
-  text-shadow: 2px 1px 2px rgba(56, 56, 56, 0.5);
-}
-
-.articledisplayoutercontainer {
-  cursor: pointer;
-}
-
-/* ARTICLE MODAL STYLES */
 .modalclosed {
   display: none;
 }
 
-.articlemodalcontainer {
+.modalcontainer {
   position: fixed !important;
   background: rgba(225, 225, 225, 0.95);
   color: black;
@@ -343,7 +382,7 @@
   left: 50% !important;
   transform: translate(-50%, -50%);
   width: 90vw;
-  height: 75vh;
+  height: 90vh;
   padding: 40px;
   overflow: none;
   display: flex;
@@ -352,7 +391,7 @@
   border-radius: 15px;
 }
 
-.articlemodalcontents {
+.modalcontents {
   overflow: scroll;
 }
 
@@ -376,7 +415,7 @@
   font-family: 'Playfair Display', serif;
 }
 
-.articlebodytext {
+.bodytext {
   font-family: 'Hanken Grotesk', sans-serif;
   height: 75%;
   font-weight: 300;
@@ -386,11 +425,3 @@
   border: 1px solid rgba(181, 181, 181, 0.5);
   padding: 15px;
 }
-
-.donereadingbtn {
-  background-color: rgba(56, 56, 56, 0.5);
-  color: white;
-  padding: 10px;
-  cursor: pointer;
-}
-
