@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 // import { uploadImage } from './lib/actions';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
+// import Heatmap from './ui/heatmap';
 
-import Heatmap from './ui/heatmap';
+const Heatmap = lazy(() => import('./ui/heatmap'));
 
 export default function Home() {
   const [imgURL, setImgURL] = useState('');
@@ -37,8 +38,7 @@ export default function Home() {
       />
       <div className={styles.majorDiv}>
         <div className={styles.title}>
-          {/* <h1>xFlair</h1> */}
-          <img className={styles.titleImg} src='/title.png' alt='testing' />
+          <img className={styles.titleImg} src='/title.png' alt='titleText' />
         </div>
         <div className={styles.inputBox}>
           {viz && (
@@ -51,7 +51,9 @@ export default function Home() {
                 <Heatmap />
               </div> */}
               <h1 className={styles.modaltitle}>Analysis</h1>
-              <Heatmap />
+              <Suspense fallback={<img src='/loadspinner.gif' />}>
+                <Heatmap />
+              </Suspense>
               <div className={styles.modalbutton}>
                 <button className={styles.primaryBtn} onClick={closeViz}>
                   Okay
