@@ -43,15 +43,15 @@ export default function Home() {
         <div className={styles.inputBox}>
           {viz && (
             <div className={styles.modalcontainer}>
-              <div className={styles.modalcontents}>
+              {/* <div className={styles.modalcontents}>
                 <div className={styles.modaltitlecontainer}>
                   <h1 className={styles.modaltitle}>Coming Soon</h1>
                 </div>
                 <p className={styles.bodytext}>Work in progress</p>
-                <Heatmap/>
-              </div>
-              {/* <h1 className={styles.modaltitle}>Analysis</h1>
-              <Heatmap /> */}
+                <Heatmap />
+              </div> */}
+              <h1 className={styles.modaltitle}>Analysis</h1>
+              <Heatmap />
               <div className={styles.modalbutton}>
                 <button className={styles.primaryBtn} onClick={closeViz}>
                   Okay
