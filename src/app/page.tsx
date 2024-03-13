@@ -4,7 +4,8 @@ import Image from 'next/image';
 import styles from './page.module.css';
 // import { uploadImage } from './lib/actions';
 import { useState } from 'react';
-import { uploadImage } from './lib/actions';
+
+import Heatmap from './ui/heatmap';
 
 export default function Home() {
   const [imgURL, setImgURL] = useState('');
@@ -12,9 +13,10 @@ export default function Home() {
 
   let inputImage: File | undefined;
 
-  const handleClick = () => {
+  const uploadClick = () => {
     if (inputImage) setImgURL(URL.createObjectURL(inputImage as File));
   };
+
   const vizClick = () => {
     openViz(true);
   };
@@ -22,6 +24,7 @@ export default function Home() {
   const closeViz = () => {
     openViz(false);
   };
+
   return (
     <main className={styles.main}>
       <Image
@@ -38,31 +41,36 @@ export default function Home() {
           <img className={styles.titleImg} src='/title.png' alt='testing' />
         </div>
         <div className={styles.inputBox}>
-          {/* <div className={styles.imgContainer}> */}
           {viz && (
-            <div className={styles.articlemodalcontainer}>
-              <div className={styles.articlemodalcontents}>
+            <div className={styles.modalcontainer}>
+              {/* <div className={styles.modalcontents}>
                 <div className={styles.modaltitlecontainer}>
                   <h1 className={styles.modaltitle}>Coming Soon</h1>
                 </div>
-                <p className={styles.articlebodytext}>Work in progress</p>
-              </div>
-              <div className={styles.articlemodalbutton}>
-                <button className={styles.button} onClick={closeViz}>
+                <p className={styles.bodytext}>Work in progress</p>
+              </div> */}
+              <h1 className={styles.modaltitle}>Analysis</h1>
+              <Heatmap />
+              <div className={styles.modalbutton}>
+                <button className={styles.primaryBtn} onClick={closeViz}>
                   Okay
                 </button>
               </div>
             </div>
           )}
-          <img
-            className={styles.uploadImg}
-            src={imgURL}
-            alt='Waiting for image...'
-          />
-          {/* </div> */}
+          {imgURL && (
+            <img
+              className={styles.uploadImg}
+              src={imgURL}
+              alt='UploadedImage'
+            />
+          )}
+          {!imgURL && (
+            <p className={styles.placeholderText}>Waiting for image</p>
+          )}
           <div>
             {imgURL && (
-              <button className={styles.button} onClick={vizClick}>
+              <button className={styles.primaryBtn} onClick={vizClick}>
                 Analysis Visualization
               </button>
             )}
@@ -72,23 +80,25 @@ export default function Home() {
             <input id='image' name='image'type='file' accept='image/*' />
             <button type='submit'>Upload</button>
           </form> */}
-            <input
-              className={styles.button}
-              name='image'
-              type='file'
-              accept='image/*'
-              onChange={(e) => (inputImage = e.target.files?.[0])}
-            />
+            <label className={styles.imgInput}>
+              <input
+                // className={styles.hide}
+                name='image'
+                type='file'
+                accept='image/*'
+                onChange={(e) => (inputImage = e.target.files?.[0])}
+              />
+            </label>
             <label>
               <button
-                className={styles.button}
+                className={styles.primaryBtn}
                 id='upload'
-                onClick={handleClick}
+                onClick={uploadClick}
               >
                 Upload
               </button>
             </label>
-            <button className={styles.button} onClick={() => setImgURL('')}>
+            <button className={styles.altBtn} onClick={() => setImgURL('')}>
               Clear
             </button>
           </div>
