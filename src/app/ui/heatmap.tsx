@@ -9,7 +9,7 @@ interface DataItem {
 
 export default function Heatmap() {
   const svgRef = useRef<SVGSVGElement>(null);
-  // Assuming containerSize is the dynamic size of your container
+ 
   const [containerSize, setContainerSize] = useState({
     width: 650,
     height: 650,
@@ -52,5 +52,5 @@ export default function Heatmap() {
     });
   });
 
-  return <svg ref={svgRef}></svg>;
+  return <svg ref={svgRef}/>;
 }
