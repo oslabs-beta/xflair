@@ -1,22 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
-interface DataItem {
-  group: string;
-  variable: string;
-  value: string;
-}
-
 export default function Heatmap() {
   const svgRef = useRef<SVGSVGElement>(null);
- 
+
   const [containerSize, setContainerSize] = useState({
     width: 650,
     height: 650,
   });
 
   useEffect(() => {
-    const numCells = { x: 224, y: 224 };
+    const numCells = { x: 50, y: 50 };
     const margin = { top: 5, right: 5, bottom: 5, left: 5 };
     const width = containerSize.width - margin.left - margin.right;
     const height = containerSize.height - margin.top - margin.bottom;
@@ -38,7 +32,7 @@ export default function Heatmap() {
       .range(['#f5f0f0', '#f20505'])
       .domain([1, 100]);
 
-    d3.csv('/heatmap_data.csv').then((data) => {
+    d3.csv('/renderTest/dataFINAL.csv').then((data) => {
       svg
         .selectAll('rect')
         .data(data)
@@ -52,5 +46,5 @@ export default function Heatmap() {
     });
   });
 
-  return <svg ref={svgRef}/>;
+  return <svg ref={svgRef} />;
 }
