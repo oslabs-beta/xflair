@@ -3,19 +3,31 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 // import { uploadImage } from './lib/actions';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 // import Heatmap from './ui/heatmap';
 
 const Heatmap = lazy(() => import('./ui/heatmap'));
 
+let inputImage: File | undefined;
+
 export default function Home() {
+  const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [viz, openViz] = useState(false);
 
-  let inputImage: File | undefined;
+  const browse = (e: ChangeEvent<HTMLInputElement>) => {
+    inputImage = e.currentTarget.files?.[0];
+    setImgName(`File Name:  ${inputImage?.name}`);
+  };
 
   const uploadClick = () => {
     if (inputImage) setImgURL(URL.createObjectURL(inputImage as File));
+  };
+
+  const clearClick = () => {
+    inputImage = undefined;
+    setImgName('Browse...');
+    setImgURL('');
   };
 
   const vizClick = () => {
@@ -36,10 +48,12 @@ export default function Home() {
         height={512}
         priority
       />
+
       <div className={styles.majorDiv}>
         <div className={styles.title}>
           <img className={styles.titleImg} src='/title.png' alt='titleText' />
         </div>
+
         <div className={styles.inputBox}>
           {viz && (
             <div className={styles.modalcontainer}>
@@ -51,7 +65,7 @@ export default function Home() {
                 <Heatmap />
               </div> */}
               <h1 className={styles.modaltitle}>Analysis</h1>
-              <Suspense fallback={<img src='/loadspinner.gif' />}>
+              <Suspense fallback={<img src='/loadspinner.gif' alt='loading' />}>
                 <Heatmap />
               </Suspense>
               <div className={styles.modalbutton}>
@@ -61,6 +75,7 @@ export default function Home() {
               </div>
             </div>
           )}
+
           {imgURL && (
             <img
               className={styles.uploadImg}
@@ -71,6 +86,7 @@ export default function Home() {
           {!imgURL && (
             <p className={styles.placeholderText}>Waiting for image</p>
           )}
+
           <div>
             {imgURL && (
               <button className={styles.primaryBtn} onClick={vizClick}>
@@ -78,30 +94,30 @@ export default function Home() {
               </button>
             )}
           </div>
-          <div>
+
+          <div className={styles.buttonBox}>
             {/* <form action={uploadImage}>
             <input id='image' name='image'type='file' accept='image/*' />
             <button type='submit'>Upload</button>
           </form> */}
             <label className={styles.imgInput}>
+              <text>{imgName}</text>
               <input
-                // className={styles.hide}
+                className={styles.hide}
                 name='image'
                 type='file'
                 accept='image/*'
-                onChange={(e) => (inputImage = e.target.files?.[0])}
+                onChange={(e) => browse(e)}
               />
             </label>
-            <label>
-              <button
-                className={styles.primaryBtn}
-                id='upload'
-                onClick={uploadClick}
-              >
-                Upload
-              </button>
-            </label>
-            <button className={styles.altBtn} onClick={() => setImgURL('')}>
+            <button
+              className={styles.primaryBtn}
+              id='upload'
+              onClick={uploadClick}
+            >
+              Upload
+            </button>
+            <button className={styles.altBtn} onClick={clearClick}>
               Clear
             </button>
           </div>
