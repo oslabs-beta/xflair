@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import styles from './page.module.css';
-// import { uploadImage } from './lib/actions';
+import { generateHeatmaps, createGif } from './lib/actions';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
+import { modelOutput } from './lib/definitions';
 // import Heatmap from './ui/heatmap';
 
 const Heatmap = lazy(() => import('./ui/heatmap'));
@@ -15,9 +16,17 @@ export default function Home() {
   const [imgURL, setImgURL] = useState('');
   const [viz, openViz] = useState(false);
   const [nextArray, setNextArray] = useState(1);
+  const [modelOutput, setModelOutput] = useState({});
+  const [gifUrl, setGifUrl] = useState('');
 
   const changeViz = () => {
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
+    setInterval(() => {
+      if (nextArray <= 30) {
+        setNextArray(nextArray + 1);
+      } else {
+        return;
+      }
+    }, 500);
   };
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +35,18 @@ export default function Home() {
   };
 
   const uploadClick = () => {
-    if (inputImage) setImgURL(URL.createObjectURL(inputImage as File));
+    if (inputImage) {
+      setImgURL(URL.createObjectURL(inputImage as File));
+
+      const reader = new FileReader();
+      reader.readAsDataURL(inputImage);
+
+      reader.onloadend = () => {
+        const data = (reader.result as string).split(',')[1];
+        setModelOutput(generateHeatmaps(data));
+        createGif((modelOutput as modelOutput).folder, setGifUrl);
+      };
+    }
   };
 
   const clearClick = () => {
@@ -37,7 +57,13 @@ export default function Home() {
 
   const vizClick = () => {
     openViz(true);
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
+    setInterval(() => {
+      if (nextArray <= 30) {
+        setNextArray(nextArray + 1);
+      } else {
+        return;
+      }
+    }, 500);
   };
 
   const closeViz = () => {
@@ -102,10 +128,6 @@ export default function Home() {
           </div>
 
           <div className={styles.buttonBox}>
-            {/* <form action={uploadImage}>
-            <input id='image' name='image'type='file' accept='image/*' />
-            <button type='submit'>Upload</button>
-          </form> */}
             <label className={styles.imgInput}>
               <text>{imgName}</text>
               <input
