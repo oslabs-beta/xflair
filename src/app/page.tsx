@@ -14,6 +14,11 @@ export default function Home() {
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [viz, openViz] = useState(false);
+  const [nextArray, setNextArray] = useState(1);
+
+  const changeViz = () => {
+    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
+  };
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -32,6 +37,7 @@ export default function Home() {
 
   const vizClick = () => {
     openViz(true);
+    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
   };
 
   const closeViz = () => {
@@ -66,7 +72,7 @@ export default function Home() {
               </div> */}
               <h1 className={styles.modaltitle}>Analysis</h1>
               <Suspense fallback={<img src='/loadspinner.gif' alt='loading' />}>
-                <Heatmap />
+                <Heatmap nextArray={nextArray} />
               </Suspense>
               <div className={styles.modalbutton}>
                 <button className={styles.primaryBtn} onClick={closeViz}>
