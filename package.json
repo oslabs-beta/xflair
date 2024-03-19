@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "@tensorflow/tfjs-node": "^4.17.0",
     "@vercel/postgres": "^0.7.2",
     "d3": "^7.9.0",
     "next": "14.1.3",

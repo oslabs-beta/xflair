@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import styles from './page.module.css';
-// import { uploadImage } from './lib/actions';
+import { processImage } from './lib/actions';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 // import Heatmap from './ui/heatmap';
 
@@ -17,7 +17,13 @@ export default function Home() {
   const [nextArray, setNextArray] = useState(1);
 
   const changeViz = () => {
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
+    setInterval(() => {
+      if (nextArray <= 30) {
+        setNextArray(nextArray + 1);
+      } else {
+        return;
+      }
+    }, 500);
   };
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +43,13 @@ export default function Home() {
 
   const vizClick = () => {
     openViz(true);
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
+    setInterval(() => {
+      if (nextArray <= 30) {
+        setNextArray(nextArray + 1);
+      } else {
+        return;
+      }
+    }, 500);
   };
 
   const closeViz = () => {
@@ -102,11 +114,27 @@ export default function Home() {
           </div>
 
           <div className={styles.buttonBox}>
-            {/* <form action={uploadImage}>
-            <input id='image' name='image'type='file' accept='image/*' />
-            <button type='submit'>Upload</button>
-          </form> */}
-            <label className={styles.imgInput}>
+            <form action={processImage}>
+              <label className={styles.imgInput}>
+                <text>{imgName}</text>
+                <input
+                  className={styles.hide}
+                  id='image'
+                  name='image'
+                  type='file'
+                  accept='image/*'
+                  onChange={(e) => browse(e)}
+                />
+              </label>
+              <button className={styles.primaryBtn} id='upload' type='submit'>
+                Upload
+              </button>
+              <button className={styles.altBtn} onClick={clearClick}>
+                Clear
+              </button>
+            </form>
+
+            {/* <label className={styles.imgInput}>
               <text>{imgName}</text>
               <input
                 className={styles.hide}
@@ -125,7 +153,7 @@ export default function Home() {
             </button>
             <button className={styles.altBtn} onClick={clearClick}>
               Clear
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
