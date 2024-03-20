@@ -44,7 +44,6 @@ export default function Home() {
       reader.onloadend = () => {
         const data = (reader.result as string).split(',')[1];
         setModelOutput(generateHeatmaps(data));
-        createGif((modelOutput as modelOutput).folder, setGifUrl);
       };
     }
   };
@@ -57,13 +56,7 @@ export default function Home() {
 
   const vizClick = () => {
     openViz(true);
-    setInterval(() => {
-      if (nextArray <= 30) {
-        setNextArray(nextArray + 1);
-      } else {
-        return;
-      }
-    }, 500);
+    createGif((modelOutput as modelOutput).folder, setGifUrl);
   };
 
   const closeViz = () => {
@@ -98,7 +91,11 @@ export default function Home() {
               </div> */}
               <h1 className={styles.modaltitle}>Analysis</h1>
               <Suspense fallback={<img src='/loadspinner.gif' alt='loading' />}>
-                <Heatmap nextArray={nextArray} />
+                {/* <Heatmap nextArray={nextArray} /> */}
+                <Image
+                  className={styles.heatmap}
+                  src={gifUrl}
+                  alt='Heatmap'/>
               </Suspense>
               <div className={styles.modalbutton}>
                 <button className={styles.primaryBtn} onClick={closeViz}>

@@ -32,7 +32,7 @@ export async function generateHeatmaps(data: string) {
   console.log('running MobileNet middleware');
   try {
     const results = await PythonShell.run(
-      path.join(__dirname, '../../python/MobileNet.py'),
+      path.join(__dirname, '../../../src/app/lib/python/MobileNet.py'),
       options
     );
     console.log('running python script');
