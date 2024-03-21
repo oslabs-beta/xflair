@@ -9,6 +9,7 @@ import HeatMapGif from './ui/heatMapGif';
 import GridMapGif from './ui/gridMapGif';
 import ResizedImage from './ui/resizedImage';
 import Top5 from './ui/top5Classes';
+import axios from 'axios';
 // import Heatmap from './ui/heatmap';
 import Modal from './ui/modal';
 
@@ -37,6 +38,16 @@ export default function Home() {
   const [vizState, setVizState] = useState(false);
   const [predictionName, setPredictionName] = useState('');
   const [viz, openViz] = useState(false);
+  const [hGifURL, setHGifURL] = useState('');
+  const [fGifURL, setFGifURL] = useState('');
+  const [initialTime, setInitialTime] = useState(0);
+  const [finalTime, setFinalTime] = useState(0);
+  const [time, setTime] = useState(0);
+  const [top5, setTop5] = useState({});
+  const [preprocessFilePath, setPreprocessFilePath] = useState('');
+  const [imagePath, setImagePath] = useState('');
+  const [hFilePath, setHFilePath] = useState('');
+  const [fFilePath, setFFilePath] = useState('');
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -46,28 +57,158 @@ export default function Home() {
     }
   };
 
-  const uploadClick = () => {
+  useEffect(() => {
+    if (!initialTime || !finalTime) return;
+    setTime(finalTime - initialTime);
+    console.log('time:', time);
+  }, [finalTime, initialTime, time]);
+
+  const predictions = (data, filePath) => {
+    fetch('http://localhost:3001/api/predictions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setPredictionName(response.class);
+        console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
+        setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
+        setFinalTime(Date.now());
+      });
+
+    fetch('http://localhost:3001/api/preprocess', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setPreprocessFilePath(response.filePath);
+        setVizState(true);
+      });
+  };
+
+  const maps = (data, filePath) => {
+    fetch('http://localhost:3001/api/heatmap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setHFilePath(response.filePath);
+      });
+
+    fetch('http://localhost:3001/api/feature', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setFFilePath(response.filePath);
+      });
+  };
+
+  useEffect(() => {
+    if (!hFilePath) {
+      return;
+    }
+
+    fetch('http://localhost:3001/api/hgif', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ hFilePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response.hgifUrl)
+        setHGifURL(response.hgifUrl);
+      });
+  }, [hFilePath]);
+
+  useEffect(() => {
+    if (!fFilePath || !hGifURL) {
+      return;
+    }
+
+    fetch('http://localhost:3001/api/fgif', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fFilePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setFGifURL(response.fgifUrl);
+      });
+  }, [fFilePath, hGifURL]);
+
+  const uploadClick = async () => {
     if (inputImage) {
       // setImgURL(URL.createObjectURL(inputImage as File));
+      setInitialTime(Date.now());
 
-      const reader = new FileReader();
-      reader.readAsDataURL(inputImage);
+      const formData = new FormData();
+      formData.append('file', inputImage as File);
 
-      reader.onloadend = () => {
-        const data = (reader.result as string).split(',')[1];
-        // setModelOutput(generateHeatmaps(data));
-        setVizState(true);
-      };
-      const predicted_class_name = `Class:    class_name_goes_here`;
-      setPredictionName(predicted_class_name);
-      const predicted_class_probability = 0.9999999;
+      await axios
+        .post('http://localhost:3001/api/imageSave', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          console.log('response:', response.data);
+          setImagePath(response.data);
+          console.log('imagePath:', imagePath);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   };
+
+  useEffect(() => {
+    if (!imagePath) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(inputImage as File);
+
+    reader.onloadend = () => {
+      const data = (reader.result as string).split(',')[1];
+      // tensorflowJS(imageData);
+      // analyze(data, imagePath);
+      console.log('imagePath:', imagePath);
+      predictions(data, imagePath);
+      maps(data, imagePath);
+    };
+  }, [imagePath]);
 
   const clearClick = () => {
     inputImage = undefined;
     setImgName('Browse...');
     setImgURL('');
+    setFFilePath('');
+    setHFilePath('');
+    setImagePath('');
+    setHGifURL('');
+    setFGifURL('');
     setVizState(false);
   };
   //ori
@@ -88,8 +229,8 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Image
-        src='/logoBlack.png'
-        alt='Logo'
+        src="/logoBlack.png"
+        alt="Logo"
         className={styles.Logo}
         width={396}
         height={512}
@@ -98,22 +239,31 @@ export default function Home() {
 
       <div className={styles.majorDiv}>
         <div className={styles.title}>
-          <img className={styles.titleImg} src='/title.png' alt='titleText' />
+          <img className={styles.titleImg} src="/title.png" alt="titleText" />
         </div>
 
         <div className={styles.inputBox}>
-          {viz && <Modal closeViz={closeViz} />}
+          {viz && (
+            <Modal
+              closeViz={closeViz}
+              hGifURL={hGifURL}
+              fGifURL={fGifURL}
+              top5={top5}
+              preprocessFilePath={preprocessFilePath}
+            />
+          )}
 
           {imgURL && (
             <img
               className={styles.uploadImg}
               src={imgURL}
-              alt='UploadedImage'
+              alt="UploadedImage"
             />
           )}
           {vizState && (
             <>
-              <div className='predictedClassName'>{predictionName}</div>
+              <h2 className="predictedClassName">Class:   {predictionName}</h2>
+              {time > 0 && <h3>Time: {(time / 1000).toFixed(2)} seconds</h3>}
             </>
           )}
           {!imgURL && (
@@ -133,15 +283,15 @@ export default function Home() {
               <text>{imgName}</text>
               <input
                 className={styles.hide}
-                name='image'
-                type='file'
-                accept='image/*'
+                name="image"
+                type="file"
+                accept="image/*"
                 onChange={(e) => browse(e)}
               />
             </label>
             <button
               className={styles.primaryBtn}
-              id='upload'
+              id="upload"
               onClick={uploadClick}
             >
               Upload
