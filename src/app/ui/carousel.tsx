@@ -3,6 +3,7 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import styles from '../page.module.css';
+import { DotButton, useDotButton } from './dotButton';
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -12,6 +13,9 @@ export function EmblaCarousel() {
       console.log(emblaApi.slideNodes()); // Access API
     }
   }, [emblaApi]);
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -30,12 +34,27 @@ export function EmblaCarousel() {
           <div className={styles.embla__slide}>Output</div>
         </div>
       </div>
-      <button className={styles.primaryBtn} onClick={scrollPrev}>
-        &lt;
-      </button>
-      <button className={styles.primaryBtn} onClick={scrollNext}>
-        &gt;
-      </button>
+      <div className={styles.embla__controls}>
+        <button className={styles.primaryBtn} onClick={scrollPrev}>
+          &lt;
+        </button>
+        <div className={styles.embla__dots}>
+          {scrollSnaps.map((_, index) => {
+            const style =
+              index === selectedIndex ? 'embla__dot--selected' : 'embla__dot';
+            return (
+              <DotButton
+                key={index}
+                onClick={() => onDotButtonClick(index)}
+                className={styles[style]}
+              />
+            );
+          })}
+        </div>
+        <button className={styles.primaryBtn} onClick={scrollNext}>
+          &gt;
+        </button>
+      </div>
     </div>
   );
 }
