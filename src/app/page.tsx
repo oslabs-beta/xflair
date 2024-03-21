@@ -5,6 +5,7 @@ import styles from './page.module.css';
 // import { uploadImage } from './lib/actions';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 // import Heatmap from './ui/heatmap';
+import Modal from './ui/modal';
 
 const Heatmap = lazy(() => import('./ui/heatmap'));
 
@@ -14,11 +15,6 @@ export default function Home() {
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [viz, openViz] = useState(false);
-  const [nextArray, setNextArray] = useState(1);
-
-  const changeViz = () => {
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
-  };
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -37,7 +33,6 @@ export default function Home() {
 
   const vizClick = () => {
     openViz(true);
-    setInterval(() => {if(nextArray <= 30) { setNextArray(nextArray+1)} else {return}}, 500)
   };
 
   const closeViz = () => {
@@ -61,26 +56,7 @@ export default function Home() {
         </div>
 
         <div className={styles.inputBox}>
-          {viz && (
-            <div className={styles.modalcontainer}>
-              {/* <div className={styles.modalcontents}>
-                <div className={styles.modaltitlecontainer}>
-                  <h1 className={styles.modaltitle}>Coming Soon</h1>
-                </div>
-                <p className={styles.bodytext}>Work in progress</p>
-                <Heatmap />
-              </div> */}
-              <h1 className={styles.modaltitle}>Analysis</h1>
-              <Suspense fallback={<img src='/loadspinner.gif' alt='loading' />}>
-                <Heatmap nextArray={nextArray} />
-              </Suspense>
-              <div className={styles.modalbutton}>
-                <button className={styles.primaryBtn} onClick={closeViz}>
-                  Okay
-                </button>
-              </div>
-            </div>
-          )}
+          {viz && <Modal closeViz={closeViz} />}
 
           {imgURL && (
             <img
