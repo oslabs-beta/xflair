@@ -240,3 +240,19 @@
   border: 1px solid rgba(181, 181, 181, 0.5);
   padding: 15px;
 }
+
+/* CAROUSEL */
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  width: 50vw;
+  height: 50vh;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  border: 1px solid black;
+}
