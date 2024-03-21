@@ -22,7 +22,11 @@ export default function Modal(props) {
       {/* <Suspense fallback={<img src='/loadspinner.gif' alt='loading' />}>
         <Heatmap />
       </Suspense> */}
-      <EmblaCarousel />
+      <EmblaCarousel closeViz={props.closeViz} 
+          hGifURL={props.hGifURL}
+          fGifURL={props.fGifURL}
+          top5={props.top5}
+          preprocessFilePath={props.preprocessFilePath}/>
       {/* <div className={styles.modalbutton}>
         <button className={styles.primaryBtn} onClick={props.closeViz}>
           Okay

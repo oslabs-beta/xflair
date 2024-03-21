@@ -319,3 +319,9 @@
 .test {
   border: 1px solid white;
 }
+
+.otherImg {
+  height: 350px;
+  width: 350x;
+  object-fit: contain;
+}
