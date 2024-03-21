@@ -189,21 +189,22 @@
 
 .modalcontainer {
   position: fixed !important;
-  background: rgba(225, 225, 225, 0.95);
-  color: black;
+  background: rgba(20, 20, 20, 0.98);
+  color: white;
   z-index: 10;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%);
   width: 60vw;
-  height: 100vh;
+  height: 80vh;
   padding: 20px;
   overflow: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border-radius: 15px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 30px 10px gray;
 }
 
 .modalcontents {
@@ -212,14 +213,17 @@
 
 .modaltitlecontainer {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 .modalxicon {
   width: 30px;
   height: 30px;
+  border: 1px solid white;
 }
 
 .modaltitle {
@@ -252,7 +256,66 @@
   height: 50vh;
 }
 .embla__slide {
-  flex: 0 0 100%;
+  flex: 0 0 80%;
   min-width: 0;
-  border: 1px solid black;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 1px solid white;
+}
+
+.embla__controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  /* margin-right: calc((2.6rem - 1.4rem) / 2 * -1); */
+}
+
+.embla__dot {
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: black;
+  border: 0.2rem solid gray;
+}
+.embla__dot:hover {
+  border-color: white;
+}
+.embla__dot--selected {
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  border: 0.2rem solid white;
+}
+
+.test {
+  border: 1px solid white;
 }
