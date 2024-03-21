@@ -4,8 +4,12 @@ import useEmblaCarousel, {
 } from 'embla-carousel-react';
 import styles from '../page.module.css';
 import { DotButton, useDotButton } from './dotButton';
+import ResizedImage from './resizedImage';
+import HeatMapGif from './heatMapGif';
+import GridMapGif from './gridMapGif';
+import Top5Classes from './top5Classes';
 
-export function EmblaCarousel() {
+export function EmblaCarousel(props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
   useEffect(() => {
@@ -28,10 +32,10 @@ export function EmblaCarousel() {
     <div>
       <div className={styles.embla} ref={emblaRef}>
         <div className={styles.embla__container}>
-          <div className={styles.embla__slide}>Preprocessed Image</div>
-          <div className={styles.embla__slide}>Feature Maps</div>
-          <div className={styles.embla__slide}>Heatmaps</div>
-          <div className={styles.embla__slide}>Output</div>
+          <ResizedImage preprocessedFilePath={props.preprocessFilePath} />
+          <GridMapGif fGifURL={props.fGifURL} />
+          <HeatMapGif hGifURL={props.hGifURL} />
+          <Top5Classes top5={props.top5} />
         </div>
       </div>
       <div className={styles.embla__controls}>
