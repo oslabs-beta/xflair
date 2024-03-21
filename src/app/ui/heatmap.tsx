@@ -7,7 +7,7 @@ interface DataItem {
   value: string;
 }
 
-export default function Heatmap({ nextArray }) {
+export default function Heatmap() {
   const svgRef = useRef<SVGSVGElement>(null);
 
   const [containerSize, setContainerSize] = useState({
@@ -39,7 +39,7 @@ export default function Heatmap({ nextArray }) {
       .domain([1, 100]);
 
     // d3.csv(`/renderTest/data${nextArray}.csv`).then((data) => {
-    d3.csv(`/gradientsMedThresh copy.csv`).then((data) => {
+    d3.csv(`/RP Data/gradients.csv`).then((data) => {
       svg
         .selectAll('rect')
         .data(data)
@@ -51,7 +51,7 @@ export default function Heatmap({ nextArray }) {
         .attr('height', cellSize.height)
         .style('fill', (d) => myColor(+d.value));
     });
-  }, [nextArray, containerSize.height, containerSize.width]);
+  });
 
   return <svg ref={svgRef} />;
 }
