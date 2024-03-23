@@ -228,18 +228,22 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+
+      <div className={styles.majorDiv}>
+        <div className={styles.title}>
+          <div className = {styles.column}>
       <Image
         src="/logoBlack.png"
         alt="Logo"
         className={styles.Logo}
-        width={396}
-        height={512}
+        width={277/2}
+        height={358/2}
         priority
       />
-
-      <div className={styles.majorDiv}>
-        <div className={styles.title}>
+      </div>
+      <div className = {styles.column}>
           <img className={styles.titleImg} src="/title.png" alt="titleText" />
+          </div>
         </div>
 
         <div className={styles.inputBox}>
