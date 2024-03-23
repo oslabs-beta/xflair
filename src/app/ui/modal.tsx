@@ -1,10 +1,12 @@
+'use server';
+
 import styles from '../page.module.css';
 import { EmblaCarousel } from './carousel';
 import { Suspense, lazy } from 'react';
 
 const Heatmap = lazy(() => import('./heatmap'));
 
-export default function Modal(props) {
+export default async function Modal(props) {
   return (
     <div className={styles.modalcontainer}>
       <div className={styles.modaltitlecontainer}>

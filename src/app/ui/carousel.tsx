@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useCallback } from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,

@@ -1,9 +1,9 @@
+'use server';
+
 import { useEffect, useRef, useState } from 'react';
 import styles from '../page.module.css';
 
 export default function Top5(props) {
-   useEffect(() => { console.log(props.top5) }, [props.top5])
-
   const top5Table = [];
 
   for (let key in props.top5) {
@@ -17,7 +17,7 @@ export default function Top5(props) {
   return (
     <div className={styles.embla__slide}>
       {Object.keys(props.top5).length > 0 && (
-        <table className="table">
+        <table className='table'>
           <thead>
             <tr>
               <th>Class</th>
