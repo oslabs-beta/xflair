@@ -2,9 +2,7 @@
 
 import Image from 'next/image';
 import styles from './page.module.css';
-import { generateHeatmaps, createGif } from './lib/actions';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
-import { modelOutput } from './lib/definitions';
 import HeatMapGif from './ui/heatMapGif';
 import GridMapGif from './ui/gridMapGif';
 import ResizedImage from './ui/resizedImage';
@@ -29,10 +27,10 @@ export default function Home() {
     'output',
   ];
 
-  const [currentState, setCurrentState] = useState(0);
-  const [preProcessedImage, setPreprocessedImage] = useState('');
-  const [featureMap, setFeatureMap] = useState('');
-  const [classificationResult, setClassificationResult] = useState('');
+  // const [currentState, setCurrentState] = useState(0);
+  // const [preProcessedImage, setPreprocessedImage] = useState('');
+  // const [featureMap, setFeatureMap] = useState('');
+  // const [classificationResult, setClassificationResult] = useState('');
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [vizState, setVizState] = useState(false);
@@ -63,8 +61,8 @@ export default function Home() {
     console.log('time:', time);
   }, [finalTime, initialTime, time]);
 
-  const predictions = (data, filePath) => {
-    fetch('http://localhost:3001/api/predictions', {
+  const predictions = (data: string, filePath: string) => {
+    fetch('/predict', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,8 +73,10 @@ export default function Home() {
       .then((response) => {
         console.log('response:', response);
         setPredictionName(response.class);
-        console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
-        setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
+        // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
+        // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
+        console.log('top5:', response.top5);
+        setTop5(response.top5);
         setFinalTime(Date.now());
       });
 
@@ -95,7 +95,7 @@ export default function Home() {
       });
   };
 
-  const maps = (data, filePath) => {
+  const maps = (data: string, filePath: string) => {
     fetch('http://localhost:3001/api/heatmap', {
       method: 'POST',
       headers: {
@@ -135,7 +135,7 @@ export default function Home() {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log('response:', response.hgifUrl)
+        console.log('response:', response.hgifUrl);
         setHGifURL(response.hgifUrl);
       });
   }, [hFilePath]);
@@ -211,13 +211,7 @@ export default function Home() {
     setFGifURL('');
     setVizState(false);
   };
-  //ori
-  //ori
-  // const vizClick = () => {
-  //   openViz(true);
-  //   createGif((modelOutput as modelOutput).folder, setGifUrl);
-  // };
-  //setinterval vizclick (for skeleton)
+
   const vizClick = () => {
     openViz(true);
   };
@@ -228,21 +222,20 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-
       <div className={styles.majorDiv}>
         <div className={styles.title}>
-          <div className = {styles.column}>
-      <Image
-        src="/logoBlack.png"
-        alt="Logo"
-        className={styles.Logo}
-        width={277/2}
-        height={358/2}
-        priority
-      />
-      </div>
-      <div className = {styles.column}>
-          <img className={styles.titleImg} src="/title.png" alt="titleText" />
+          <div className={styles.column}>
+            <Image
+              src='/logoBlack.png'
+              alt='Logo'
+              className={styles.Logo}
+              width={277 / 2}
+              height={358 / 2}
+              priority
+            />
+          </div>
+          <div className={styles.column}>
+            <img className={styles.titleImg} src='/title.png' alt='titleText' />
           </div>
         </div>
 
@@ -261,12 +254,12 @@ export default function Home() {
             <img
               className={styles.uploadImg}
               src={imgURL}
-              alt="UploadedImage"
+              alt='UploadedImage'
             />
           )}
           {vizState && (
             <>
-              <h2 className="predictedClassName">Class:   {predictionName}</h2>
+              <h2 className='predictedClassName'>Class: {predictionName}</h2>
               {time > 0 && <h3>Time: {(time / 1000).toFixed(2)} seconds</h3>}
             </>
           )}
@@ -287,15 +280,15 @@ export default function Home() {
               <text>{imgName}</text>
               <input
                 className={styles.hide}
-                name="image"
-                type="file"
-                accept="image/*"
+                name='image'
+                type='file'
+                accept='image/*'
                 onChange={(e) => browse(e)}
               />
             </label>
             <button
               className={styles.primaryBtn}
-              id="upload"
+              id='upload'
               onClick={uploadClick}
             >
               Upload
