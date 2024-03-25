@@ -9,9 +9,11 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
   background-color: black;
-  /* background-image: url(/logoBlack.png);
-  background-repeat: no-repeat;
-  background-position: 10% 25%; */
+  /* background-image: url(/ai-generated-7914562_1920.jpg); */
+  /* filter: blur(8px); */
+  /* background-image: url(/logoBlack.png); */
+  /* background-repeat: no-repeat; */
+  /* background-position: 10% 25%;  */
 
   /* --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -62,6 +64,6 @@ body {
 } */
 
 a {
-  color: inherit;
+  background-color: inherit;
   text-decoration: none;
 }
