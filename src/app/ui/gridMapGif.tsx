@@ -9,10 +9,12 @@ export default function GridMapGif(props) {
     console.log(props.fgifURL);
   }, [props.fgifURL]);
 
+  const fGifURL = 'https://res.cloudinary.com/dufc4fu9r/image/multi/f_gif/v1711062953/featuremaps_gif.gif'
+
   return (
     <div className={styles.embla__slide}>
       <Suspense fallback={<img src="/loadspinner.gif" alt="loading" />}>
-        <img className={styles.otherImg} src={props.fGifURL} alt="gridMapGif" />
+        <img className={styles.otherImg} src={fGifURL} alt="gridMapGif" />
       </Suspense>
     </div>
   );
