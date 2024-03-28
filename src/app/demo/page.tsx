@@ -5,9 +5,9 @@ import styles from './page.module.css';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 // import Heatmap from './ui/heatmap';
-import Modal from './ui/modal';
+import Modal from '../ui/modal';
 
-const Heatmap = lazy(() => import('./ui/heatmap'));
+const Heatmap = lazy(() => import('../ui/heatmap'));
 
 let inputImage: File | undefined;
 let count = 0;
