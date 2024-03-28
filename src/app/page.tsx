@@ -3,10 +3,6 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
-import HeatMapGif from './ui/heatMapGif';
-import GridMapGif from './ui/gridMapGif';
-import ResizedImage from './ui/resizedImage';
-import Top5 from './ui/top5Classes';
 import axios from 'axios';
 // import Heatmap from './ui/heatmap';
 import Modal from './ui/modal';
@@ -14,8 +10,10 @@ import Modal from './ui/modal';
 const Heatmap = lazy(() => import('./ui/heatmap'));
 
 let inputImage: File | undefined;
+let count = 0;
 
 export default function Home() {
+  console.log(`===== RENDER ${count++} ======`);
   const states = [
     'original',
     'preprocessing',
@@ -27,10 +25,6 @@ export default function Home() {
     'output',
   ];
 
-  // const [currentState, setCurrentState] = useState(0);
-  // const [preProcessedImage, setPreprocessedImage] = useState('');
-  // const [featureMap, setFeatureMap] = useState('');
-  // const [classificationResult, setClassificationResult] = useState('');
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [vizState, setVizState] = useState(false);
@@ -44,8 +38,6 @@ export default function Home() {
   const [top5, setTop5] = useState({});
   const [preprocessFilePath, setPreprocessFilePath] = useState('');
   const [imagePath, setImagePath] = useState('');
-  const [hFilePath, setHFilePath] = useState('');
-  const [fFilePath, setFFilePath] = useState('');
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -55,13 +47,26 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (!initialTime || !finalTime) return;
-    setTime(finalTime - initialTime);
-    console.log('time:', time);
-  }, [finalTime, initialTime, time]);
+  function imgSave(inputImage: File) {
+    const formData = new FormData();
+    formData.append('file', inputImage as File);
+    axios
+      .post('http://localhost:3001/api/imageSave', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        console.log('response:', response.data);
+        setImagePath(response.data);
+        console.log('imagePath:', imagePath);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
-  const predictions = (data: string, filePath: string) => {
+  function predict(data: string, filePath: string) {
     fetch('/predict', {
       method: 'POST',
       headers: {
@@ -75,11 +80,12 @@ export default function Home() {
         setPredictionName(response.class);
         // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
-        console.log('top5:', response.top5);
         setTop5(response.top5);
         setFinalTime(Date.now());
       });
+  }
 
+  function preprocess(data: string, filePath: string) {
     fetch('http://localhost:3001/api/preprocess', {
       method: 'POST',
       headers: {
@@ -91,114 +97,97 @@ export default function Home() {
       .then((response) => {
         console.log('response:', response);
         setPreprocessFilePath(response.filePath);
-        setVizState(true);
       });
-  };
-
-  const maps = (data: string, filePath: string) => {
-    fetch('http://localhost:3001/api/heatmap', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data, filePath }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setHFilePath(response.filePath);
-      });
-
-    fetch('http://localhost:3001/api/feature', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data, filePath }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setFFilePath(response.filePath);
-      });
-  };
-
-  useEffect(() => {
-    if (!hFilePath) {
-      return;
-    }
-
-    fetch('http://localhost:3001/api/hgif', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ hFilePath }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('response:', response.hgifUrl);
-        setHGifURL(response.hgifUrl);
-      });
-  }, [hFilePath]);
-
-  useEffect(() => {
-    if (!fFilePath || !hGifURL) {
-      return;
-    }
-
-    fetch('http://localhost:3001/api/fgif', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ fFilePath }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setFGifURL(response.fgifUrl);
-      });
-  }, [fFilePath, hGifURL]);
+  }
 
   const uploadClick = async () => {
     if (inputImage) {
-      // setImgURL(URL.createObjectURL(inputImage as File));
       setInitialTime(Date.now());
 
-      const formData = new FormData();
-      formData.append('file', inputImage as File);
+      await imgSave(inputImage);
 
-      await axios
-        .post('http://localhost:3001/api/imageSave', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          console.log('response:', response.data);
-          setImagePath(response.data);
-          console.log('imagePath:', imagePath);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const reader = new FileReader();
+      reader.readAsDataURL(inputImage as File);
+
+      reader.onloadend = () => {
+        const data = (reader.result as string).split(',')[1];
+        Promise.all([
+          predict(data, imagePath),
+          preprocess(data, imagePath),
+        ]).then(() => setVizState(true));
+        // maps(data, imagePath);
+      };
     }
   };
 
   useEffect(() => {
-    if (!imagePath) {
-      return;
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(inputImage as File);
+    if (!initialTime || !finalTime) return;
+    setTime(finalTime - initialTime);
+    console.log('time:', time);
+  }, [finalTime, initialTime, time]);
 
-    reader.onloadend = () => {
-      const data = (reader.result as string).split(',')[1];
-      // tensorflowJS(imageData);
-      // analyze(data, imagePath);
-      console.log('imagePath:', imagePath);
-      predictions(data, imagePath);
-      maps(data, imagePath);
-    };
-  }, [imagePath]);
+  // const maps = (data: string, filePath: string) => {
+  //   fetch('http://localhost:3001/api/heatmap', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ data, filePath }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       setHFilePath(response.filePath);
+  //     });
+
+  //   fetch('http://localhost:3001/api/feature', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ data, filePath }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       setFFilePath(response.filePath);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   if (!hFilePath) {
+  //     return;
+  //   }
+
+  //   fetch('http://localhost:3001/api/hgif', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ hFilePath }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log('response:', response.hgifUrl);
+  //       setHGifURL(response.hgifUrl);
+  //     });
+  // }, [hFilePath]);
+
+  // useEffect(() => {
+  //   if (!fFilePath || !hGifURL) {
+  //     return;
+  //   }
+
+  //   fetch('http://localhost:3001/api/fgif', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ fFilePath }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       setFGifURL(response.fgifUrl);
+  //     });
+  // }, [fFilePath, hGifURL]);
 
   const clearClick = () => {
     inputImage = undefined;
@@ -259,8 +248,12 @@ export default function Home() {
           )}
           {vizState && (
             <>
-              <h2 className='predictedClassName'>Class: {predictionName}</h2>
-              {time > 0 && <h3>Time: {(time / 1000).toFixed(2)} seconds</h3>}
+              <h2 style={{ color: 'white' }}>Class: {predictionName}</h2>
+              {time > 0 && (
+                <h3 style={{ color: 'white' }}>
+                  Time: {(time / 1000).toFixed(2)} seconds
+                </h3>
+              )}
             </>
           )}
           {!imgURL && (
