@@ -12,8 +12,8 @@ featuremaps = Blueprint('featuremaps', __name__)
 @featuremaps.route('/featuremaps', methods=['POST'])
 def upload_featuremaps():
     data = request.get_json()
-    base64_image = data['image']
-    image_path = data['image_path']
+    base64_image = data['data']
+    image_path = data['filePath']
 
     model = get_model()
     layer_names = get_layer_names()
