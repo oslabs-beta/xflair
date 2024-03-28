@@ -1,12 +1,25 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { redirect } from "next/navigation";
+export async function fetchHgif (data: string, filePath: string) {
+    const resMap = await fetch('http://localhost:3001/api/heatmap', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ data, filePath }),
+  });
+  const resMapParsed = await resMap.json();
+  console.log('FETCH 1', resMapParsed);
+  const hFilePath =  resMapParsed.filePath;
 
-let imgURL: string;
-
-export async function uploadImage(formData: FormData) {
-  const image = formData.get('image');
-  if (image) imgURL = URL.createObjectURL(image as File);
-  console.log('imgURL: ',imgURL)
+  const resGif = await fetch('http://localhost:3001/api/hgif', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ hFilePath }),
+  });
+  const resGifParsed = await resGif.json();
+  console.log('FETCH 2', resGifParsed);
+  return resGifParsed.hGifUrl;
 }
