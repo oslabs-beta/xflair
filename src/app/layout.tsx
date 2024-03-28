@@ -1,30 +1,21 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Sidebar from './ui/Sidebar';
 import './globals.css';
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'xFlair Demo',
-  description: 'A demo for xFlair',
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <div style = {{display: 'flex', minHeight: '100vh'}}>
-        <Sidebar />
-        <main style = {{flex: 1, padding: '20px'}}>
+    <>
+      <Head>
+        <title>xFlair Demo</title>
+        <meta name="description" content="A demo for xFlair" />
+        {/* Any other head elements like external stylesheets */}
+      </Head>
+      <main className={inter.className}>
         {children}
-        </main>
-        </div>
-        </body>
-    </html>
+      </main>
+    </>
   );
 }
