@@ -11,8 +11,8 @@ preprocess = Blueprint('preprocess', __name__)
 @preprocess.route('/preprocess', methods=['POST'])
 def upload_preprocess():
     data = request.get_json()
-    base64_image = data['image']
-    image_path = data['image_path']
+    base64_image = data['data']
+    image_path = data['filePath']
 
     preprocessed_image = make_preprocess_image(base64_image)
 

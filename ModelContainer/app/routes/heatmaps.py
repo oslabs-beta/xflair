@@ -19,14 +19,14 @@ heatmaps = Blueprint('heatmaps', __name__)
 
 def upload_heatmaps():
     data = request.get_json()
-    base64_image = data['image']
-    image_path = data['image_path']
+    base64_image = data['data']
+    image_path = data['filePath']
 
 
     model = get_model()
     layer_names = get_layer_names()
     preprocessed_image = preprocess_image(base64_image)
-    pred_index = generate_predictions(model, base64_image)[3]
+    pred_index = generate_predictions(model, base64_image)['predicted_class']
 
     visuals_dir = os.path.join(dir, "../visuals/")
     heatmaps_dir = os.path.join(visuals_dir, "heatmaps/")
