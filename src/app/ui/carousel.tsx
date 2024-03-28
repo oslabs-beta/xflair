@@ -12,6 +12,8 @@ import Top5Classes from './top5Classes';
 
 // const HeatMapGif = lazy(() => import('./heatMapGif'));
 
+// const HeatMapGif = lazy(() => import('./heatMapGif'));
+
 export function EmblaCarousel(props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
