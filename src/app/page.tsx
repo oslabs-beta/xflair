@@ -64,7 +64,7 @@ export default function Home() {
   }, [finalTime, initialTime, time]);
 
   const predictions = (data, filePath) => {
-    fetch('http://localhost:3001/api/predictions', {
+    fetch('http://localhost:5000/predictions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
