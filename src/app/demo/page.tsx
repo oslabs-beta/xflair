@@ -80,10 +80,10 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPredictionName(response.class);
+        setPredictionName(response.predictions.predicted_class_name);
         // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
-        setTop5(response.top5);
+        setTop5(response.predictions.class_name_probabilities);
         setFinalTime(Date.now());
       });
   }
@@ -103,6 +103,16 @@ export default function Home() {
       });
   }
 
+  function heatmaps(data: string, filePath: string) {
+    fetch('http://localhost:5000/heatmap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    }).then((response) => console.log('yep yep'));
+  }
+
   const uploadClick = async () => {
     if (inputImage) {
       setInitialTime(Date.now());
@@ -116,6 +126,7 @@ export default function Home() {
         const data = (reader.result as string).split(',')[1];
         Promise.all([
           predict(data, imagePath),
+          heatmaps(data, imagePath),
           preprocess(data, imagePath),
         ]).then(() => {
           setVizState(true);
