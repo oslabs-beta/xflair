@@ -1,14 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import styles from './page.module.css';
 import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-// import Heatmap from './ui/heatmap';
 import Sidebar from '../ui/Sidebar';
 import Modal from '../ui/modal';
-
-const Heatmap = lazy(() => import('../ui/heatmap'));
 
 let inputImage: File | undefined;
 let count = 0;
@@ -229,23 +224,23 @@ export default function Home() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <Sidebar />
-      <main className="flex flex-row justify-evenly items-center bg-black min-w-full">
-        <div className="flex flex-col items-center bg-transparent h-100 w-100 ml-5%">
-          <div className="text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2">
-            <div className="flex flex-col items-center justify-center">
+      <main className='flex flex-row justify-evenly items-center bg-black min-w-full'>
+        <div className='flex flex-col items-center bg-transparent h-100 w-100 ml-5%'>
+          <div className='text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2'>
+            <div className='flex flex-col items-center justify-center'>
               {/* Your image and logo components here */}
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className='flex flex-col items-center justify-center'>
               <img
-                className="h-50 w-75 object-contain"
-                src="/title.png"
-                alt="titleText"
+                className='h-50 w-75 object-contain'
+                src='/title.png'
+                alt='titleText'
               />
             </div>
           </div>
 
           <div
-            className="flex items-center justify-center h-full bg-cover bg-no-repeat w-3/4 min-h-full"
+            className='flex items-center justify-center h-full bg-cover bg-no-repeat w-3/4 min-h-full'
             style={{ backgroundImage: "url('/backgroundFlareBW.avif')" }}
           >
             {viz && (
@@ -259,15 +254,15 @@ export default function Home() {
             )}
             {imgURL && (
               <img
-                className="h-37.5 w-37.5 object-contain"
+                className='h-37.5 w-37.5 object-contain'
                 src={imgURL}
-                alt="UploadedImage"
+                alt='UploadedImage'
               />
             )}
 
             {vizState && (
               <>
-                <h2 className="text-white">Class: {predictionName}</h2>
+                <h2 className='text-white'>Class: {predictionName}</h2>
                 {time > 0 && <h3>Time: {(time / 1000).toFixed(2)} seconds</h3>}
               </>
             )}
@@ -275,27 +270,27 @@ export default function Home() {
             <div>
               {vizState && (
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
                   onClick={vizClick}
                 >
                   Analysis Visualization
                 </button>
               )}
-              <div className="flex flex-col items-center justify-center w-full">
+              <div className='flex flex-col items-center justify-center w-full'>
                 {buttonState === 0 && (
-                  <label className="cursor-pointer bg-transparent text-white p-2.5 m-2.5 rounded-full">
+                  <label className='cursor-pointer bg-transparent text-white p-2.5 m-2.5 rounded-full'>
                     {imgName}
                     <input
-                      className="hidden"
-                      type="file"
-                      accept="image/*"
+                      className='hidden'
+                      type='file'
+                      accept='image/*'
                       onChange={browse}
                     />
                   </label>
                 )}
                 {buttonState === 1 && (
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
                     onClick={uploadClick}
                   >
                     Upload
@@ -305,7 +300,7 @@ export default function Home() {
             </div>
           </div>
           <button
-            className="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            className='mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
             onClick={clearClick}
           >
             Clear
