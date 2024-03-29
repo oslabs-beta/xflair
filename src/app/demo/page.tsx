@@ -253,13 +253,13 @@ export default function Home() {
     <div style = {{display: 'flex', minHeight: '100vh'}}>
       <Sidebar /> 
     <main className="flex flex-row justify-evenly items-center bg-black min-w-full">
-    <div className="flex flex-col items-center bg-transparent h-100 w-100 ml-5%">
+    <div className="flex flex-col items-center bg-transparent h-full w-full ml-5%">
       <div className="text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2">
         <div className="flex flex-col items-center justify-center">
           {/* Your image and logo components here */}
         </div>
-        <div className="flex flex-col items-center justify-center">
-          <img className="h-50 w-75 object-contain" src="/title.png" alt="titleText" />
+        <div className="w-full flex justify-center items-center bg-transparent">
+          <img className="h-20 w-30 object-contain" src="/title.png" alt="titleText" />
         </div>
       </div>
       

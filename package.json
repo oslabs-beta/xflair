@@ -11,6 +11,7 @@
   "dependencies": {
     "@vercel/postgres": "^0.7.2",
     "axios": "^1.6.8",
+    "cors": "^2.8.5",
     "d3": "^7.9.0",
     "embla-carousel-react": "^8.0.0",
     "next": "14.1.3",
