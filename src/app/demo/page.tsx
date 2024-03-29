@@ -40,6 +40,8 @@ export default function Home() {
   const [preprocessFilePath, setPreprocessFilePath] = useState('');
   const [imagePath, setImagePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
+  const [heatmapLinks, setHeatmapLinks] = useState({});
+  const [featureMapLinks, setFeatureMapLinks] = useState({});
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -70,7 +72,7 @@ export default function Home() {
   }
 
   function predict(data: string, filePath: string) {
-    fetch('/predict', {
+    fetch('http://localhost:5000/predictions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,10 +82,10 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPredictionName(response.class);
+        setPredictionName(response.predictions.predicted_class_name);
         // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
-        setTop5(response.top5);
+        setTop5(response.predictions.class_name_probabilities);
         setFinalTime(Date.now());
       });
   }
@@ -103,6 +105,36 @@ export default function Home() {
       });
   }
 
+  function heatmaps(data: string, filePath: string) {
+    fetch('http://localhost:5000/heatmaps', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setHeatmapLinks(response);
+      });
+  }
+
+  function featureMaps(data: string, filePath: string) {
+    fetch('http://localhost:5000/featuremaps', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setFeatureMapLinks(response);
+      });
+  }
+
   const uploadClick = async () => {
     if (inputImage) {
       setInitialTime(Date.now());
@@ -116,9 +148,11 @@ export default function Home() {
         const data = (reader.result as string).split(',')[1];
         Promise.all([
           predict(data, imagePath),
-          preprocess(data, imagePath),
+          heatmaps(data, imagePath),
+          featureMaps(data, imagePath),
+          // preprocess(data, imagePath),
         ]).then(() => {
-          setVizState(true)
+          setVizState(true);
           setButtonState(2);
         });
         // maps(data, imagePath);
@@ -217,7 +251,7 @@ export default function Home() {
   };
   return (
     <div style = {{display: 'flex', minHeight: '100vh'}}>
-        <Sidebar /> 
+      <Sidebar /> 
     <main className="flex flex-row justify-evenly items-center bg-black min-w-full">
     <div className="flex flex-col items-center bg-transparent h-100 w-100 ml-5%">
       <div className="text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2">
@@ -255,7 +289,7 @@ export default function Home() {
       </div>
       <button className="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={clearClick}>Clear</button>
     </div>
-  </main>
-  </div>
-);
+    </main>
+    </div>
+  );
 }
