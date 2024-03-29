@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: xflair/dev:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - model
+
+  model:
+    build:
+      context: ./ModelContainer
+      dockerfile: Dockerfile
+    image: xflair/model:latest
+    ports:
+      - '5000:5000'
+    env_file:
+      - ./ModelContainer/.env
