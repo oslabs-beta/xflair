@@ -18,12 +18,16 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN chmod +x /model_container/start/start.sh
+
+RUN chmod +x /model_container/start/get_weights.py
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
 # Run server.py when the container launches
-CMD ["gunicorn", "--workers=2", "--bind", "0.0.0.0:5000", "server:app"]
+ENTRYPOINT ["/model_container/start/start.sh"]
 
 

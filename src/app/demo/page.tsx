@@ -40,6 +40,8 @@ export default function Home() {
   const [preprocessFilePath, setPreprocessFilePath] = useState('');
   const [imagePath, setImagePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
+  const [heatmapLinks, setHeatmapLinks] = useState({});
+  const [featureMapLinks, setFeatureMapLinks] = useState({});
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -104,13 +106,33 @@ export default function Home() {
   }
 
   function heatmaps(data: string, filePath: string) {
-    fetch('http://localhost:5000/heatmap', {
+    fetch('http://localhost:5000/heatmaps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ data, filePath }),
-    }).then((response) => console.log('yep yep'));
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setHeatmapLinks(response);
+      });
+  }
+
+  function featureMaps(data: string, filePath: string) {
+    fetch('http://localhost:5000/featuremaps', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, filePath }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        setFeatureMapLinks(response);
+      });
   }
 
   const uploadClick = async () => {
@@ -127,7 +149,8 @@ export default function Home() {
         Promise.all([
           predict(data, imagePath),
           heatmaps(data, imagePath),
-          preprocess(data, imagePath),
+          featureMaps(data, imagePath),
+          // preprocess(data, imagePath),
         ]).then(() => {
           setVizState(true);
           setButtonState(2);

@@ -1,9 +1,6 @@
-import numpy as np
 import tensorflow as tf
 import os
-from PIL import Image
 import matplotlib.pyplot as plt
-from app.utils.image_utils import add_progress_bar
 import cv2
 
 def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None):
@@ -45,28 +42,15 @@ def make_feature_maps(preprocessed_image, model, layer_name, output_dir, layer_n
             ax.set_title(f'Feature Map {i+1}')
             ax.axis('off')
 
-        temp_output_path = os.path.join(output_dir, "temp.jpg")
-        plt.savefig(temp_output_path, format='jpeg')
-        plt.close(fig)
-
-        # Add progress bar
-        img_with_progress = Image.open(temp_output_path)
-        img_array = np.array(img_with_progress)
-        current_index = layer_names.index(layer_name)
-        total_layers = len(layer_names)
-        img_with_progress_bar = add_progress_bar(img_array, current_index, total_layers)
-
-        # Resize and save the final image with the progress bar
-        final_img = Image.fromarray(img_with_progress_bar)
-        final_img_resized = final_img.resize((500, 500), Image.Resampling.LANCZOS)  # Resizing the final image
         file_name = f"{str(layer_names.index(layer_name) + 1).zfill(3) + layer_name}.jpg"
         output_path = os.path.join(output_dir, file_name)
-        final_img_resized.save(output_path, format='JPEG', quality=85)  # Saving the resized final image
-        os.remove(temp_output_path)  # Removing the temporary image file
+        plt.savefig(output_path, format='jpeg')
+        plt.close(fig)
     else:
         return
     
     return output_path
+
 
 def make_preprocess_image(original_image_path, preprocessed_image, output_dir):
     original_image = cv2.imread(original_image_path)
