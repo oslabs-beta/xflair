@@ -1,0 +1,12 @@
+FROM node:latest
+
+WORKDIR /usr/src/xflair
+
+COPY . /usr/src/xflair
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+
