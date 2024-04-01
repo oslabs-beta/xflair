@@ -13,14 +13,14 @@ services:
 
   model:
     build:
-      context: ./ModelContainer
+      context: ./ModelContainerNew
       dockerfile: Dockerfile
-    image: xflair/model:latest
+    image: xflair/modelnew:latest
     ports:
       - '5000:5000'
       - '6006:6006'
     env_file:
-      - ./ModelContainer/.env
+      - ./ModelContainerNew/.env
     volumes:
-      - ./ModelContainer/model/logs:/model_container/model/logs
+      - ./ModelContainerNew/model/logs:/model_container/model/logs
     entrypoint: /model_container/start/start.sh

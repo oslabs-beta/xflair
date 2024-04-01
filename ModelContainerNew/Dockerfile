@@ -1,4 +1,4 @@
-FROM python:3.9.13
+FROM python:latest
 
 WORKDIR /model_container
 
@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libffi-dev \
     python3-setuptools \
-    python3-venv \
     libgl1-mesa-dev \
+    libhdf5-dev \ 
     && apt-get clean
 
 RUN pip install --upgrade pip
