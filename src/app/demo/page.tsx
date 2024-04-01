@@ -163,8 +163,8 @@ export default function Home() {
         const data = (reader.result as string).split(',')[1];
         Promise.all([
           predict(data, imagePath),
-          // heatmaps(data, imagePath),
-          // featureMaps(data, imagePath),
+          heatmaps(data, imagePath),
+          featureMaps(data, imagePath),
           logs(data),
           // preprocess(data, imagePath), 
         ]).then(() => {

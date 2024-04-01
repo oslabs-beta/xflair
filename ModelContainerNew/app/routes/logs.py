@@ -20,8 +20,8 @@ def tensorboard_logs():
     os.makedirs(log_dir, exist_ok=True)
     
     # Generate TensorBoard logs and obtain the log directory
-    # log_dir = handle_tensorboard_logging(model, base64_image, layer_names)
-    model_summary(model, log_dir)
+    log_dir = handle_tensorboard_logging(model, base64_image, layer_names)
+    # model_summary(model, log_dir)
     
     return jsonify({"message": "TensorBoard logs generated successfully.", "log_dir": log_dir})
 
