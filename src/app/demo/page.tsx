@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import styles from './page.module.css';
-import { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
+import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 // import Heatmap from './ui/heatmap';
 import Sidebar from '../ui/Sidebar';
@@ -26,6 +26,7 @@ export default function Home() {
     'output',
   ];
 
+  const [sidebarOpen, setSidebarOpen] = useState(false); // State to control sidebar
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [vizState, setVizState] = useState(false);
@@ -250,8 +251,15 @@ export default function Home() {
     openViz(false);
   };
   return (
-    <div style = {{display: 'flex', minHeight: '100vh'}}>
-      <Sidebar /> 
+    <div className="flex min-h-screen bg-black"> {/* bg-black to ensure the entire screen has a black background */}
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
+        <button type="button" className="text-gray-500 hover:text-gray-600 p-4" onClick={() => setSidebarOpen(!sidebarOpen)}>
+         <span className="sr-only">Toggle Navigation</span>
+            <svg className="flex-shrink-0 size-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+             </svg>
+        </button>
     <main className="flex flex-row justify-evenly items-center bg-black min-w-full">
     <div className="flex flex-col items-center bg-transparent h-full w-full ml-5%">
       <div className="text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2">
@@ -290,6 +298,7 @@ export default function Home() {
       <button className="mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={clearClick}>Clear</button>
     </div>
     </main>
+    </div>
     </div>
   );
 }
