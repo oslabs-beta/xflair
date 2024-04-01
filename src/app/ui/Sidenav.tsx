@@ -862,7 +862,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                   : 'hidden'
               }`}
             >
-              <ul className='pt-2 ps-2'>
+              <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
                   <a
                     className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
@@ -1013,7 +1013,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 activeAccordion[0] === 'doc-accordion' ? 'block' : 'hidden'
               }`}
             >
-              <ul className='pt-2 ps-2'>
+              <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
                   <a
                     className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
