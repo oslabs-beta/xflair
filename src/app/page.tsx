@@ -1,15 +1,9 @@
-'use client';
+'use server';
 
-import { useState } from 'react';
 import './globals.css';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-function StartPage() {
-  const router = useRouter();
-  const startClick = () => {
-    router.push('/demo');
-  };
-
+async function StartPage() {
   return (
     <div className='relative flex-grow bg-purple-400'>
       <img
@@ -28,12 +22,13 @@ function StartPage() {
             Import, capture, and analyze your images for your TensorFlow or
             PyTorch models.
           </p>
-          <button
-            onClick={startClick}
+          <div className='h-50'></div>
+          <Link
             className='bg-amber-500 hover:bg-amber-300 text-white hover:text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:scale-105'
+            href={'/models/tensorflow/objects/classification'}
           >
             Start
-          </button>
+          </Link>
         </div>
       </div>
     </div>

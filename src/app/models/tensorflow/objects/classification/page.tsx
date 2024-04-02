@@ -4,10 +4,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-// import Heatmap from './ui/heatmap';
-import Modal from '../ui/modal';
-
-const Heatmap = lazy(() => import('../ui/heatmap'));
+import Modal from '@/app/ui/modal';
 
 let inputImage: File | undefined;
 let count = 0;
