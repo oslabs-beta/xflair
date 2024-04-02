@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 from model.mobile_net import get_model, get_all_layer_names
-from app.services.generate_logs import handle_tensorboard_logging, model_summary
+from app.services.generate_logs import handle_tensorboard_logging
 
 dir = os.path.dirname(__file__)
 logs = Blueprint('logs', __name__)
