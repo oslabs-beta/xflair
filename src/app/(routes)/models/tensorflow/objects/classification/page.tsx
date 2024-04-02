@@ -1,13 +1,13 @@
 'use client';
 
-import Image from 'next/image';
-import styles from './page.module.css';
 import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 import Modal from '@/app/ui/modal';
 
 let inputImage: File | undefined;
 let count = 0;
+
+let modelName: string = 'MobileNet';
 
 export default function Home() {
   console.log(`===== RENDER ${count++} ======`);
@@ -22,7 +22,6 @@ export default function Home() {
     'output',
   ];
 
-  const [sidebarOpen, setSidebarOpen] = useState(false); // State to control sidebar
   const [imgName, setImgName] = useState('Browse...');
   const [imgURL, setImgURL] = useState('');
   const [vizState, setVizState] = useState(false);
@@ -49,11 +48,12 @@ export default function Home() {
     }
   };
 
-  async function imgSave(inputImage: File) {
+  async function imgUpload(inputImage: File) {
     const formData = new FormData();
     formData.append('file', inputImage as File);
+    formData.append('modelName', modelName);
     axios
-      .post('http://localhost:3001/api/imageSave', formData, {
+      .post('/models/actions/image/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -68,13 +68,13 @@ export default function Home() {
       });
   }
 
-  function predict(data: string, filePath: string) {
-    fetch('http://localhost:5000/predictions', {
+  function predict(data: string, modelName: string) {
+    fetch('/models/actions/image/predict', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
@@ -84,6 +84,9 @@ export default function Home() {
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
         setTop5(response.predictions.class_name_probabilities);
         setFinalTime(Date.now());
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -99,36 +102,45 @@ export default function Home() {
       .then((response) => {
         console.log('response:', response);
         setPreprocessFilePath(response.filePath);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
-  function heatmaps(data: string, filePath: string) {
-    fetch('http://localhost:5000/heatmaps', {
+  function heatmaps(data: string, modelName: string) {
+    fetch('/models/actions/image/heatmaps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
         setHeatmapLinks(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
-  function featureMaps(data: string, filePath: string) {
-    fetch('http://localhost:5000/featuremaps', {
+  function featureMaps(data: string, modelName: string) {
+    fetch('/models/actions/image/featmaps', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
         setFeatureMapLinks(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -136,23 +148,25 @@ export default function Home() {
     if (inputImage) {
       setInitialTime(Date.now());
 
-      await imgSave(inputImage);
-
       const reader = new FileReader();
       reader.readAsDataURL(inputImage as File);
 
       reader.onloadend = () => {
         const data = (reader.result as string).split(',')[1];
         Promise.all([
-          predict(data, imagePath),
-          heatmaps(data, imagePath),
-          featureMaps(data, imagePath),
+          imgUpload(inputImage as File),
+          predict(data, modelName),
+          heatmaps(data, modelName),
+          featureMaps(data, modelName),
           // preprocess(data, imagePath),
-        ]).then(() => {
-          setVizState(true);
-          setButtonState(2);
-        });
-        // maps(data, imagePath);
+        ])
+          .then(() => {
+            setVizState(true);
+            setButtonState(2);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       };
     }
   };
@@ -183,6 +197,7 @@ export default function Home() {
   const closeViz = () => {
     openViz(false);
   };
+
   return (
     <div className='flex-grow bg-black'>
       <main className='flex flex-1 justify-center items-center w-full'>
