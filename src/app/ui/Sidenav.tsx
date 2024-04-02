@@ -4,8 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface props {
-  sidebarOpen: boolean,
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+  sidebarOpen: boolean;
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Define the Sidenav component
@@ -41,13 +41,12 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
       } transition-transform duration-300 flex flex-col`}
     >
       <div className='px-6 pt-5'>
-        <a
+        <p
           className='flex-grow text-xl font-semibold dark:text-white'
-          href='#'
           aria-label='Brand'
         >
           xFlair
-        </a>
+        </p>
       </div>
       <nav
         className='hs-accordion-group p-6 w-full flex flex-col flex-wrap'
@@ -55,9 +54,9 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
       >
         <ul className='space-y-1.5'>
           <li>
-            <a
+            <Link
               className='flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-              href='#'
+              href={'/'}
             >
               <svg
                 className='size-4'
@@ -75,7 +74,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 <polyline points='9 22 9 12 15 12 15 22' />
               </svg>
               Home
-            </a>
+            </Link>
           </li>
 
           <li className='hs-accordion' id='models-accordion'>
@@ -263,28 +262,28 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/tensorflow/objects/classification'
                               >
                                 Classification
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/tensorflow/objects/detection'
                               >
                                 Detection
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/tensorflow/objects/generation'
                               >
                                 Generation
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -346,20 +345,20 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/tensorflow/text/llm'
                               >
                                 LLMs
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/tensorflow/text/texttospeech'
                               >
                                 Text to Speech
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -476,28 +475,28 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/pytorch/objects/classification'
                               >
                                 Classification
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/pytorch/objects/detection'
                               >
                                 Detection
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/pytorch/objects/generation'
                               >
                                 Generation
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -559,20 +558,20 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/pytorch/text/llm'
                               >
                                 LLMs
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/pytorch/text/texttospeech'
                               >
                                 Text to Speech
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -689,28 +688,28 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/agnostic/objects/classification'
                               >
                                 Classification
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/agnostic/objects/detection'
                               >
                                 Detection
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/agnostic/objects/generation'
                               >
                                 Generation
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -772,20 +771,20 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                         >
                           <ul className='pt-2 ps-2'>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/agnostic/text/llm'
                               >
                                 LLMs
-                              </a>
+                              </Link>
                             </li>
                             <li>
-                              <a
+                              <Link
                                 className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                                href='#'
+                                href='/models/agnostic/text/texttospeech'
                               >
                                 Text to Speech
-                              </a>
+                              </Link>
                             </li>
                           </ul>
                         </div>
@@ -862,14 +861,14 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                   : 'hidden'
               }`}
             >
-              <ul className='pt-2 ps-2'>
+              <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
-                  <a
+                  <Link
                     className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                    href='#'
+                    href='/libraries/python'
                   >
                     Python
-                  </a>
+                  </Link>
                 </li>
                 <li className='hs-accordion' id='lib-react-accordion'>
                   <button
@@ -927,20 +926,20 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                   >
                     <ul className='pt-2 ps-2'>
                       <li>
-                        <a
+                        <Link
                           className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                          href='#'
+                          href='/libraries/react/javascript'
                         >
                           Javascript
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
+                        <Link
                           className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                          href='#'
+                          href='/libraries/react/typescript'
                         >
                           Typescript
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -1013,30 +1012,30 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 activeAccordion[0] === 'doc-accordion' ? 'block' : 'hidden'
               }`}
             >
-              <ul className='pt-2 ps-2'>
+              <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
-                  <a
+                  <Link
                     className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                    href='#'
+                    href='/documentation/python'
                   >
                     Python
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-                    href='#'
+                    href='/documentation/javascript-typescript'
                   >
                     Javascript / Typescript
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
           </li>
           <li>
-            <a
+            <Link
               className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
-              href='#'
+              href='/about-us'
             >
               <svg
                 className='size-4'
@@ -1056,7 +1055,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 <path d='M16 3.13a4 4 0 0 1 0 7.75' />
               </svg>
               About us
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
