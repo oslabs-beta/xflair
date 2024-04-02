@@ -185,25 +185,21 @@ export default function Home() {
   };
   return (
     <div className='flex-grow bg-black'>
-      <main className='flex flex-row justify-evenly items-center bg-black min-w-full'>
+      <main className='flex flex-1 justify-center items-center w-full'>
         <div className='flex flex-col items-center bg-transparent h-full w-full ml-5%'>
           <div className='text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2'>
             <div className='flex flex-col items-center justify-center'>
               {/* Your image and logo components here */}
             </div>
-            <div className='w-full flex justify-center items-center bg-transparent'>
-              <img
-                className='h-20 w-30 object-contain'
-                src='/title.png'
-                alt='titleText'
-              />
-            </div>
+            {/* <div className="w-full flex justify-center items-center bg-transparent"> */}
+            <img
+              className='h-20 w-30 object-contain'
+              src='/title.png'
+              alt='titleText'
+            />
+            {/* </div> */}
           </div>
-
-          <div
-            className='flex items-center justify-center h-full bg-cover bg-no-repeat w-3/4 min-h-full'
-            style={{ backgroundImage: "url('/backgroundFlareBW.avif')" }}
-          >
+          <div className='flex flex-col pt-10 min-h-[50vh] min-w-[50vw] max-w-[50vw] max-h-[50vh]'>
             {viz && (
               <Modal
                 closeViz={closeViz}
@@ -224,44 +220,50 @@ export default function Home() {
             {vizState && (
               <>
                 <h2 className='text-white'>Class: {predictionName}</h2>
-                {time > 0 && <h3>Time: {(time / 1000).toFixed(2)} seconds</h3>}
+                {time > 0 && (
+                  <h2 className='text-white'>
+                    Time: {(time / 1000).toFixed(2)} seconds
+                  </h2>
+                )}
               </>
             )}
-
-            <div>
+          </div>
+          <div className='flex items-center justify-center h-full bg-cover bg-no-repeat w-3/4'>
+            {/* <div> */}
+            <div className='flex flex items-end justify-center w-full'>
+              {buttonState === 0 && (
+                <label className='absolute bottom-[5rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-transparent text-white p-2.5 m-2.5 border-2 border-white hover:border-green-500 hover:border-4 hover:text-green-300'>
+                  {imgName}
+                  <input
+                    className='hidden'
+                    type='file'
+                    accept='image/*'
+                    onChange={browse}
+                  />
+                </label>
+              )}
+              {buttonState === 1 && (
+                <button
+                  className='absolute bottom-[5rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-transparent text-green-300 p-2.5 m-2.5 border-2 border-green-500 hover:border-purple-500 hover:border-4 hover:text-purple-300'
+                  onClick={uploadClick}
+                >
+                  Upload
+                </button>
+              )}
               {vizState && (
                 <button
-                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                  className='absolute bottom-[5rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-transparent text-purple-300 p-2.5 m-2.5 border-2 border-purple-500 hover:border-[#e7792a] hover:border-4 hover:text-[#e7792a]'
                   onClick={vizClick}
                 >
                   Analysis Visualization
                 </button>
               )}
-              <div className='flex flex-col items-center justify-center w-full'>
-                {buttonState === 0 && (
-                  <label className='cursor-pointer bg-transparent text-white p-2.5 m-2.5 rounded-full'>
-                    {imgName}
-                    <input
-                      className='hidden'
-                      type='file'
-                      accept='image/*'
-                      onChange={browse}
-                    />
-                  </label>
-                )}
-                {buttonState === 1 && (
-                  <button
-                    className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                    onClick={uploadClick}
-                  >
-                    Upload
-                  </button>
-                )}
-              </div>
             </div>
+            {/* </div> */}
           </div>
+          <div className='flex justify-center items-end'></div>
           <button
-            className='mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
+            className='absolute bottom-4 right-4 bg-transparent hover:border-white text-white font-semibold hover:text-red-400 py-2 px-4 rounded'
             onClick={clearClick}
           >
             Clear
