@@ -39,6 +39,9 @@ next-env.d.ts
 venv/
 ```
 
+# env
 /Models/TensorFlow/.env
 /Models/TensorBoard/logs/*
 
+
+.env
