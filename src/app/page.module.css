@@ -10,7 +10,7 @@
   /* background-image: url(/public/ai-generated-7914562_1920.jpg); */
 }
 
-.Logo{
+.Logo {
   display: flex;
   flex-direction: column;
   object-fit: contain;
@@ -101,7 +101,6 @@
   /* height: 60vh; */
   /* padding: 5%; */
   width: 70vw;
-  
 
   min-height: 500px;
 }
@@ -134,7 +133,6 @@
   margin-bottom: 2%;
 }
 
-
 .primaryBtn:active {
   color: white;
   background-color: rgba(100, 100, 100, 0.5);
@@ -142,7 +140,7 @@
 
 .altBtn {
   display: inline-block;
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   text-align: left;
   color: white;
   font-size: medium;
@@ -151,7 +149,7 @@
   border-radius: 50%;
   height: 100px;
   width: 100px;
-    /* background-image: linear-gradient(
+  /* background-image: linear-gradient(
     220deg,
     hsl(0deg 100% 100%) 0%,
     hsl(17deg 100% 78%) 18%,
@@ -175,7 +173,7 @@
     hsl(15deg 95% 47%) 78%,
     hsl(2deg 80% 53%) 92%,
     hsl(0deg 75% 58%) 100%
-  ); 
+  );
 }
 
 .altBtn:active {
@@ -189,7 +187,7 @@
     hsl(15deg 95% 47%) 78%,
     hsl(2deg 80% 53%) 92%,
     hsl(0deg 75% 58%) 100%
-  ); 
+  );
 }
 
 .uploadImg {
@@ -198,7 +196,8 @@
   object-fit: contain;
 }
 
-.imgInput, .primaryBtn{
+.imgInput,
+.primaryBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -210,12 +209,13 @@
   background-color: transparent;
   border: none;
   padding: 10px;
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   font-size: medium;
   position: relative;
 }
 
-.imgInput:hover, .primaryBtn:hover {
+.imgInput:hover,
+.primaryBtn:hover {
   box-shadow: 0 0 0 5px white inset;
 }
 
@@ -232,7 +232,7 @@
   height: 100px;
   width: 100px;
   /* background-color: transparent; */
-  /* background-image: url(/backgroundFlareBW.avif); 
+/* background-image: url(/backgroundFlareBW.avif); 
   padding: 10px;
   margin: 10px;
 
@@ -265,13 +265,11 @@
   background-color: rgba(100, 100, 100, 0.5);
 } */
 
-
-
 .buttonBox {
   display: flex;
   flex-direction: column; /* Stack buttons vertically */
   align-items: center; /* Center buttons horizontally */
-  justify-content: center; 
+  justify-content: center;
   border-radius: 50%; /* Center the .buttonBox vertically within its container */
   width: 100%; /* Take full width to center content properly */
 }
@@ -283,6 +281,31 @@
 }
 
 .modalcontainer {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 80vw;
+  height: 90vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../../public/modal-background-1.jpg);
+  background-size: cover;
+  z-index: 10;
+}
+
+.modalcontents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* .modalcontainer {
+  border: 1px solid blue;
   position: fixed !important;
   background: rgba(20, 20, 20, 0.98);
   color: white;
@@ -290,8 +313,8 @@
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%);
-  width: 60vw;
-  height: 80vh;
+  width: 80vw;
+  height: 100vh;
   padding: 20px;
   overflow: none;
   display: flex;
@@ -300,11 +323,12 @@
   justify-content: space-between;
   border-radius: 5px;
   box-shadow: inset 0 0 30px 10px gray;
-}
+} */
 
-.modalcontents {
+/* .modalcontents {
+  border: 1px solid green;
   overflow: scroll;
-}
+} */
 
 .modaltitlecontainer {
   display: flex;
@@ -315,22 +339,22 @@
   width: 100%;
 }
 
-.modalxicon {
+/* .modalxicon {
   width: 30px;
   height: 30px;
-  border: 1px solid white;
-}
+} */
 
 .modaltitle {
   font-size: 30px;
   font-weight: 700;
   /* margin-bottom: 15px; */
   position: sticky;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .bodytext {
-  font-family: 'Hanken Grotesk', sans-serif;
+  background-color: red;
+  font-family: "Hanken Grotesk", sans-serif;
   height: 75%;
   font-weight: 300;
   line-height: 1.5;
@@ -412,9 +436,9 @@
   border: 0.2rem solid white;
 }
 
-.test {
+/* .test {
   border: 1px solid white;
-}
+} */
 
 .otherImg {
   height: 350px;

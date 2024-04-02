@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-import Modal from '@/app/ui/modal';
+import NewModal from '@/app/ui/newModal';
 
 let inputImage: File | undefined;
 let count = 0;
@@ -201,10 +201,10 @@ export default function Home() {
           </div>
           <div className='flex flex-col pt-10 min-h-[50vh] min-w-[50vw] max-w-[50vw] max-h-[50vh]'>
             {viz && (
-              <Modal
+              <NewModal
                 closeViz={closeViz}
-                hGifURL={hGifURL}
-                fGifURL={fGifURL}
+                // hGifURL={hGifURL}
+                // fGifURL={fGifURL}
                 top5={top5}
                 preprocessFilePath={preprocessFilePath}
               />
