@@ -39,9 +39,6 @@ next-env.d.ts
 venv/
 ```
 
-/ModelContainer/.env
+/Models/TensorFlow/.env
+/Models/TensorBoard/logs/*
 
-/ModelContainerNew/.env
-
-/ModelContainerNew/model/logs/
-/ModelContainer/model/logs/

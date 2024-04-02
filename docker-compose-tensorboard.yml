@@ -6,20 +6,21 @@ services:
       context: .
       dockerfile: Dockerfile-dev
     image: xflair/dev:latest
+    environment:
+      - mode=logs
     ports:
       - '3000:3000'
-    environment:
-      - mode=development
     depends_on:
       - model
 
   model:
     build:
-      context: ./Models/Tensorflow
+      context: ./Models/TensorBoard
       dockerfile: Dockerfile
-    image: xflair/tensorflow:latest
+    image: xflair/tensorboard:latest
     ports:
       - '5000:5000'
-    env_file:
-      - ./Models/TensorFlow/.env
-    entrypoint: /TensorFlow/start/start.sh
+      - '6006:6006'
+    volumes:
+      - ./Models/TensorBoard/logs:./TensorBoard/logs
+    entrypoint: /TensorBoard/start/start.sh
