@@ -39,4 +39,6 @@ next-env.d.ts
 venv/
 ```
 
+# env
 /ModelContainer/.env
+.env

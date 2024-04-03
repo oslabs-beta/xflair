@@ -1,41 +1,40 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import styles from "./page.module.css";
-import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from "react";
-import axios from "axios";
-import Modal from "@/app/ui/modal";
+import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
+import axios from 'axios';
+import Modal from '@/app/ui/modal';
 
 let inputImage: File | undefined;
 let count = 0;
 
+let modelName: string = 'MobileNet';
+
 export default function Home() {
   console.log(`===== RENDER ${count++} ======`);
   const states = [
-    "original",
-    "preprocessing",
-    "preprocessed",
-    "loadingMesh",
-    "featureMap",
-    "resizing",
-    "classifying",
-    "output",
+    'original',
+    'preprocessing',
+    'preprocessed',
+    'loadingMesh',
+    'featureMap',
+    'resizing',
+    'classifying',
+    'output',
   ];
 
-  const [sidebarOpen, setSidebarOpen] = useState(false); // State to control sidebar
-  const [imgName, setImgName] = useState("Browse...");
-  const [imgURL, setImgURL] = useState("");
+  const [imgName, setImgName] = useState('Browse...');
+  const [imgURL, setImgURL] = useState('');
   const [vizState, setVizState] = useState(false);
-  const [predictionName, setPredictionName] = useState("");
+  const [predictionName, setPredictionName] = useState('');
   const [viz, openViz] = useState(false);
-  const [hGifURL, setHGifURL] = useState("");
-  const [fGifURL, setFGifURL] = useState("");
+  const [hGifURL, setHGifURL] = useState('');
+  const [fGifURL, setFGifURL] = useState('');
   const [initialTime, setInitialTime] = useState(0);
   const [finalTime, setFinalTime] = useState(0);
   const [time, setTime] = useState(0);
   const [top5, setTop5] = useState({});
-  const [preprocessFilePath, setPreprocessFilePath] = useState("");
-  const [imagePath, setImagePath] = useState("");
+  const [preprocessFilePath, setPreprocessFilePath] = useState('');
+  const [imagePath, setImagePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
   const [heatmapLinks, setHeatmapLinks] = useState({});
   const [featureMapLinks, setFeatureMapLinks] = useState({});
@@ -49,86 +48,99 @@ export default function Home() {
     }
   };
 
-  async function imgSave(inputImage: File) {
+  async function imgUpload(inputImage: File) {
     const formData = new FormData();
-    formData.append("file", inputImage as File);
+    formData.append('file', inputImage as File);
+    formData.append('modelName', modelName);
     axios
-      .post("http://localhost:3001/api/imageSave", formData, {
+      .post('/models/actions/image/upload', formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        console.log("response:", response.data);
+        console.log('response:', response.data);
         setImagePath(response.data);
-        console.log("imagePath:", imagePath);
+        console.log('imagePath:', imagePath);
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  function predict(data: string, filePath: string) {
-    fetch("http://localhost:5000/predictions", {
-      method: "POST",
+  function predict(data: string, modelName: string) {
+    fetch('/models/actions/image/predict', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response);
+        console.log('response:', response);
         setPredictionName(response.predictions.predicted_class_name);
         // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
         setTop5(response.predictions.class_name_probabilities);
         setFinalTime(Date.now());
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
   function preprocess(data: string, filePath: string) {
-    fetch("http://localhost:3001/api/preprocess", {
-      method: "POST",
+    fetch('http://localhost:3001/api/preprocess', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ data, filePath }),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response);
+        console.log('response:', response);
         setPreprocessFilePath(response.filePath);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
-  function heatmaps(data: string, filePath: string) {
-    fetch("http://localhost:5000/heatmaps", {
-      method: "POST",
+  function heatmaps(data: string, modelName: string) {
+    fetch('/models/actions/image/heatmaps', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response);
+        console.log('response:', response);
         setHeatmapLinks(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
-  function featureMaps(data: string, filePath: string) {
-    fetch("http://localhost:5000/featuremaps", {
-      method: "POST",
+  function featureMaps(data: string, modelName: string) {
+    fetch('/models/actions/image/featmaps', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, modelName }),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response:", response);
+        console.log('response:', response);
         setFeatureMapLinks(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -136,23 +148,25 @@ export default function Home() {
     if (inputImage) {
       setInitialTime(Date.now());
 
-      await imgSave(inputImage);
-
       const reader = new FileReader();
       reader.readAsDataURL(inputImage as File);
 
       reader.onloadend = () => {
-        const data = (reader.result as string).split(",")[1];
+        const data = (reader.result as string).split(',')[1];
         Promise.all([
-          predict(data, imagePath),
-          heatmaps(data, imagePath),
-          featureMaps(data, imagePath),
+          imgUpload(inputImage as File),
+          predict(data, modelName),
+          heatmaps(data, modelName),
+          featureMaps(data, modelName),
           // preprocess(data, imagePath),
-        ]).then(() => {
-          setVizState(true);
-          setButtonState(2);
-        });
-        // maps(data, imagePath);
+        ])
+          .then(() => {
+            setVizState(true);
+            setButtonState(2);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       };
     }
   };
@@ -160,18 +174,18 @@ export default function Home() {
   useEffect(() => {
     if (!initialTime || !finalTime) return;
     setTime(finalTime - initialTime);
-    console.log("time:", time);
+    console.log('time:', time);
   }, [finalTime, initialTime, time]);
 
   const clearClick = () => {
     inputImage = undefined;
-    setImgName("Browse...");
-    setImgURL("");
+    setImgName('Browse...');
+    setImgURL('');
     // setFFilePath('');
     // setHFilePath('');
-    setImagePath("");
-    setHGifURL("");
-    setFGifURL("");
+    setImagePath('');
+    setHGifURL('');
+    setFGifURL('');
     setVizState(false);
     setButtonState(0);
   };
@@ -183,6 +197,7 @@ export default function Home() {
   const closeViz = () => {
     openViz(false);
   };
+
   return (
     <div className="flex-grow bg-black">
       <main className="flex flex-1 justify-center items-center w-full">
