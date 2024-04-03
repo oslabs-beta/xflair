@@ -10,6 +10,9 @@ services:
       - '3000:3000'
     environment:
       - mode=development
+      - SERVICE_HOST=host.docker.internal
+    env_file:
+      - .env
     depends_on:
       - model
 
@@ -22,4 +25,6 @@ services:
       - '5000:5000'
     env_file:
       - ./Models/TensorFlow/.env
+    volumes:
+      - ./Models/TensorFlow/app/assets:/TensorFlow/app/assets
     entrypoint: /TensorFlow/start/start.sh

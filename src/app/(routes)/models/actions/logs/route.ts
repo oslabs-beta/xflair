@@ -7,8 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const reqParsed = await req.json();
     const { data, modelName } = reqParsed;
-
-    const response = await fetch(`${serviceUrl}/predictions/${modelName}`, {
+    const response = await fetch(`${serviceUrl}/logs/${modelName}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
