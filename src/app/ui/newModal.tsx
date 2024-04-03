@@ -7,7 +7,6 @@ import { Suspense, lazy } from 'react';
 // const HeatMapGif = lazy(() => import('./heatMapGif'));
 // const Heatmap = lazy(() => import('./heatmap'));
 
-
 interface Props {
   closeViz: () => void;
   hGifURL: string;
@@ -33,15 +32,15 @@ export default function NewModal(props: Props) {
 
         <button className={styles.exitmodalbutton}>
           <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='100'
-            height='100'
-            id='x'
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            id="x"
           >
             <path
-              fill-rule='evenodd'
-              fill='#ffffff'
-              d='M5.043 3v.004a.998.998 0 0 0-.1 0A.998.998 0 0 0 4.21 4.61l2.543 3.391-2.543 3.396a.999.999 0 1 0 1.6 1.198L8 9.672l2.191 2.924a.999.999 0 1 0 1.598-1.198L9.248 8.002l2.541-3.39a.998.998 0 0 0-.865-1.608.998.998 0 0 0-.733.41L8 6.338 5.809 3.414A.998.998 0 0 0 5.043 3z'
+              fill-rule="evenodd"
+              fill="#ffffff"
+              d="M5.043 3v.004a.998.998 0 0 0-.1 0A.998.998 0 0 0 4.21 4.61l2.543 3.391-2.543 3.396a.999.999 0 1 0 1.6 1.198L8 9.672l2.191 2.924a.999.999 0 1 0 1.598-1.198L9.248 8.002l2.541-3.39a.998.998 0 0 0-.865-1.608.998.998 0 0 0-.733.41L8 6.338 5.809 3.414A.998.998 0 0 0 5.043 3z"
             ></path>
           </svg>
         </button>
@@ -71,27 +70,22 @@ export default function NewModal(props: Props) {
             bring AI to life.
           </p>
         </div>
-        <div>
-          <img src= {props.heatmapUrl} alt="heatmap" />
-          <img src= {props.featuremapUrl} alt="heatmap" />
-          {imgDivs}
-        </div>
       </div>
       <div className={styles.modalbutton}>
         <div className={styles.modalbutton}>
           <button className={styles.startJourneyButton}>
             <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='100'
-              height='100'
-              viewBox='0 0 24 24'
-              id='arrow'
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              viewBox="0 0 24 24"
+              id="arrow"
             >
               <path
-                fill='white'
-                fillRule='evenodd'
-                d='m-929.1 911.362.7.7-5.3 5.3-5.3-5.3.7-.7 4.6 4.6 4.6-4.6z'
-                transform='translate(942 -906.362)'
+                fill="white"
+                fillRule="evenodd"
+                d="m-929.1 911.362.7.7-5.3 5.3-5.3-5.3.7-.7 4.6 4.6 4.6-4.6z"
+                transform="translate(942 -906.362)"
               />
             </svg>
           </button>
