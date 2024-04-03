@@ -15,10 +15,11 @@ module.exports = {
           dark: '#6D28D9',
         },
       },
-      // fontFamily: {
-      //   primary: ['Poppins'],
-      //   secondary: ['"Open Sans"'],
-      // },
+      fontFamily: {
+        primary: ['Poppins'],
+        secondary: ['Open Sans'],
+        saira: ['Saira'],
+      },
     },
   },
   variants: {
