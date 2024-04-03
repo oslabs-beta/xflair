@@ -1,6 +1,6 @@
 'use client';
 
-import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, use } from 'react';
 import axios from 'axios';
 import NewModal from '@/app/ui/newModal';
 
@@ -29,15 +29,15 @@ export default function Home() {
   const [viz, openViz] = useState(false);
   const [hGifURL, setHGifURL] = useState('');
   const [fGifURL, setFGifURL] = useState('');
-  const [initialTime, setInitialTime] = useState(0);
-  const [finalTime, setFinalTime] = useState(0);
   const [time, setTime] = useState(0);
   const [top5, setTop5] = useState({});
   const [preprocessFilePath, setPreprocessFilePath] = useState('');
-  const [imagePath, setImagePath] = useState('');
+  const [filePath, setFilePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
   const [heatmapLinks, setHeatmapLinks] = useState({});
   const [featureMapLinks, setFeatureMapLinks] = useState({});
+  const [data, setData] = useState('');
+  const [fileType, setFileType] = useState('');
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -60,15 +60,14 @@ export default function Home() {
       })
       .then((response) => {
         console.log('response:', response.data);
-        setImagePath(response.data);
-        console.log('imagePath:', imagePath);
+        setFilePath(response.data.filePath as string);
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  function predict(data: string, modelName: string) {
+  async function predict(data: string, modelName: string) {
     fetch('/models/actions/image/predict', {
       method: 'POST',
       headers: {
@@ -83,25 +82,25 @@ export default function Home() {
         // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
         // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
         setTop5(response.predictions.class_name_probabilities);
-        setFinalTime(Date.now());
+        setTime(response.time);
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  function preprocess(data: string, filePath: string) {
-    fetch('http://localhost:3001/api/preprocess', {
+  function preprocess(data: string, filePath: string, fileType: string) {
+    fetch('/models/actions/image/preprocess', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ data, filePath }),
+      body: JSON.stringify({ data, filePath, fileType }),
     })
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPreprocessFilePath(response.filePath);
+        setPreprocessFilePath(response.preprocessed_image);
       })
       .catch((error) => {
         console.error(error);
@@ -144,38 +143,60 @@ export default function Home() {
       });
   }
 
+  function logs(data: string, modelName: string) {
+    fetch('/models/actions/logs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data, modelName }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+      })
+      .then(() => {
+        setVizState(true);
+        setButtonState(2);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   const uploadClick = async () => {
     if (inputImage) {
-      setInitialTime(Date.now());
-
       const reader = new FileReader();
       reader.readAsDataURL(inputImage as File);
 
       reader.onloadend = () => {
         const data = (reader.result as string).split(',')[1];
-        Promise.all([
-          imgUpload(inputImage as File),
-          predict(data, modelName),
-          heatmaps(data, modelName),
-          featureMaps(data, modelName),
-          // preprocess(data, imagePath),
-        ])
-          .then(() => {
+        setData(data as string);
+        const fileType = inputImage?.type.split('/')[1];
+        setFileType(fileType as string);
+        if (process.env.mode === 'logs') {
+          logs(data, modelName);
+        } else {
+          heatmaps(data, modelName);
+          featureMaps(data, modelName);
+          imgUpload(inputImage as File);
+          predict(data, modelName).then(() => {
             setVizState(true);
             setButtonState(2);
-          })
-          .catch((error) => {
-            console.error(error);
           });
+          
+        }
       };
     }
   };
 
   useEffect(() => {
-    if (!initialTime || !finalTime) return;
-    setTime(finalTime - initialTime);
-    console.log('time:', time);
-  }, [finalTime, initialTime, time]);
+    if (filePath){
+      preprocess(data, filePath, fileType);
+    }
+  }
+  , [filePath, data, fileType]);
+
 
   const clearClick = () => {
     inputImage = undefined;
@@ -183,7 +204,7 @@ export default function Home() {
     setImgURL('');
     // setFFilePath('');
     // setHFilePath('');
-    setImagePath('');
+    setFilePath('');
     setHGifURL('');
     setFGifURL('');
     setVizState(false);
@@ -239,7 +260,7 @@ export default function Home() {
                 <h2 className="text-white">Class: {predictionName}</h2>
                 {time > 0 && (
                   <h2 className="text-white">
-                    Time: {(time / 1000).toFixed(2)} seconds
+                    Time: {(time).toFixed(2)} seconds
                   </h2>
                 )}
               </>

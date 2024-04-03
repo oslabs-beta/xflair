@@ -8,15 +8,23 @@ services:
     image: xflair/dev:latest
     ports:
       - '3000:3000'
+    environment:
+      - mode=development
+      - SERVICE_HOST=host.docker.internal
+    env_file:
+      - .env
     depends_on:
       - model
 
   model:
     build:
-      context: ./ModelContainer
+      context: ./Models/Tensorflow
       dockerfile: Dockerfile
-    image: xflair/model:latest
+    image: xflair/tensorflow:latest
     ports:
       - '5000:5000'
     env_file:
-      - ./ModelContainer/.env
+      - ./Models/TensorFlow/.env
+    volumes:
+      - ./Models/TensorFlow/app/assets:/TensorFlow/app/assets
+    entrypoint: /TensorFlow/start/start.sh

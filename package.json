@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.540.0",
     "@preline/overlay": "^2.0.2",
     "@vercel/postgres": "^0.7.2",
-    "aws-sdk": "^2.1590.0",
+    "aws-sdk": "^2.1591.0",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
     "d3": "^7.9.0",

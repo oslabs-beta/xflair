@@ -40,5 +40,8 @@ venv/
 ```
 
 # env
-/ModelContainer/.env
+/Models/TensorFlow/.env
+/Models/TensorBoard/logs/*
+
+
 .env

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: xflair/dev:latest
+    environment:
+      - mode=logs
+    ports:
+      - '3000:3000'
+    depends_on:
+      - model
+
+  model:
+    build:
+      context: ./Models/TensorBoard
+      dockerfile: Dockerfile
+    image: xflair/tensorboard:latest
+    ports:
+      - '5000:5000'
+      - '6006:6006'
+    volumes:
+      - ./Models/TensorBoard/logs:./TensorBoard/logs
+    entrypoint: /TensorBoard/start/start.sh
