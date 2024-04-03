@@ -39,13 +39,6 @@ next-env.d.ts
 venv/
 ```
 
+# env
 /ModelContainer/.env
-
-/ModelContainerNew/.env
-
-/ModelContainerNew/logs/*
-
-ModelContainerNew/model/logs/20240401-195026/events.out.tfevents.1712001026.ca0000288829.136.0.v2
-ModelContainerNew/model/logs/20240401-195816/events.out.tfevents.1712001496.0a9dd2b995af.66.0.v2
-ModelContainerNew/model/logs/20240401-201224/events.out.tfevents.1712002344.61321cda5d88.149.0.v2
-ModelContainerNew/model/logs/20240401-202008/events.out.tfevents.1712002808.236ebc927f20.122.0.v2
+.env

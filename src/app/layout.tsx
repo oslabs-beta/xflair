@@ -5,11 +5,13 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Head from 'next/head';
 import tailwind from 'tailwindcss';
+import { Saira } from 'next/font/google';
 
 import { useState } from 'react';
 import Sidenav from './ui/Sidenav';
 
 const inter = Inter({ subsets: ['latin'] });
+const saira = Saira({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,7 +24,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
       <body>
-        <main className={inter.className}>
+        <main className={saira.className}>
           <div className='flex h-screen min-w-screen bg-black'>
             <Sidenav
               sidebarOpen={sidebarOpen}

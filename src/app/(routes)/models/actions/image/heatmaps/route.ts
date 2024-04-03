@@ -3,14 +3,17 @@ import { type NextRequest } from 'next/server';
 export async function POST(req: NextRequest) {
   try {
     const reqParsed = await req.json();
-    const { data, filePath } = reqParsed;
-    const response = await fetch('http://localhost:3001/api/predictions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data, filePath }),
-    });
+    const { data, modelName } = reqParsed;
+    const response = await fetch(
+      `http://localhost:5000/heatmaps/${modelName}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data }),
+      }
+    );
     return response;
   } catch (err) {
     console.error('Error:    ', err);
