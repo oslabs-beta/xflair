@@ -76,5 +76,8 @@ def make_preprocess_image(original_image_path, preprocessed_image, output_dir):
     ax[1].imshow((preprocessed_image_np * 0.5) + 0.5)  # Assuming preprocessing includes normalization
     ax[1].axis('off')
     # Save the figure
+    print (output_dir)
+    print ('saving')
     plt.savefig(output_dir, format='jpeg')
+    print ('saved')
     plt.close(fig)  # Close the figure to free memory

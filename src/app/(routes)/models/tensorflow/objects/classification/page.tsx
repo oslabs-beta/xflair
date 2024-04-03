@@ -61,7 +61,6 @@ export default function Home() {
       .then((response) => {
         console.log('response:', response.data);
         setFilePath(response.data.filePath as string);
-        console.log('imagePath:', filePath);
       })
       .catch((error) => {
         console.error(error);
@@ -178,21 +177,8 @@ export default function Home() {
         if (process.env.mode === 'logs') {
           logs(data, modelName);
         } else {
-          // Promise.all([
-          //   imgUpload(inputImage as File),
-          //   predict(data, modelName),
-          //   heatmaps(data, modelName),
-          //   featureMaps(data, modelName),
-          // ])
-          //   .then(() => {
-          //     setVizState(true);
-          //     setButtonState(2);
-          //   })
-          //   .catch((error) => {
-          //     console.error(error);
-          //   });
-          // heatmaps(data, modelName);
-          // featureMaps(data, modelName);
+          heatmaps(data, modelName);
+          featureMaps(data, modelName);
           imgUpload(inputImage as File);
           predict(data, modelName).then(() => {
             setVizState(true);
@@ -274,7 +260,7 @@ export default function Home() {
                 <h2 className="text-white">Class: {predictionName}</h2>
                 {time > 0 && (
                   <h2 className="text-white">
-                    Time: {(time / 1000).toFixed(2)} seconds
+                    Time: {(time).toFixed(2)} seconds
                   </h2>
                 )}
               </>
