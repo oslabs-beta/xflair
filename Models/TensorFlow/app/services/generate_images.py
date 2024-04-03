@@ -74,11 +74,7 @@ def make_preprocess_image(original_image_path, preprocessed_image, output_dir):
     ax[0].axis('off')
     
     ax[1].imshow((preprocessed_image_np * 0.5) + 0.5)  # Assuming preprocessing includes normalization
-    ax[1].set_title('Preprocessed Image')
     ax[1].axis('off')
-    file_name = 'input_images_comparison.png'
-    file_path = os.path.join(output_dir, file_name)
-    print(file_name)
     # Save the figure
-    plt.savefig(file_path)
+    plt.savefig(output_dir, format='jpeg')
     plt.close(fig)  # Close the figure to free memory

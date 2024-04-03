@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to the directory containing the model container files
-cd /model_container
+cd /TensorFlow
 
 # Download the weights by running the get_weights.py script
 echo "Downloading MobileNetV2 weights..."
