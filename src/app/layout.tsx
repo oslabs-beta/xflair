@@ -1,19 +1,26 @@
 'use client';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Saira, Roboto } from 'next/font/google';
 import './globals.css';
 import Head from 'next/head';
 import tailwind from 'tailwindcss';
-import { Saira } from 'next/font/google';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import Sidenav from './ui/Sidenav';
+
+interface Props {
+  children: ReactNode;
+}
 
 const inter = Inter({ subsets: ['latin'] });
 const saira = Saira({ subsets: ['latin'] });
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: '100',
+});
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -21,7 +28,7 @@ export default function RootLayout({ children }) {
       <Head>
         <title>xFlair Demo</title>
         <meta name='description' content='A demo for xFlair' />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+        {/* <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" /> */}
       </Head>
       <body>
         <main className={saira.className}>
