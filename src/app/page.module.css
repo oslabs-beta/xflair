@@ -110,6 +110,25 @@
   display: none;
 }
 
+.grid-item {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically if there's extra space */
+  margin: 10px; /* Add some space around each grid item */
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+}
+
+.gridItem div {
+  margin-bottom: 10px; /* Space between title and image */
+  color: white; /* Assuming you want the text white as per modal theme */
+  font-size: 1em; /* Adjust based on your design */
+}
+
 .placeholderText {
   font-size: 30px;
   font-weight: bolder;
@@ -276,17 +295,26 @@
 
 /* MODAL */
 .exitmodalbutton {
-  background-color: #4CAF50; /* Green */
+  background-color: black; /* Green */
   border: none;
+  position: sticky;
+  top: 5%;
+  left: 95%;
   color: white;
-  padding: 15px 32px;
+  max-height: 1rem;
+  max-width: 1rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  /* margin: 4px 2px; */
+  z-index:20;
   cursor: pointer;
   transition-duration: 0.4s;
+}
+
+.exitmodalbutton:hover {
+  background-color: #e92a04;
 }
 
 .custom-button:hover {
@@ -302,11 +330,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  width: 80vw;
-  height: 90vh;
-  top: 50%;
+  justify-content: space-around;
+  position: absolute;
+  max-width: 80vw;
+  max-height: 93vh;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-image: url(../../public/modal-background-1.jpg);
@@ -314,6 +342,44 @@
   background-position: -15px center;
   z-index: 10;
   box-shadow: inset 0 0 16px 16px #000000;
+  overflow: scroll;
+  /* box-sizing: border-box; */
+}
+
+.slide {
+  border: 1px solid goldenrod;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  position: relative;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 80vw;
+  min-height: 80vh;
+  max-height: 80vh;
+  /* padding: 20px; */
+  font-family: "Roboto", sans-serif;
+}
+
+.slideRow {
+  border: 1px solid goldenrod;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  position: relative;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 80vw;
+  min-height: 80vh;
+  max-height: 80vh;
+  /* padding: 20px; */
+  font-family: "Roboto", sans-serif;
 }
 
 .modalcontainertext {
@@ -340,6 +406,38 @@
 .modalcontainertext p {
   font-size: 1em;
 }
+
+/* Style for Chrome, Safari, and Opera */
+.modalcontainer::-webkit-scrollbar {
+  width: 12px; /* Adjust the width of the scrollbar */
+}
+
+.modalcontainer::-webkit-scrollbar-track {
+  background: #000; /* Track color */
+}
+
+.modalcontainer::-webkit-scrollbar-thumb {
+  background-color: #555; /* Thumb color */
+  border-radius: 6px; /* Roundness of the scrollbar thumb */
+  border: 3px solid #000; /* Creates padding around the scroll thumb */
+}
+
+/* Style for Firefox */
+.modalcontainer {
+  scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
+  scrollbar-color: #555 #000; /* Thumb and track color */
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox (where applicable) */
+.modalcontainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.modalcontainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
 
 .modalheader {
   display: flex;
@@ -385,9 +483,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 25px;
   width: 100%;
+  padding: 10px;
 }
 
 .startJourneyButton {
@@ -410,6 +509,9 @@
 } */
 
 .modaltitle {
+  display: flex;
+  align-items: center;
+  position: absolute;
   font-size: 2em;
   font-weight: 700;
   position: sticky;
