@@ -275,6 +275,23 @@
 }
 
 /* MODAL */
+.exitmodalbutton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.custom-button:hover {
+  background-color: #45a049;
+}
 
 .modalclosed {
   display: none;
@@ -294,10 +311,44 @@
   transform: translate(-50%, -50%);
   background-image: url(../../public/modal-background-1.jpg);
   background-size: cover;
+  background-position: -15px center;
   z-index: 10;
+  box-shadow: inset 0 0 16px 16px #000000;
 }
 
-.modalcontents {
+.modalcontainertext {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 40vw;
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.modalcontainertext h1 {
+  font-size: 2em;
+}
+
+.modalcontainertext h2 {
+  font-size: 1.5em;
+}
+
+.modalcontainertext p {
+  font-size: 1em;
+}
+
+.modalheader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalbody {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -339,17 +390,31 @@
   width: 100%;
 }
 
+.startJourneyButton {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
 /* .modalxicon {
   width: 30px;
   height: 30px;
 } */
 
 .modaltitle {
-  font-size: 30px;
+  font-size: 2em;
   font-weight: 700;
-  /* margin-bottom: 15px; */
   position: sticky;
-  font-family: "Playfair Display", serif;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.1em;
 }
 
 .bodytext {
