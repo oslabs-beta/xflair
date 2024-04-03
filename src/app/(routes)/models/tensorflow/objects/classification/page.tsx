@@ -2,7 +2,7 @@
 
 import React, { lazy, Suspense, useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-import Modal from '@/app/ui/modal';
+import NewModal from '@/app/ui/newModal';
 
 let inputImage: File | undefined;
 let count = 0;
@@ -217,10 +217,10 @@ export default function Home() {
           <div className="flex flex-col min-h-[60vh] min-w-[60vw] max-w-[60vw] max-h-[70vh] relative">
             <div className="flex flex-col min-h-[50vh] min-w-[60vw] max-w-[50vw] max-h-[50vh]">
               {viz && (
-                <Modal
+                <NewModal
                   closeViz={closeViz}
-                  hGifURL={hGifURL}
-                  fGifURL={fGifURL}
+                  // hGifURL={hGifURL}
+                  // fGifURL={fGifURL}
                   top5={top5}
                   preprocessFilePath={preprocessFilePath}
                 />
