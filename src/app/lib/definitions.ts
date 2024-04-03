@@ -1,8 +1,8 @@
 export type Upload = {
-    id: string;
-    name: string;
-    size: number;
-    image: Buffer;
+  id: string;
+  name: string;
+  size: number;
+  image: Buffer;
 };
 
 export type Heatmaps = {
@@ -13,4 +13,8 @@ export type Heatmaps = {
 export type Featuremaps = {
     featuremaps: string[] | null
     progressbars: string[] | null
+}
+
+export interface Top5Obj {
+  [key: string]: number;
 }

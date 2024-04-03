@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from '../page.module.css';
+import { Top5Obj } from '../lib/definitions';
 
-export default function Top5(props) {
-   useEffect(() => { console.log(props.top5) }, [props.top5])
+interface Props {
+  top5: Top5Obj;
+}
+
+export default function Top5(props: Props) {
+  useEffect(() => {
+    console.log(props.top5);
+  }, [props.top5]);
 
   const top5Table = [];
 
@@ -17,7 +24,7 @@ export default function Top5(props) {
   return (
     <div className={styles.embla__slide}>
       {Object.keys(props.top5).length > 0 && (
-        <table className="table">
+        <table className='table'>
           <thead>
             <tr>
               <th>Class</th>
