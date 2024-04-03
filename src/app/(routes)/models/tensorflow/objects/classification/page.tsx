@@ -3,6 +3,7 @@
 import React, { useState, useEffect, ChangeEvent, use } from 'react';
 import axios from 'axios';
 import NewModal from '@/app/ui/newModal';
+import { Heatmaps, Featuremaps } from '@/app/lib/definitions';
 
 let inputImage: File | undefined;
 let count = 0;
@@ -31,11 +32,11 @@ export default function Home() {
   const [fGifURL, setFGifURL] = useState('');
   const [time, setTime] = useState(0);
   const [top5, setTop5] = useState({});
-  const [preprocessFilePath, setPreprocessFilePath] = useState('');
+  const [preprocessFilePath, setPreprocessFilePath] = useState([]);
   const [filePath, setFilePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
-  const [heatmapLinks, setHeatmapLinks] = useState({});
-  const [featureMapLinks, setFeatureMapLinks] = useState({});
+  const [heatmapLinks, setHeatmapLinks] = useState({} as Heatmaps);
+  const [featuremapLinks, setFeaturemapLinks] = useState({} as Featuremaps);
   const [data, setData] = useState('');
   const [fileType, setFileType] = useState('');
 
@@ -100,7 +101,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPreprocessFilePath(response.preprocessed_image);
+        setPreprocessFilePath(response.preprocessed_images);
       })
       .catch((error) => {
         console.error(error);
@@ -125,6 +126,68 @@ export default function Home() {
       });
   }
 
+  function uploadGifs(urls: string[], tag: string) {
+    fetch('/models/actions/image/gifs/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ urls, tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        // createGif(response.tag);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function createGif(tag: string) {
+    fetch('/models/actions/image/gifs/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        if (response.tag === 'heatmap_gif') {
+          setHGifURL(response.url);
+        } else {
+          setFGifURL(response.url);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function gif(urls: string[], tag: string) {
+    fetch('/models/actions/image/gifs/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ urls, tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        if (tag === 'heatmap_gif') {
+          setHGifURL(response.url);
+        } else {
+          setFGifURL(response.url);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   function featureMaps(data: string, modelName: string) {
     fetch('/models/actions/image/featmaps', {
       method: 'POST',
@@ -136,7 +199,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setFeatureMapLinks(response);
+        setFeaturemapLinks(response);
       })
       .catch((error) => {
         console.error(error);
@@ -184,19 +247,28 @@ export default function Home() {
             setVizState(true);
             setButtonState(2);
           });
-          
         }
       };
     }
   };
 
   useEffect(() => {
-    if (filePath){
+    if (filePath) {
       preprocess(data, filePath, fileType);
     }
-  }
-  , [filePath, data, fileType]);
+  }, [filePath, data, fileType]);
 
+  useEffect(() => {
+    if (heatmapLinks.progressbars) {
+      gif(heatmapLinks.progressbars as string[], 'heatmap_gif');
+    }
+  }, [heatmapLinks]);
+
+  useEffect(() => {
+    if (hGifURL && featuremapLinks.progressbars) {
+      gif(featuremapLinks.progressbars as string[], 'featuremap_gif');
+    }
+  }, [hGifURL, featuremapLinks]);
 
   const clearClick = () => {
     inputImage = undefined;
@@ -245,7 +317,8 @@ export default function Home() {
                   top5={top5}
                   preprocessFilePath={preprocessFilePath}
                 />
-              )} <div className="flex-grow flex flex-col justify-end items-center ">
+              )}{' '}
+              <div className="flex-grow flex flex-col justify-end items-center ">
                 {imgURL && (
                   <img
                     className="max-w-[45vw] max-h-[45vh] object-contain"
@@ -253,24 +326,23 @@ export default function Home() {
                     alt="UploadedImage"
                   />
                 )}
-              <div className="flex-grow flex flex-col justify-end items-center min-h-1 pt-5">
-              </div>
-            {vizState && (
-              <>
-                <h2 className="text-white">Class: {predictionName}</h2>
-                {time > 0 && (
-                  <h2 className="text-white">
-                    Time: {(time).toFixed(2)} seconds
-                  </h2>
+                <div className="flex-grow flex flex-col justify-end items-center min-h-1 pt-5"></div>
+                {vizState && (
+                  <>
+                    <h2 className="text-white">Class: {predictionName}</h2>
+                    {time > 0 && (
+                      <h2 className="text-white">
+                        Time: {time.toFixed(2)} seconds
+                      </h2>
+                    )}
+                  </>
                 )}
-              </>
-            )}
-</div>
+              </div>
             </div>
             <button className="absolute bottom-0 flex justify-center items-center w-[120px] h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5">
-              <img 
-              className="h-[65px] w-[90px] object-contain"
-              src="/logoBlack.png"
+              <img
+                className="h-[65px] w-[90px] object-contain"
+                src="/logoBlack.png"
               ></img>
             </button>
             {!vizState && (
@@ -282,7 +354,9 @@ export default function Home() {
               <button
                 className="absolute bottom-0 flex justify-center items-center w-[120px] h-[70px] rounded-full cursor-pointer bg-transparent text-xs text-transparent text-blue-500 p-2.5 m-2.5 border-2  border-[#f3ec78] hover:border-4 hover:text-[#f3ec78] hover:bg-black py-5"
                 onClick={vizClick}
-              > Analysis Visualization
+              >
+                {' '}
+                Analysis Visualization
               </button>
             )}
 
@@ -317,9 +391,10 @@ export default function Home() {
             Upload
           </button>
         )}
-         {buttonState === 2 && (
-          <label className="absolute bottom-[2rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300"
-          onClick={clearClick}
+        {buttonState === 2 && (
+          <label
+            className="absolute bottom-[2rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300"
+            onClick={clearClick}
           >
             Reset
           </label>

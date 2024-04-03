@@ -6,7 +6,14 @@ import { Suspense, lazy } from "react";
 // const HeatMapGif = lazy(() => import('./heatMapGif'));
 // const Heatmap = lazy(() => import('./heatmap'));
 
+
 export default function NewModal(props) {
+
+  const imgDivs = props.preprocessUrls.map((url: string, index: number ) => {
+    return <img key={index} src={url
+    } alt="preprocess" />;
+  }
+  );
   return (
     <div className={styles.modalcontainer}>
       <div className={styles.modaltitlecontainer}>
@@ -60,6 +67,11 @@ export default function NewModal(props) {
             explore the complex algorithms and decision-making processes that
             bring AI to life.
           </p>
+        </div>
+        <div>
+          <img src= {props.heatmapUrl} alt="heatmap" />
+          <img src= {props.featuremapUrl} alt="heatmap" />
+          {imgDivs}
         </div>
       </div>
       <div className={styles.modalbutton}>

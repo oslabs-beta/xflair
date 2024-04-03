@@ -2,8 +2,9 @@ import os
 from flask import Blueprint, request, jsonify
 from botocore.exceptions import ClientError
 import base64
+import glob
 
-from app.services.generate_images import make_preprocess_image
+from app.services.generate_images import make_preprocess_image, make_preprocess_images
 from app.utils.image_utils import preprocess_image
 from app.utils.s3_utils import download_file, upload_file
 
@@ -58,10 +59,26 @@ def upload_preprocess():
     try:
         print(f"Downloaded file from s3://{s3_bucket}/{object_name}")
         make_preprocess_image(download_path, preprocessed, upload_path)
+        make_preprocess_images(base64_image, assets_dir)
         print(f"Preprocessed image saved to {upload_path}")
-        upload_file(upload_path, s3_bucket, 'preprocess/image.jpg')
+        # upload_file(upload_path, s3_bucket, 'preprocess/image.jpg')
+        file_list = glob.glob(os.path.join(assets_dir, '*'))
+        # Loop through each file and upload it to S3
+        for file_path in file_list:
+            try:
+                # Get the filename from the file path
+                filename = os.path.basename(file_path)
+                
+                # Upload the file to S3
+                upload_file(file_path, s3_bucket, f'preprocess/{filename}')
+                
+                print(f"Uploaded {filename} to s3://{s3_bucket}/preprocess/{filename}")
+            except ClientError as e:
+                print(f"Failed to upload {filename} to S3: {e}")
+
         print(f"Uploaded preprocessed image to s3://{s3_bucket}/preprocess/image.jpg")
-        url = f"https://{s3_bucket}.s3.amazonaws.com/preprocess/image.jpg"
-        return jsonify({'preprocessed_image': url})
+        urls = [f"s3://{s3_bucket}/preprocess/{os.path.basename(file_path)}" for file_path in file_list]
+
+        return jsonify({'preprocessed_images': urls})
     except ClientError as e:
         return jsonify({'error': str(e)}), 500

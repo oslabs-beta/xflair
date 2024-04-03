@@ -4,3 +4,13 @@ export type Upload = {
     size: number;
     image: Buffer;
 };
+
+export type Heatmaps = {
+    heatmaps: string[] | null
+    progressbars: string[] | null
+}
+
+export type Featuremaps = {
+    featuremaps: string[] | null
+    progressbars: string[] | null
+}

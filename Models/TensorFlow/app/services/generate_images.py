@@ -2,6 +2,8 @@ import tensorflow as tf
 import os
 import matplotlib.pyplot as plt
 import cv2
+import base64
+import numpy as np
 
 def make_gradcam_heatmap(img_array, model, conv_layer_name, pred_index=None):
     # Create a model that maps the input image to the activations of the conv layer
@@ -81,3 +83,41 @@ def make_preprocess_image(original_image_path, preprocessed_image, output_dir):
     plt.savefig(output_dir, format='jpeg')
     print ('saved')
     plt.close(fig)  # Close the figure to free memory
+
+def preprocess_image_steps(base64_image_str):
+# Decode the image from base64
+    image_bytes = base64.b64decode(base64_image_str)
+    # Decode image to tensor and resize
+    image_tensor = tf.image.decode_image(image_bytes, channels=3)
+    resized_image_tensor = tf.image.resize(image_tensor, (224, 224))
+    # Normalize
+    preprocessed_image_tensor = tf.keras.applications.mobilenet_v2.preprocess_input(resized_image_tensor)
+    # Add batch dimension
+    final_image_tensor = tf.expand_dims(preprocessed_image_tensor, 0)
+
+    # Convert tensors to numpy for visualization
+    original_np = image_tensor.numpy()
+    resized_np = resized_image_tensor.numpy()
+    preprocessed_np = (preprocessed_image_tensor.numpy() * 0.5) + 0.5  # Undo normalization for visualization
+
+    return original_np, resized_np, preprocessed_np
+
+def save_image(image_np, output_path):
+    fig, ax = plt.subplots(figsize=(5, 5))
+    ax.imshow(image_np)
+    ax.axis('off')  # Remove axes and borders
+    plt.savefig(output_path, format='jpeg', bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
+
+def make_preprocess_images(base64_image_str, output_dir):
+    original_np, resized_np, preprocessed_np = preprocess_image_steps(base64_image_str)
+    
+    # Adjust these lines to change the format or naming convention
+    original_output_path = os.path.join(output_dir, 'original_image.jpg')
+    resized_output_path = os.path.join(output_dir, 'resized_image.jpg')
+    preprocessed_output_path = os.path.join(output_dir, 'preprocessed_image.jpg')
+    
+    # Save the images
+    save_image(cv2.cvtColor(original_np.astype(np.uint8), cv2.COLOR_BGR2RGB), original_output_path)
+    save_image(cv2.cvtColor(resized_np.astype(np.uint8), cv2.COLOR_BGR2RGB), resized_output_path)
+    save_image(preprocessed_np, preprocessed_output_path)
