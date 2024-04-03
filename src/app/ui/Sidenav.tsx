@@ -263,7 +263,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/objects/classification'
                               >
                                 Classification
