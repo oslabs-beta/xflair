@@ -1,12 +1,21 @@
-import styles from "../page.module.css";
+import { Top5Obj } from '../lib/definitions';
+import styles from '../page.module.css';
 // import { EmblaCarousel } from "./carousel";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy } from 'react';
 
 // import HeatMapGif from './heatMapGif';
 // const HeatMapGif = lazy(() => import('./heatMapGif'));
 // const Heatmap = lazy(() => import('./heatmap'));
 
-export default function NewModal(props) {
+interface Props {
+  closeViz: () => void;
+  hGifURL: string;
+  fGifURL: string;
+  top5: Top5Obj;
+  preprocessFilePath: string;
+}
+
+export default function NewModal(props: Props) {
   return (
     <div className={styles.modalcontainer}>
       <button className={styles.exitmodalbutton} onClick={props.closeViz}>

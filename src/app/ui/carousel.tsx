@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback, Suspense, lazy } from 'react';
-import Image from 'next/image';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
@@ -9,12 +8,16 @@ import ResizedImage from './resizedImage';
 import HeatMapGif from './heatMapGif';
 import GridMapGif from './gridMapGif';
 import Top5Classes from './top5Classes';
+import { Top5Obj } from '../lib/definitions';
 
-// const HeatMapGif = lazy(() => import('./heatMapGif'));
+interface Props {
+  hGifURL: string;
+  fGifURL: string;
+  top5: Top5Obj;
+  preprocessFilePath: string;
+}
 
-// const HeatMapGif = lazy(() => import('./heatMapGif'));
-
-export function EmblaCarousel(props) {
+export function EmblaCarousel(props: Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
 
   useEffect(() => {
@@ -39,21 +42,6 @@ export function EmblaCarousel(props) {
         <div className={styles.embla__container}>
           <ResizedImage preprocessedFilePath={props.preprocessFilePath} />
           <GridMapGif fGifURL={props.fGifURL} />
-
-          {/* <div className={styles.embla__slide}>
-            <Suspense
-              fallback={
-                <Image
-                  src='/loadspinner.gif'
-                  alt='loading'
-                  height={350}
-                  width={350}
-                />
-              }
-            >
-            </Suspense>
-          </div> */}
-
           <HeatMapGif hGifURL={props.hGifURL} />
           <Top5Classes top5={props.top5} />
         </div>
