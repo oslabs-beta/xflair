@@ -42,6 +42,7 @@ venv/
 # env
 /Models/TensorFlow/.env
 /Models/TensorBoard/logs/*
+/Models/TensorFlow/app/assets/*
 
 
 .env

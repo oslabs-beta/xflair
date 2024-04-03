@@ -3,6 +3,7 @@
 import React, { useState, useEffect, ChangeEvent, use } from 'react';
 import axios from 'axios';
 import NewModal from '@/app/ui/newModal';
+import { Heatmaps, Featuremaps } from '@/app/lib/definitions';
 
 let inputImage: File | undefined;
 let count = 0;
@@ -31,11 +32,11 @@ export default function Home() {
   const [fGifURL, setFGifURL] = useState('');
   const [time, setTime] = useState(0);
   const [top5, setTop5] = useState({});
-  const [preprocessFilePath, setPreprocessFilePath] = useState('');
+  const [preprocessFilePath, setPreprocessFilePath] = useState([]);
   const [filePath, setFilePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
-  const [heatmapLinks, setHeatmapLinks] = useState({});
-  const [featureMapLinks, setFeatureMapLinks] = useState({});
+  const [heatmapLinks, setHeatmapLinks] = useState({} as Heatmaps);
+  const [featuremapLinks, setFeaturemapLinks] = useState({} as Featuremaps);
   const [data, setData] = useState('');
   const [fileType, setFileType] = useState('');
 
@@ -100,7 +101,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPreprocessFilePath(response.preprocessed_image);
+        setPreprocessFilePath(response.preprocessed_images);
       })
       .catch((error) => {
         console.error(error);
@@ -125,6 +126,68 @@ export default function Home() {
       });
   }
 
+  function uploadGifs(urls: string[], tag: string) {
+    fetch('/models/actions/image/gifs/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ urls, tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        // createGif(response.tag);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function createGif(tag: string) {
+    fetch('/models/actions/image/gifs/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        if (response.tag === 'heatmap_gif') {
+          setHGifURL(response.url);
+        } else {
+          setFGifURL(response.url);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function gif(urls: string[], tag: string) {
+    fetch('/models/actions/image/gifs/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ urls, tag }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log('response:', response);
+        if (tag === 'heatmap_gif') {
+          setHGifURL(response.url);
+        } else {
+          setFGifURL(response.url);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   function featureMaps(data: string, modelName: string) {
     fetch('/models/actions/image/featmaps', {
       method: 'POST',
@@ -136,7 +199,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setFeatureMapLinks(response);
+        setFeaturemapLinks(response);
       })
       .catch((error) => {
         console.error(error);
@@ -194,6 +257,18 @@ export default function Home() {
       preprocess(data, filePath, fileType);
     }
   }, [filePath, data, fileType]);
+
+  useEffect(() => {
+    if (heatmapLinks.progressbars) {
+      gif(heatmapLinks.progressbars as string[], 'heatmap_gif');
+    }
+  }, [heatmapLinks]);
+
+  useEffect(() => {
+    if (hGifURL && featuremapLinks.progressbars) {
+      gif(featuremapLinks.progressbars as string[], 'featuremap_gif');
+    }
+  }, [hGifURL, featuremapLinks]);
 
   const clearClick = () => {
     inputImage = undefined;
