@@ -77,8 +77,7 @@ def upload_preprocess():
                 print(f"Failed to upload {filename} to S3: {e}")
 
         print(f"Uploaded preprocessed image to s3://{s3_bucket}/preprocess/image.jpg")
-        urls = [f"s3://{s3_bucket}/preprocess/{os.path.basename(file_path)}" for file_path in file_list]
-
-        return jsonify({'preprocessed_images': urls})
+        object_names = [f"preprocess/{os.path.basename(file_path)}" for file_path in file_list]
+        return jsonify({'preprocessed_images': object_names})
     except ClientError as e:
         return jsonify({'error': str(e)}), 500

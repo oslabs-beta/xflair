@@ -101,7 +101,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((response) => {
         console.log('response:', response);
-        setPreprocessFilePath(response.preprocessed_images);
+        setPreprocessFilePath(response.urls as string[]);
       })
       .catch((error) => {
         console.error(error);

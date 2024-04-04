@@ -101,7 +101,7 @@ export default function NewModal(props: Props) {
         <div>Original Image</div>
         <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
           <image
-            href={props.preprocessFilePath[0]}
+            href={props.preprocessFilePath[1]}
           width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
           />
         </svg> 
@@ -110,16 +110,16 @@ export default function NewModal(props: Props) {
         <div>Preprocessed Image</div>
         <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
           <image
-            href={props.preprocessFilePath[1]}
+            href={props.preprocessFilePath[2]}
           width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
           />
         </svg>
         </div>
         <div className="gridItem"> 
-        <div>Upload Image</div>
+        <div>Image Tensor</div>
         <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
           <image
-            href={props.preprocessFilePath[2]}
+            href={props.preprocessFilePath[3]}
           width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
           />
         </svg>
