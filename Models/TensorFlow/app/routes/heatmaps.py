@@ -60,7 +60,7 @@ def upload_heatmaps(model_name):
         output_path_pb = os.path.join(heatmapspb_dir, f"{file_name}.jpg")
         current_index = layer_names.index(layer_name)
         total_layers = len(layer_names)
-        superimposed_img_with_progress = add_progress_bar(superimposed_img, current_index, total_layers)
+        superimposed_img_with_progress = add_progress_bar(superimposed_img, current_index, total_layers, width=4)
         cv2.imwrite(output_path_pb, superimposed_img_with_progress)  # Correctly save the image with progress bar
 
         upload_file(output_path_pb, bucket_name, f"heatmaps/progressbars/{file_name}.jpg")
