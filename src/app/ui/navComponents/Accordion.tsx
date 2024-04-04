@@ -78,7 +78,7 @@ export default function Accordion(props: Props) {
       </button>
 
       <div
-        id={props.id}
+        id={props.id[props.id.length - 1]}
         className={`hs-accordion-content w-full overflow-hidden transition-[height] duration-300 ${
           props.activeAccordion[props.depth] === props.id[props.id.length - 1]
             ? 'block'
