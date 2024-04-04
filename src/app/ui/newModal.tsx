@@ -1,11 +1,9 @@
-import { Top5Obj } from '../lib/definitions';
-import styles from '../page.module.css';
-// import { EmblaCarousel } from "./carousel";
-import { Suspense, lazy } from 'react';
-
-// import HeatMapGif from './heatMapGif';
-// const HeatMapGif = lazy(() => import('./heatMapGif'));
-// const Heatmap = lazy(() => import('./heatmap'));
+import { Top5Obj } from "../lib/definitions";
+import styles from "../page.module.css";
+import HeatMapGif from "./heatMapGif";
+import GridMapGif from "./gridMapGif";
+import Top5 from "./top5Classes";
+import { Suspense, lazy } from "react";
 
 interface Props {
   closeViz: () => void;
@@ -29,24 +27,8 @@ export default function NewModal(props: Props) {
       </button>
       <div className={styles.slide}>
         <div className={styles.modaltitlecontainer}>
-          {/* <div className={styles.test} /> */}
           <h1 className={styles.modaltitle}>ANALYSIS VISUALS COMING SOON</h1>
-          {/* <svg
-          onClick={props.closeViz}
-          className={styles.modalxicon}
-          xmlns='http://www.w3.org/2000/svg'
-          width='200'
-          height='200'
-          viewBox='0 0 24 24'
-        /> */}
         </div>
-        {/* <EmblaCarousel
-      closeViz={props.closeViz}
-      hGifURL={props.hGifURL}
-      fGifURL={props.fGifURL}
-      top5={props.top5}
-      preprocessFilePath={props.preprocessFilePath}
-      /> */}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
             <h1>Unraveling AI: A Visual Journey</h1>
@@ -97,32 +79,38 @@ export default function NewModal(props: Props) {
       </div>
       <div className={styles.slideRow}>
         {/*preprocess image*/}
-        <div className="gridItem"> 
-        <div>Original Image</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[1]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg> 
+        <div className="gridItem">
+          <div>Original Image</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[1]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
-        <div className="gridItem"> 
-        <div>Preprocessed Image</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[2]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Preprocessed Image</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[2]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
-        <div className="gridItem"> 
-        <div>Image Tensor</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[3]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Image Tensor</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[3]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
       </div>
       <div className={styles.slide}>
@@ -151,26 +139,16 @@ export default function NewModal(props: Props) {
       <div className={styles.slideRow}>
         {" "}
         {/*gifs*/}
-        <div className="gridItem"> 
-        <div>Heat map</div>
-        <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.hGifURL}
-          width="40vw" height="40vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Heat map</div>
+          <HeatMapGif hGifURL={props.hGifURL} />
         </div>
-        <div className="gridItem"> 
-        <div>Feature Map</div>
-        <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.fGifURL}
-          width="40vw" height="40vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Feature Map</div>
+          <GridMapGif fGifURL={props.fGifURL} />
         </div>
       </div>
-      <div className={styles.slide}>top5</div>
+      <Top5 top5={props.top5} />
     </div>
   );
 }

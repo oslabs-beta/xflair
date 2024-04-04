@@ -7,10 +7,6 @@ interface Props {
 }
 
 export default function Top5(props: Props) {
-  useEffect(() => {
-    console.log(props.top5);
-  }, [props.top5]);
-
   const top5Table = [];
 
   for (let key in props.top5) {
@@ -22,7 +18,7 @@ export default function Top5(props: Props) {
     );
   }
   return (
-    <div className={styles.embla__slide}>
+    <div className={styles.slide}>
       {Object.keys(props.top5).length > 0 && (
         <table className='table'>
           <thead>
