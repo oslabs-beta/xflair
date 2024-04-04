@@ -141,7 +141,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
       <div className='mt-auto w-full flex justify-center items-center bg-transparent pt-5 pb-20'>
         <img
           className='h-20 w-30 object-contain'
-          src='/logoBlack.png'
+          src='/xflair_logo_clear.png'
           alt='titleText'
         />
       </div>
