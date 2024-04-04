@@ -243,10 +243,14 @@ export default function Home() {
           heatmaps(data, modelName);
           featureMaps(data, modelName);
           imgUpload(inputImage as File);
-          predict(data, modelName).then(() => {
-            setVizState(true);
-            setButtonState(2);
-          });
+          predict(data, modelName)
+            .then(() => {
+              setVizState(true);
+              setButtonState(2);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         }
       };
     }
