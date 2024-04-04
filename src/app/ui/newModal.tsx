@@ -1,11 +1,9 @@
 import { Top5Obj } from "../lib/definitions";
 import styles from "../page.module.css";
-// import { EmblaCarousel } from "./carousel";
+import HeatMapGif from "./heatMapGif";
+import GridMapGif from "./gridMapGif";
+import Top5 from "./top5Classes";
 import { Suspense, lazy } from "react";
-
-// import HeatMapGif from './heatMapGif';
-// const HeatMapGif = lazy(() => import('./heatMapGif'));
-// const Heatmap = lazy(() => import('./heatmap'));
 
 interface Props {
   closeViz: () => void;
@@ -186,66 +184,14 @@ export default function NewModal(props: Props) {
         {/*gifs*/}
         <div className="gridItem">
           <div>Heat map</div>
-          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-            <image
-              href={props.hGifURL}
-              width="40vw"
-              height="40vh"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </svg>
+          <HeatMapGif hGifURL={props.hGifURL} />
         </div>
         <div className="gridItem">
           <div>Feature Map</div>
-          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-            <image
-              href={props.fGifURL}
-              width="40vw"
-              height="40vh"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </svg>
+          <GridMapGif fGifURL={props.fGifURL} />
         </div>
       </div>
-      <div className={styles.slide}>
-        {/*top 5*/}
-        <div className={styles.modalcontainertext}>
-          <div className={styles.modalheader}>
-            <h1>AI&apos;s Best Guesses</h1>
-            <h2>The top predictions and the reasoning behind them</h2>
-          </div>
-          <div className={styles.modalbody}>
-            <p>
-              Based on the analysis of your image, the AI model has generated
-              its top predictions. These predictions represent the categories or
-              labels that the model believes are most likely to match your
-              image. Each prediction is accompanied by a confidence score,
-              indicating the model&apos;s level of certainty.
-            </p>
-            <br />
-            <div className={styles.modalbody}>
-              {/* <p>Scroll Down For More Information</p> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                id="down-arrow"
-              >
-                <path
-                  fill="#ffffff"
-                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.slideRow}>
-        <div className="gridItem"></div>
-        <div className="gridItem"></div>
-      </div>
+      <Top5 top5={props.top5} />
     </div>
   );
 }
