@@ -1,19 +1,20 @@
-version: 3
+version: '3'
 
 services:
-  build:
-    context: .
-    dockerfile: Dockerfile
-  image: xflair/prod
-  ports:
-    - "3000:3000"
-  environment:
-    - NODE_ENV=production
-    - SERVICE_HOST=host.docker.internal
-  env_file:
-    - .env
-  depends_on:
-    - model
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: xflair/prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - SERVICE_HOST=host.docker.internal
+    env_file:
+      - .env
+    depends_on:
+      - model
 
   model:
     build:

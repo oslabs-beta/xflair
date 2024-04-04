@@ -4,7 +4,7 @@ import React, { useState, useEffect, ChangeEvent, use } from 'react';
 import axios from 'axios';
 import NewModal from '@/app/ui/newModal';
 import { Heatmaps, Featuremaps } from '@/app/lib/definitions';
-import { set } from 'zod';
+import { Top5Obj } from '@/app/lib/definitions';
 
 let inputImage: File | undefined;
 let count = 0;
@@ -32,7 +32,7 @@ export default function Home() {
   const [hGifURL, setHGifURL] = useState('');
   const [fGifURL, setFGifURL] = useState('');
   const [time, setTime] = useState(0);
-  const [top5, setTop5] = useState({});
+  const [top5, setTop5] = useState({} as Top5Obj);
   const [preprocessFilePath, setPreprocessFilePath] = useState<string[]>([]);
   const [filePath, setFilePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
@@ -40,6 +40,7 @@ export default function Home() {
   const [featuremapLinks, setFeaturemapLinks] = useState({} as Featuremaps);
   const [data, setData] = useState('');
   const [fileType, setFileType] = useState('');
+  const [top5Formatted, setTop5Formatted] = useState({} as Top5Obj);
 
   const browse = (e: ChangeEvent<HTMLInputElement>) => {
     inputImage = e.currentTarget.files?.[0];
@@ -228,6 +229,15 @@ export default function Home() {
       });
   }
 
+  function formatString(inputString: string): string {
+    // Split the string by underscores, then map over each word,
+    // capitalizing the first letter of each and joining them back with a space.
+    return inputString
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
+
   const uploadClick = async () => {
     if (inputImage) {
       const reader = new FileReader();
@@ -276,6 +286,19 @@ export default function Home() {
     }
   }, [hGifURL, featuremapLinks, fGifURL]);
 
+  useEffect(() => {
+    if (top5) {
+      const formattedTop5: Top5Obj = {};
+      for (const key in top5) {
+        const formattedKey = formatString(key);
+        formattedTop5[formattedKey] = top5[key];
+      }
+      setTop5Formatted(formattedTop5);
+    }
+      
+  }
+  , [top5]);
+
   const clearClick = () => {
     inputImage = undefined;
     setImgName('Browse...');
@@ -289,6 +312,7 @@ export default function Home() {
     setButtonState(0);
     setHeatmapLinks({} as Heatmaps);
     setFeaturemapLinks({} as Featuremaps);
+    setPredictionName('');
   };
 
   const vizClick = () => {
@@ -322,7 +346,7 @@ export default function Home() {
                   closeViz={closeViz}
                   hGifURL={hGifURL}
                   fGifURL={fGifURL}
-                  top5={top5}
+                  top5={top5Formatted}
                   preprocessFilePath={preprocessFilePath}
                 />
               )}{' '}
@@ -337,7 +361,7 @@ export default function Home() {
                 <div className="flex-grow flex flex-col justify-end items-center min-h-1 pt-5"></div>
                 {vizState && (
                   <>
-                    <h2 className="text-white">Class: {predictionName}</h2>
+                    <h2 className="text-white">Class: {formatString(predictionName)}</h2>
                     {time > 0 && (
                       <h2 className="text-white">
                         Time: {time.toFixed(2)} seconds
