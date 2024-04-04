@@ -17,7 +17,9 @@ interface Props {
 
 export default function NewModal(props: Props) {
   return (
+    // modal main container
     <div className={styles.modalcontainer}>
+      {/* exit button */}
       <button className={styles.exitmodalbutton} onClick={props.closeViz}>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" id="x">
           <path
@@ -27,29 +29,15 @@ export default function NewModal(props: Props) {
           ></path>
         </svg>
       </button>
+      {/* intro slide */}
       <div className={styles.slide}>
+        {/* title */}
         <div className={styles.modaltitlecontainer}>
           <h1 className={styles.modaltitle}>ANALYSIS VISUALS COMING SOON</h1>
-          {/* <svg
-          onClick={props.closeViz}
-          className={styles.modalxicon}
-          xmlns='http://www.w3.org/2000/svg'
-          width='200'
-          height='200'
-          viewBox='0 0 24 24'
-        /> */}
         </div>
-        {/* <EmblaCarousel
-      closeViz={props.closeViz}
-      hGifURL={props.hGifURL}
-      fGifURL={props.fGifURL}
-      top5={props.top5}
-      preprocessFilePath={props.preprocessFilePath}
-      /> */}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
             <h1>Unraveling AI: A Visual Journey</h1>
-
             <h2>Discover how artificial intelligence</h2>
             <h2>perceives and interprets your image.</h2>
           </div>
@@ -109,8 +97,9 @@ export default function NewModal(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.slide}>
+      <div className={styles.slideRow}>
         {/*preprocess image*/}
+
         <div className="gridItem">
           <div>Original Image</div>
           <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +134,7 @@ export default function NewModal(props: Props) {
           </svg>
         </div>
       </div>
-      <div className={styles.slide}>
+      <div className={styles.slideRow}>
         {/*explain gifs*/}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
@@ -168,7 +157,7 @@ export default function NewModal(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.slide}>
+      <div className={styles.slideRow}>
         {" "}
         {/*gifs*/}
         <div className="gridItem">

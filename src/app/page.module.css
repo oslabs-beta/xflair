@@ -365,12 +365,12 @@
 }
 
 .slideRow {
+  margin-top: 20px;
   border: 1px solid goldenrod;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
   position: relative;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
