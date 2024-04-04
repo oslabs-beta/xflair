@@ -10,13 +10,13 @@ def preprocess_image(base64_image_str):
     image_tensor = tf.expand_dims(image_tensor, 0)
     return image_tensor
 
-def add_progress_bar(image, current_index, total_layers, bar_height=5, border_color=(255,255,255), progress_color=(50,205,50), remaining_color=(220,220,220)):
+def add_progress_bar(image, current_index, total_layers, width, border_color=(255,255,255), progress_color=(50,205,50), remaining_color=(220,220,220)):
 
     img_height, img_width = image.shape[:2]
     progress_width = int(((current_index + 1) / total_layers) * img_width)
 
     # Create a progress bar image
-    bar_img = np.zeros((bar_height, img_width, 3), dtype=np.uint8)
+    bar_img = np.zeros((width, img_width, 3), dtype=np.uint8)
 
     # Fill the progress part
     bar_img[:, :progress_width] = progress_color

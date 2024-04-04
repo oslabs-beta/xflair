@@ -63,8 +63,11 @@ export async function POST(req: NextRequest) {
   try {
     const { urls, tag } = await req.json();
 
+    console.log('URLs:', urls);
+    console.log('Tag:', tag);
+
     if (tag === 'featuremap_gif') {
-      await delay(1000);
+      delay(10000);
     }
 
     const objectKeys = urls.map((url: string) => {
@@ -80,43 +83,10 @@ export async function POST(req: NextRequest) {
       return new Response('Missing URLs', { status: 400 });
     }
 
-    const signedUrls = await Promise.all(
-      objectKeys.map((objectKey: string) =>
-        generateSignedUrl(
-          process.env.AWS_S3_BUCKET_NAME as string,
-          objectKey,
-          180
-        )
-      )
-    );
-
-    // Creating upload promises for all URLs
-    const uploadPromises = signedUrls.map((url: string, index: number) => {
-      const formattedIndex = String(index + 1).padStart(3, '0');
-      uploadImage(url, `${tag}_${formattedIndex}`, tag);
-    });
-
-    // Await all upload promises
-    await Promise.all(uploadPromises);
-    console.log('All images uploaded.');
-
-    await delay(1000);
-
-    // Create GIF from uploaded images and cleanup
-    const gifCreationResult = await cloudinary.uploader.multi(tag as string, {
-      format: 'gif' as ImageAndVideoFormatOptions,
-    });
-
-    console.log(gifCreationResult.secure_url);
-
-    // Delete uploaded images after creating the GIF
-    await cloudinary.api.delete_resources_by_tag(tag);
-    console.log('Uploaded images cleaned up successfully');
-
     // Return the URL of the created GIF
     return new Response(
       JSON.stringify({
-        url: gifCreationResult.secure_url as string,
+        urls: urls,
         tag: tag as string,
       }),
       { status: 200 }
