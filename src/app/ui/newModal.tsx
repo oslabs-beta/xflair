@@ -14,7 +14,9 @@ interface Props {
 
 export default function NewModal(props: Props) {
   return (
+    // modal main container
     <div className={styles.modalcontainer}>
+      {/* exit button */}
       <button className={styles.exitmodalbutton} onClick={props.closeViz}>
         <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' id='x'>
           <path
@@ -24,28 +26,44 @@ export default function NewModal(props: Props) {
           ></path>
         </svg>
       </button>
+      {/* intro slide */}
       <div className={styles.slide}>
+        {/* title */}
         <div className={styles.modaltitlecontainer}>
           <h1 className={styles.modaltitle}>ANALYSIS VISUALS COMING SOON</h1>
         </div>
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
             <h1>Unraveling AI: A Visual Journey</h1>
-            <h2>
-              Step into the world of artificial intelligence and discover how it
-              perceives and interprets your image.
-            </h2>
+            <h2>Discover how artificial intelligence</h2>
+            <h2>perceives and interprets your image.</h2>
           </div>
           <div className={styles.modalbody}>
             <p>
-              In this immersive experience, we&apos;ll guide you through the
-              fascinating process of AI image analysis. From preprocessing to
-              feature extraction and classification, you&apos;ll gain a deeper
+              This immersive experience, will guide you through the fascinating
+              process of AI image analysis. From preprocessing to feature
+              extraction and classification, you&apos;ll gain a deeper
               understanding of how AI models work behind the scenes. Get ready
               to explore the complex algorithms and decision-making processes
               that bring AI to life.
             </p>
-            <p>Scroll Down For More Information</p>
+            <br />
+            <div className={styles.modalbody}>
+              {/* <p>Scroll Down For More Information</p> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                data-name="Layer 1"
+                viewBox="0 0 24 24"
+                id="down-arrow"
+              >
+                <path
+                  fill="#ffffff"
+                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                ></path>
+              </svg>
+            </div>
           </div>
         </div>
         <div className={styles.modalbutton}>
@@ -104,7 +122,7 @@ export default function NewModal(props: Props) {
           </svg>
         </div>
       </div>
-      <div className={styles.slide}>
+      <div className={styles.slideRow}>
         {/*explain gifs*/}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
