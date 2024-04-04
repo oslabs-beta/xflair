@@ -12,11 +12,7 @@ interface Props {
   preprocessFilePath: string[];
 }
 
-
-
-
 export default function NewModal(props: Props) {
-
   return (
     // modal main container
     <div className={styles.modalcontainer}>
@@ -53,16 +49,16 @@ export default function NewModal(props: Props) {
             <div className={styles.modalbody}>
               {/* <p>Scroll Down For More Information</p> */}
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                id="down-arrow"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
               >
                 <path
-                  fill="#ffffff"
-                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
                 ></path>
               </svg>
             </div>
@@ -95,16 +91,16 @@ export default function NewModal(props: Props) {
             <div className={styles.modalbody}>
               {/* <p>Scroll Down For More Information</p> */}
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                id="down-arrow"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
               >
                 <path
-                  fill="#ffffff"
-                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
                 ></path>
               </svg>
             </div>
@@ -167,16 +163,16 @@ export default function NewModal(props: Props) {
             <div className={styles.modalbody}>
               {/* <p>Scroll Down For More Information</p> */}
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                id="down-arrow"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
               >
                 <path
-                  fill="#ffffff"
-                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
                 ></path>
               </svg>
             </div>
@@ -184,14 +180,26 @@ export default function NewModal(props: Props) {
         </div>
       </div>
       <div className={styles.slideRow}>
-        {/*gifs*/}
-        <div className='gridItem'>
-          <div>Heat map</div>
-          <HeatMapGif hGifURL={props.hGifURL} />
-        </div>
-        <div className='gridItem'>
-          <div>Feature Map</div>
-          <GridMapGif fGifURL={props.fGifURL} />
+        <div className={styles.gifSlide}>
+          <div className={styles.gifDisplay}>
+            <div className={styles.gifContainer}>
+              <div className={styles.gifTitle}>Heat Map</div>
+              <HeatMapGif hGifURL={props.hGifURL} />
+            </div>
+            <div className={styles.gifContainer}>
+              <div className={styles.gifTitle}>Feature Map</div>
+              <GridMapGif fGifURL={props.fGifURL} />
+            </div>
+          </div>
+          <h2 className={styles.gifDescription}>
+            On the left side, you can see which pixels the AI model focuses on
+            as it moves through the layers of the neural network. The network
+            provides weights to important regions, and the larger the weight,
+            the hotter the region. The right is a visualization of how the
+            neural network interprets different features of the image. Feature
+            determination is broad in earlier stages, and becomes more focused
+            on smaller areas towards the end.
+          </h2>
         </div>
       </div>
       <Top5 top5={props.top5} />
