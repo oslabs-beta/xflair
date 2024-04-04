@@ -38,7 +38,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
       id='docs-sidebar'
       className={`fixed inset-y-0 left-0 transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-300 flex flex-col`}
+      } transition-transform duration-300 flex flex-col bg-slate-900 text-white`}
     >
       <div className='px-6 pt-5'>
         <p
@@ -55,7 +55,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
         <ul className='space-y-1.5'>
           <li>
             <Link
-              className='flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
               href={'/'}
             >
               <svg
@@ -84,7 +84,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 activeAccordion[0] === 'models-accordion'
                   ? 'hs-accordion-active:text-blue-600'
                   : ''
-              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600 rounded`}
+              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600`}
               onClick={() => toggleAccordion(['models-accordion'])}
             >
               <svg
@@ -263,7 +263,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 hover:text-slate-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/objects/classification'
                               >
                                 Classification
@@ -271,7 +271,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/objects/detection'
                               >
                                 Detection
@@ -279,7 +279,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/objects/generation'
                               >
                                 Generation
@@ -346,7 +346,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/text/llm'
                               >
                                 LLMs
@@ -354,7 +354,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/tensorflow/text/texttospeech'
                               >
                                 Text to Speech
@@ -476,7 +476,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/pytorch/objects/classification'
                               >
                                 Classification
@@ -484,7 +484,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/pytorch/objects/detection'
                               >
                                 Detection
@@ -492,7 +492,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/pytorch/objects/generation'
                               >
                                 Generation
@@ -559,7 +559,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2 space-y-1.5'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/pytorch/text/llm'
                               >
                                 LLMs
@@ -567,7 +567,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/pytorch/text/texttospeech'
                               >
                                 Text to Speech
@@ -689,7 +689,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/agnostic/objects/classification'
                               >
                                 Classification
@@ -697,7 +697,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/agnostic/objects/detection'
                               >
                                 Detection
@@ -705,7 +705,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/agnostic/objects/generation'
                               >
                                 Generation
@@ -772,7 +772,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                           <ul className='pt-2 ps-2'>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/agnostic/text/llm'
                               >
                                 LLMs
@@ -780,7 +780,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                             </li>
                             <li>
                               <Link
-                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                                className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                                 href='/models/agnostic/text/texttospeech'
                               >
                                 Text to Speech
@@ -803,7 +803,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 activeAccordion[0] === 'libraries-accordion'
                   ? 'hs-accordion-active:text-blue-600'
                   : ''
-              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600 rounded`}
+              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600`}
               onClick={() => toggleAccordion(['libraries-accordion'])}
             >
               <svg
@@ -864,7 +864,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
               <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
                   <Link
-                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                     href='/libraries/python'
                   >
                     Python
@@ -927,7 +927,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                     <ul className='pt-2 ps-2'>
                       <li>
                         <Link
-                          className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                          className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                           href='/libraries/react/javascript'
                         >
                           Javascript
@@ -935,7 +935,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                       </li>
                       <li>
                         <Link
-                          className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                          className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                           href='/libraries/react/typescript'
                         >
                           Typescript
@@ -955,7 +955,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 activeAccordion[0] === 'doc-accordion'
                   ? 'hs-accordion-active:text-blue-600'
                   : ''
-              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600 rounded`}
+              } w-full text-start flex items-center gap-x-3.5 py-2 px-4 text-sm font-medium text-slate-700 bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring dark:focus:ring-gray-600`}
               onClick={() => toggleAccordion(['doc-accordion'])}
             >
               <svg
@@ -1015,7 +1015,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
               <ul className='pt-2 ps-2 space-y-1.5'>
                 <li>
                   <Link
-                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                     href='/documentation/python'
                   >
                     Python
@@ -1023,7 +1023,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
                 </li>
                 <li>
                   <Link
-                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+                    className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded hover:bg-gray-100 dark:bg-gray-800 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
                     href='/documentation/javascript-typescript'
                   >
                     Javascript / Typescript
@@ -1034,7 +1034,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
           </li>
           <li>
             <Link
-              className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-300 rounded hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
               href='/about-us'
             >
               <svg

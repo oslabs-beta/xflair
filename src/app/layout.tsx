@@ -56,7 +56,7 @@ export default function RootLayout({ children }: Props) {
                   className="flex-shrink-0 size-4"
                   width="16"
                   height="16"
-                  fill="currentColor"
+                  fill="white"
                   viewBox="0 0 16 16"
                 >
                   <path
