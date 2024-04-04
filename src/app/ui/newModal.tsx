@@ -111,7 +111,7 @@ export default function NewModal(props: Props) {
         <div className='gridItem'>
           <div className={styles.modalheader} >Initial Formatting</div>          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
-              href={props.preprocessFilePath[2]}
+              href={props.preprocessFilePath[0]}
               width='25vw'
               height='25vh'
               preserveAspectRatio='xMidYMid meet'
@@ -122,7 +122,7 @@ export default function NewModal(props: Props) {
           <div className={styles.modalheader}>Image Resizing</div>
           <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
-              href={props.preprocessFilePath[0]}
+              href={props.preprocessFilePath[1]}
               width='25vw'
               height='25vh'
               preserveAspectRatio='xMidYMid meet'
@@ -133,7 +133,7 @@ export default function NewModal(props: Props) {
           <div className={styles.modalheader}>Image Tensor</div>
           <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
-              href={props.preprocessFilePath[1]}
+              href={props.preprocessFilePath[2]}
               width='25vw'
               height='25vh'
               preserveAspectRatio='xMidYMid meet'

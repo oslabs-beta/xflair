@@ -7,7 +7,6 @@ import glob
 from app.services.generate_images import make_preprocess_image, make_preprocess_images
 from app.utils.image_utils import preprocess_image
 from app.utils.s3_utils import download_file, upload_file
-import os
 
 
 dir = os.path.dirname(__file__)
@@ -58,7 +57,7 @@ def upload_preprocess():
     # Error handling for S3 operations
     try:
         print(f"Downloaded file from s3://{s3_bucket}/{object_name}")
-        make_preprocess_images(base64_image, assets_dir)
+        file_names = make_preprocess_images(base64_image, assets_dir)
         # upload_file(upload_path, s3_bucket, 'preprocess/image.jpg')
         if os.path.exists(download_path):
             os.remove(download_path)
@@ -79,7 +78,7 @@ def upload_preprocess():
                 print(f"Failed to upload {filename} to S3: {e}")
 
         print(f"Uploaded preprocessed image to s3://{s3_bucket}/preprocess/image.jpg")
-        object_names = [f"preprocess/{os.path.basename(file_path)}" for file_path in file_list]
+        object_names = [f"preprocess/{file_name}" for file_name in file_names]
         return jsonify({'preprocessed_images': object_names})
     except ClientError as e:
         return jsonify({'error': str(e)}), 500

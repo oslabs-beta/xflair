@@ -112,12 +112,17 @@ def save_image(image_np, output_path):
 def make_preprocess_images(base64_image_str, output_dir):
     original_np, resized_np, preprocessed_np = preprocess_image_steps(base64_image_str)
     
+    original_file_name = 'original_image.jpg'
+    resized_file_name = 'resized_image.jpg'
+    preprocessed_file_name = 'preprocessed_image.jpg'
     # Adjust these lines to change the format or naming convention
-    original_output_path = os.path.join(output_dir, 'original_image.jpg')
-    resized_output_path = os.path.join(output_dir, 'resized_image.jpg')
-    preprocessed_output_path = os.path.join(output_dir, 'preprocessed_image.jpg')
+    original_output_path = os.path.join(output_dir, original_file_name)
+    resized_output_path = os.path.join(output_dir, resized_file_name)
+    preprocessed_output_path = os.path.join(output_dir, preprocessed_file_name)
     
     # Save the images
     save_image(cv2.cvtColor(original_np.astype(np.uint8), cv2.COLOR_BGR2RGB), original_output_path)
     save_image(cv2.cvtColor(resized_np.astype(np.uint8), cv2.COLOR_BGR2RGB), resized_output_path)
     save_image(preprocessed_np, preprocessed_output_path)
+
+    return [original_file_name, resized_file_name, preprocessed_file_name]
