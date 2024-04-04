@@ -1,11 +1,8 @@
-import { Top5Obj } from "../lib/definitions";
-import styles from "../page.module.css";
-// import { EmblaCarousel } from "./carousel";
-import { Suspense, lazy } from "react";
-
-// import HeatMapGif from './heatMapGif';
-// const HeatMapGif = lazy(() => import('./heatMapGif'));
-// const Heatmap = lazy(() => import('./heatmap'));
+import { Top5Obj } from '../lib/definitions';
+import styles from '../page.module.css';
+import HeatMapGif from './heatMapGif';
+import GridMapGif from './gridMapGif';
+import Top5 from './top5Classes';
 
 interface Props {
   closeViz: () => void;
@@ -21,11 +18,11 @@ export default function NewModal(props: Props) {
     <div className={styles.modalcontainer}>
       {/* exit button */}
       <button className={styles.exitmodalbutton} onClick={props.closeViz}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" id="x">
+        <svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' id='x'>
           <path
-            fillRule="evenodd"
-            fill="#ffffff"
-            d="M5.043 3v.004a.998.998 0 0 0-.1 0A.998.998 0 0 0 4.21 4.61l2.543 3.391-2.543 3.396a.999.999 0 1 0 1.6 1.198L8 9.672l2.191 2.924a.999.999 0 1 0 1.598-1.198L9.248 8.002l2.541-3.39a.998.998 0 0 0-.865-1.608.998.998 0 0 0-.733.41L8 6.338 5.809 3.414A.998.998 0 0 0 5.043 3z"
+            fillRule='evenodd'
+            fill='#ffffff'
+            d='M5.043 3v.004a.998.998 0 0 0-.1 0A.998.998 0 0 0 4.21 4.61l2.543 3.391-2.543 3.396a.999.999 0 1 0 1.6 1.198L8 9.672l2.191 2.924a.999.999 0 1 0 1.598-1.198L9.248 8.002l2.541-3.39a.998.998 0 0 0-.865-1.608.998.998 0 0 0-.733.41L8 6.338 5.809 3.414A.998.998 0 0 0 5.043 3z'
           ></path>
         </svg>
       </button>
@@ -85,51 +82,42 @@ export default function NewModal(props: Props) {
             </h2>
           </div>
           <div className={styles.modalbody}>
-            <p>
-              {/* In this immersive experience, we&apos;ll guide you through the
-            fascinating process of AI image analysis. From preprocessing to
-            feature extraction and classification, you&apos;ll gain a deeper
-            understanding of how AI models work behind the scenes. Get ready to
-            explore the complex algorithms and decision-making processes that
-            bring AI to life. */}
-              scroll down for demo
-            </p>
+            <p>Continue Scrolling for Demo</p>
           </div>
         </div>
       </div>
       <div className={styles.slideRow}>
         {/*preprocess image*/}
-
-        <div className="gridItem">
+        <div className='gridItem'>
           <div>Original Image</div>
-          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
               href={props.preprocessFilePath[1]}
-              width="25vw"
-              height="25vh"
-              preserveAspectRatio="xMidYMid meet"
+              width='25vw'
+              height='25vh'
+              preserveAspectRatio='xMidYMid meet'
             />
           </svg>
         </div>
-        <div className="gridItem">
+        <div className='gridItem'>
           <div>Preprocessed Image</div>
-          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
               href={props.preprocessFilePath[2]}
-              width="25vw"
-              height="25vh"
-              preserveAspectRatio="xMidYMid meet"
+              width='25vw'
+              height='25vh'
+              preserveAspectRatio='xMidYMid meet'
             />
           </svg>
         </div>
-        <div className="gridItem">
+        <div className='gridItem'>
           <div>Image Tensor</div>
-          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
               href={props.preprocessFilePath[3]}
-              width="25vw"
-              height="25vh"
-              preserveAspectRatio="xMidYMid meet"
+              width='25vw'
+              height='25vh'
+              preserveAspectRatio='xMidYMid meet'
             />
           </svg>
         </div>
@@ -145,45 +133,23 @@ export default function NewModal(props: Props) {
             </h2>
           </div>
           <div className={styles.modalbody}>
-            <p>
-              {/* In this immersive experience, we&apos;ll guide you through the
-            fascinating process of AI image analysis. From preprocessing to
-            feature extraction and classification, you&apos;ll gain a deeper
-            understanding of how AI models work behind the scenes. Get ready to
-            explore the complex algorithms and decision-making processes that
-            bring AI to life. */}
-              scroll down for demo
-            </p>
+            <p>Continue Scrolling for Demo</p>
           </div>
         </div>
       </div>
       <div className={styles.slideRow}>
-        {" "}
+        {' '}
         {/*gifs*/}
-        <div className="gridItem">
+        <div className='gridItem'>
           <div>Heat map</div>
-          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-            <image
-              href={props.hGifURL}
-              width="40vw"
-              height="40vh"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </svg>
+          <HeatMapGif hGifURL={props.hGifURL} />
         </div>
-        <div className="gridItem">
+        <div className='gridItem'>
           <div>Feature Map</div>
-          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-            <image
-              href={props.fGifURL}
-              width="40vw"
-              height="40vh"
-              preserveAspectRatio="xMidYMid meet"
-            />
-          </svg>
+          <GridMapGif fGifURL={props.fGifURL} />
         </div>
       </div>
-      <div className={styles.slide}>top5</div>
+      <Top5 top5={props.top5} />
     </div>
   );
 }
