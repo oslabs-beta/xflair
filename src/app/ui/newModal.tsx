@@ -1,7 +1,7 @@
-import { Top5Obj } from '../lib/definitions';
-import styles from '../page.module.css';
+import { Top5Obj } from "../lib/definitions";
+import styles from "../page.module.css";
 // import { EmblaCarousel } from "./carousel";
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
 // import HeatMapGif from './heatMapGif';
 // const HeatMapGif = lazy(() => import('./heatMapGif'));
@@ -29,7 +29,6 @@ export default function NewModal(props: Props) {
       </button>
       <div className={styles.slide}>
         <div className={styles.modaltitlecontainer}>
-          {/* <div className={styles.test} /> */}
           <h1 className={styles.modaltitle}>ANALYSIS VISUALS COMING SOON</h1>
           {/* <svg
           onClick={props.closeViz}
@@ -50,21 +49,36 @@ export default function NewModal(props: Props) {
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
             <h1>Unraveling AI: A Visual Journey</h1>
-            <h2>
-              Step into the world of artificial intelligence and discover how it
-              perceives and interprets your image.
-            </h2>
+
+            <h2>Discover how artificial intelligence</h2>
+            <h2>perceives and interprets your image.</h2>
           </div>
           <div className={styles.modalbody}>
             <p>
-              In this immersive experience, we&apos;ll guide you through the
-              fascinating process of AI image analysis. From preprocessing to
-              feature extraction and classification, you&apos;ll gain a deeper
+              This immersive experience, will guide you through the fascinating
+              process of AI image analysis. From preprocessing to feature
+              extraction and classification, you&apos;ll gain a deeper
               understanding of how AI models work behind the scenes. Get ready
               to explore the complex algorithms and decision-making processes
               that bring AI to life.
             </p>
-            <p>Scroll Down For More Information</p>
+            <br />
+            <div className={styles.modalbody}>
+              {/* <p>Scroll Down For More Information</p> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                data-name="Layer 1"
+                viewBox="0 0 24 24"
+                id="down-arrow"
+              >
+                <path
+                  fill="#ffffff"
+                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                ></path>
+              </svg>
+            </div>
           </div>
         </div>
         <div className={styles.modalbutton}>
@@ -95,34 +109,40 @@ export default function NewModal(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.slideRow}>
+      <div className={styles.slide}>
         {/*preprocess image*/}
-        <div className="gridItem"> 
-        <div>Original Image</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[1]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg> 
+        <div className="gridItem">
+          <div>Original Image</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[1]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
-        <div className="gridItem"> 
-        <div>Preprocessed Image</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[2]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Preprocessed Image</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[2]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
-        <div className="gridItem"> 
-        <div>Image Tensor</div>
-        <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.preprocessFilePath[3]}
-          width="25vw" height="25vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Image Tensor</div>
+          <svg width="25vw" height="25vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.preprocessFilePath[3]}
+              width="25vw"
+              height="25vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
       </div>
       <div className={styles.slide}>
@@ -148,26 +168,30 @@ export default function NewModal(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.slideRow}>
+      <div className={styles.slide}>
         {" "}
         {/*gifs*/}
-        <div className="gridItem"> 
-        <div>Heat map</div>
-        <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.hGifURL}
-          width="40vw" height="40vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Heat map</div>
+          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.hGifURL}
+              width="40vw"
+              height="40vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
-        <div className="gridItem"> 
-        <div>Feature Map</div>
-        <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
-          <image
-            href={props.fGifURL}
-          width="40vw" height="40vh" preserveAspectRatio="xMidYMid meet"
-          />
-        </svg>
+        <div className="gridItem">
+          <div>Feature Map</div>
+          <svg width="40vw" height="40vh" xmlns="http://www.w3.org/2000/svg">
+            <image
+              href={props.fGifURL}
+              width="40vw"
+              height="40vh"
+              preserveAspectRatio="xMidYMid meet"
+            />
+          </svg>
         </div>
       </div>
       <div className={styles.slide}>top5</div>
