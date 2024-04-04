@@ -51,16 +51,16 @@ export default function NewModal(props: Props) {
             <div className={styles.modalbody}>
               {/* <p>Scroll Down For More Information</p> */}
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-                id="down-arrow"
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
               >
                 <path
-                  fill="#ffffff"
-                  d="M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z"
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
                 ></path>
               </svg>
             </div>
@@ -138,15 +138,26 @@ export default function NewModal(props: Props) {
         </div>
       </div>
       <div className={styles.slideRow}>
-        {' '}
-        {/*gifs*/}
-        <div className='gridItem'>
-          <div>Heat map</div>
-          <HeatMapGif hGifURL={props.hGifURL} />
-        </div>
-        <div className='gridItem'>
-          <div>Feature Map</div>
-          <GridMapGif fGifURL={props.fGifURL} />
+        <div className={styles.gifSlide}>
+          <div className={styles.gifDisplay}>
+            <div className={styles.gifContainer}>
+              <div className={styles.gifTitle}>Heat map</div>
+              <HeatMapGif hGifURL={props.hGifURL} />
+            </div>
+            <div className={styles.gifContainer}>
+              <div className={styles.gifTitle}>Feature Map</div>
+              <GridMapGif fGifURL={props.fGifURL} />
+            </div>
+          </div>
+          <h2 className={styles.gifDescription}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </h2>
         </div>
       </div>
       <Top5 top5={props.top5} />
