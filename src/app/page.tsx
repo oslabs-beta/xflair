@@ -24,7 +24,7 @@ async function StartPage() {
           <div className='h-50'></div>
           <Link
             className='bg-amber-500 hover:bg-amber-300 text-white hover:text-black font-bold py-2 px-4 rounded-full transition-colors duration-300 ease-in-out transform hover:scale-105'
-            href={'/models/tensorflow/objects/classification'}
+            href={'/models/tensorflow/images/classification'}
           >
             Start
           </Link>

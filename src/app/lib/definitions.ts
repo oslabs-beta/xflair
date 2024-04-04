@@ -18,3 +18,12 @@ export type Featuremaps = {
 export interface Top5Obj {
   [key: string]: number;
 }
+
+export interface AccordionContent {
+  type: 'Link' | 'Accordion';
+  label: string;
+  path?: string;
+  id?: string[];
+  icon?: 'gear' | 'book' | 'pages';
+  contents?: AccordionContent[];
+}
