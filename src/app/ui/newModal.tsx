@@ -30,7 +30,7 @@ export default function NewModal(props: Props) {
       <div className={styles.slide}>
         {/* title */}
         <div className={styles.modaltitlecontainer}>
-          <h1 className={styles.modaltitle}>ANALYSIS VISUALS COMING SOON</h1>
+          <h1 className={styles.modaltitle}>ANALYSIS VISUALIZATION</h1>
         </div>
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
@@ -40,12 +40,10 @@ export default function NewModal(props: Props) {
           </div>
           <div className={styles.modalbody}>
             <p>
-              This immersive experience, will guide you through the fascinating
+              This immersive experience will guide you through the fascinating
               process of AI image analysis. From preprocessing to feature
               extraction and classification, you&apos;ll gain a deeper
-              understanding of how AI models work behind the scenes. Get ready
-              to explore the complex algorithms and decision-making processes
-              that bring AI to life.
+              understanding of how AI models work behind the scenes.
             </p>
             <br />
             <div className={styles.modalbody}>
@@ -70,19 +68,42 @@ export default function NewModal(props: Props) {
           <div className={styles.modalbutton}></div>
         </div>
       </div>
-      {/*slide 1*/}
       <div className={styles.slide}>
         {/*preprocess image explanation*/}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
             <h1>Preparing Your Image</h1>
             <h2>
-              Discover the essential steps that prepare your image for AI
-              analysis.
+              The essential steps that prepare your image for AI analysis.
             </h2>
           </div>
           <div className={styles.modalbody}>
-            <p>Continue Scrolling for Demo</p>
+            <p>
+              Before an AI model can analyze your image, it needs to be
+              preprocessed. This crucial step ensures that the image is in the
+              optimal format and size for the model to interpret accurately. In
+              this slide, notice how your image is transformed through resizing,
+              normalization, and other preprocessing techniques. These steps are
+              essential for the AI model to focus on the most relevant features
+              and provide accurate predictions.
+            </p>
+            <br />
+            <div className={styles.modalbody}>
+              {/* <p>Scroll Down For More Information</p> */}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
+              >
+                <path
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
+                ></path>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -122,18 +143,39 @@ export default function NewModal(props: Props) {
           </svg>
         </div>
       </div>
-      <div className={styles.slideRow}>
+      <div className={styles.slide}>
         {/*explain gifs*/}
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
-            <h1>explain gifs</h1>
-            <h2>
-              Step into the world of artificial intelligence and discover how it
-              perceives and interprets your image.
-            </h2>
+            <h1>The Brain of AI</h1>
+            <h2>Your image entering the complex world of the neural network</h2>
           </div>
           <div className={styles.modalbody}>
-            <p>Continue Scrolling for Demo</p>
+            <p>
+              In the slide below, a series of GIFs visualize how your
+              preprocessed image is analyzed by the AI model&apos;s neural
+              network. The GIFs showcase activation heatmaps at different
+              layers, representing the regions of the image that the AI focuses
+              on. As your image flows through the layers, the heatmaps highlight
+              basic features, then progress to capture higher-level concepts.
+            </p>
+            <br />
+            <div className={styles.modalbody}>
+              {/* <p>Scroll Down For More Information</p> */}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='20'
+                height='20'
+                data-name='Layer 1'
+                viewBox='0 0 24 24'
+                id='down-arrow'
+              >
+                <path
+                  fill='#ffffff'
+                  d='M17.71,11.29a1,1,0,0,0-1.42,0L13,14.59V7a1,1,0,0,0-2,0v7.59l-3.29-3.3a1,1,0,0,0-1.42,1.42l5,5a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l5-5A1,1,0,0,0,17.71,11.29Z'
+                ></path>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -141,7 +183,7 @@ export default function NewModal(props: Props) {
         <div className={styles.gifSlide}>
           <div className={styles.gifDisplay}>
             <div className={styles.gifContainer}>
-              <div className={styles.gifTitle}>Heat map</div>
+              <div className={styles.gifTitle}>Heat Map</div>
               <HeatMapGif hGifURL={props.hGifURL} />
             </div>
             <div className={styles.gifContainer}>
@@ -150,13 +192,13 @@ export default function NewModal(props: Props) {
             </div>
           </div>
           <h2 className={styles.gifDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            On the left side, you can see which pixels the AI model focuses on
+            as it moves through the layers of the neural network. The network
+            provides weights to important regions, and the larger the weight,
+            the hotter the region. The right is a visualization of how the
+            neural network interprets different features of the image. Feature
+            determination is broad in earlier stages, and becomes more focused
+            on smaller areas towards the end.
           </h2>
         </div>
       </div>

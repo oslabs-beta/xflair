@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <html lang="en">
+    <html lang="en" className="bg-black">
       <Head>
         <title>xFlair Demo</title>
         <meta name="description" content="A demo for xFlair" />

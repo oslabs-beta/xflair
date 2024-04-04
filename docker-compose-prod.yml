@@ -4,12 +4,12 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile-dev
-    image: xflair/dev:latest
+      dockerfile: Dockerfile
+    image: xflair/prod
     ports:
-      - '3000:3000'
+      - "3000:3000"
     environment:
-      - mode=development
+      - NODE_ENV=production
       - SERVICE_HOST=host.docker.internal
     env_file:
       - .env
@@ -18,11 +18,11 @@ services:
 
   model:
     build:
-      context: ./Models/Tensorflow
+      context: ./Models/TensorFlow
       dockerfile: Dockerfile
     image: xflair/tensorflow:latest
     ports:
-      - '5000:5000'
+      - "5000:5000"
     env_file:
       - ./Models/TensorFlow/.env
     entrypoint: /TensorFlow/start/start.sh
