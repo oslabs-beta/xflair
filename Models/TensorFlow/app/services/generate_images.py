@@ -98,7 +98,7 @@ def preprocess_image_steps(base64_image_str):
     # Convert tensors to numpy for visualization
     original_np = image_tensor.numpy()
     resized_np = resized_image_tensor.numpy()
-    preprocessed_np = (preprocessed_image_tensor.numpy() * 0.5) + 0.5  # Undo normalization for visualization
+    preprocessed_np = (preprocessed_image_tensor.numpy())  # Undo normalization for visualization
 
     return original_np, resized_np, preprocessed_np
 
