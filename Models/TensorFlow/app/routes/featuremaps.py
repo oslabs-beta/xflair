@@ -50,7 +50,7 @@ def upload_featuremaps(model_name):
         img_array = np.array(img_with_progress)
         current_index = layer_names.index(layer_name)
         total_layers = len(layer_names)
-        img_with_progress_bar = add_progress_bar(img_array, current_index, total_layers)
+        img_with_progress_bar = add_progress_bar(img_array, current_index, total_layers, width = 20)
 
         # Resize and save the final image with the progress bar
         final_img = Image.fromarray(img_with_progress_bar)
@@ -58,7 +58,7 @@ def upload_featuremaps(model_name):
         output_path_pb = os.path.join(featuremapspb_dir, file_name)
         final_img_resized.save(output_path_pb, format='JPEG', quality=85)  # Saving the resized final image
 
-        upload_file(output_path_pb, bucket_name, f"featuremaps/progressbars/{os.path.basename(output_path_pb)}")
+        upload_file(output_path_pb, bucket_name, f"featuremaps/progressbars/{os.path.basename(output_path_pb)}.jpg")
         progressbar_links.append(f"https://{bucket_name}.s3.amazonaws.com/featuremaps/progressbars/{file_name}.jpg")
 
     return jsonify({'featuremaps': links, 'progressbars': progressbar_links})
