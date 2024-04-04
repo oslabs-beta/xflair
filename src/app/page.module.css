@@ -308,7 +308,7 @@
   display: inline-block;
   font-size: 16px;
   /* margin: 4px 2px; */
-  z-index:20;
+  z-index: 20;
   cursor: pointer;
   transition-duration: 0.4s;
 }
@@ -333,7 +333,7 @@
   justify-content: space-around;
   position: absolute;
   max-width: 80vw;
-  max-height: 93vh;
+  max-height: 100vh;
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -352,10 +352,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
+  margin-top: 20px;
   position: relative;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
   width: 80vw;
   min-height: 80vh;
@@ -365,12 +365,12 @@
 }
 
 .slideRow {
+  margin-top: 20px;
   border: 1px solid goldenrod;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
   position: relative;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -396,11 +396,14 @@
 }
 
 .modalcontainertext h1 {
-  font-size: 2em;
+  font-size: 1.75em;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-family: "RobotoSlab", sans-serif;
 }
 
 .modalcontainertext h2 {
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 .modalcontainertext p {
@@ -430,14 +433,13 @@
 
 /* Hide scrollbar for IE, Edge, and Firefox (where applicable) */
 .modalcontainer {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .modalcontainer::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
-
 
 .modalheader {
   display: flex;
@@ -450,7 +452,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
+  padding: 20px;
 }
 
 /* .modalcontainer {
@@ -503,32 +507,14 @@
   cursor: pointer;
 }
 
-/* .modalxicon {
-  width: 30px;
-  height: 30px;
-} */
-
 .modaltitle {
   display: flex;
   align-items: center;
   position: absolute;
-  font-size: 2em;
-  font-weight: 700;
+  font-size: 2.5em;
+  font-weight: 1000;
   position: sticky;
-  font-family: "Roboto", sans-serif;
-  letter-spacing: 0.1em;
-}
-
-.bodytext {
-  background-color: red;
-  font-family: "Hanken Grotesk", sans-serif;
-  height: 75%;
-  font-weight: 300;
-  line-height: 1.5;
-  overflow-y: scroll;
-  text-indent: 30pt;
-  border: 1px solid rgba(181, 181, 181, 0.5);
-  padding: 15px;
+  font-family: "RobotoSlab", sans-serif;
 }
 
 /* CAROUSEL */
