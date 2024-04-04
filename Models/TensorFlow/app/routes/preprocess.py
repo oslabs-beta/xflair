@@ -37,7 +37,6 @@ def upload_preprocess():
     print(f"Object name is {object_name}")
 
     download_path = os.path.join(assets_dir, f'upload.{image_type}')  # Fixed string formatting
-    upload_path = os.path.join(assets_dir, 'preprocess.jpg')
 
     s3_bucket = os.environ.get('AWS_S3_BUCKET_NAME')
 
@@ -58,10 +57,12 @@ def upload_preprocess():
     # Error handling for S3 operations
     try:
         print(f"Downloaded file from s3://{s3_bucket}/{object_name}")
-        make_preprocess_image(download_path, preprocessed, upload_path)
-        make_preprocess_images(base64_image, assets_dir)
-        print(f"Preprocessed image saved to {upload_path}")
+        file_names = make_preprocess_images(base64_image, assets_dir)
         # upload_file(upload_path, s3_bucket, 'preprocess/image.jpg')
+        if os.path.exists(download_path):
+            os.remove(download_path)
+            print(f"Deleted upload.jpg from {assets_dir}")
+
         file_list = glob.glob(os.path.join(assets_dir, '*'))
         # Loop through each file and upload it to S3
         for file_path in file_list:
@@ -77,7 +78,7 @@ def upload_preprocess():
                 print(f"Failed to upload {filename} to S3: {e}")
 
         print(f"Uploaded preprocessed image to s3://{s3_bucket}/preprocess/image.jpg")
-        object_names = [f"preprocess/{os.path.basename(file_path)}" for file_path in file_list]
+        object_names = [f"preprocess/{file_name}" for file_name in file_names]
         return jsonify({'preprocessed_images': object_names})
     except ClientError as e:
         return jsonify({'error': str(e)}), 500

@@ -30,7 +30,7 @@ export default function NewModal(props: Props) {
       <div className={styles.slide}>
         {/* title */}
         <div className={styles.modaltitlecontainer}>
-          <h1 className={styles.modaltitle}>ANALYSIS VISUALIZATION</h1>
+          <h1 className={styles.modaltitle}>The Path Between Input and Output</h1>
         </div>
         <div className={styles.modalcontainertext}>
           <div className={styles.modalheader}>
@@ -80,12 +80,11 @@ export default function NewModal(props: Props) {
           <div className={styles.modalbody}>
             <p>
               Before an AI model can analyze your image, it needs to be
-              preprocessed. This crucial step ensures that the image is in the
-              optimal format and size for the model to interpret accurately. In
+              preprocessed. This crucial step ensures that the image is
+              converted into an array of parameters that the nueral network expects. In
               this slide, notice how your image is transformed through resizing,
               normalization, and other preprocessing techniques. These steps are
-              essential for the AI model to focus on the most relevant features
-              and provide accurate predictions.
+              essential for the AI model to properly interpret your image.
             </p>
             <br />
             <div className={styles.modalbody}>
@@ -110,7 +109,17 @@ export default function NewModal(props: Props) {
       <div className={styles.slideRow}>
         {/*preprocess image*/}
         <div className='gridItem'>
-          <div>Original Image</div>
+          <div className={styles.modalheader} >Initial Formatting</div>          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
+            <image
+              href={props.preprocessFilePath[0]}
+              width='25vw'
+              height='25vh'
+              preserveAspectRatio='xMidYMid meet'
+            />
+          </svg>
+        </div>
+        <div className='gridItem'>
+          <div className={styles.modalheader}>Image Resizing</div>
           <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
               href={props.preprocessFilePath[1]}
@@ -121,21 +130,10 @@ export default function NewModal(props: Props) {
           </svg>
         </div>
         <div className='gridItem'>
-          <div>Preprocessed Image</div>
+          <div className={styles.modalheader}>Image Tensor</div>
           <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
             <image
               href={props.preprocessFilePath[2]}
-              width='25vw'
-              height='25vh'
-              preserveAspectRatio='xMidYMid meet'
-            />
-          </svg>
-        </div>
-        <div className='gridItem'>
-          <div>Image Tensor</div>
-          <svg width='25vw' height='25vh' xmlns='http://www.w3.org/2000/svg'>
-            <image
-              href={props.preprocessFilePath[3]}
               width='25vw'
               height='25vh'
               preserveAspectRatio='xMidYMid meet'
@@ -152,12 +150,13 @@ export default function NewModal(props: Props) {
           </div>
           <div className={styles.modalbody}>
             <p>
-              In the slide below, a series of GIFs visualize how your
+              In the slide below, we show how your
               preprocessed image is analyzed by the AI model&apos;s neural
-              network. The GIFs showcase activation heatmaps at different
+              network. The sequences showcase activation heatmaps at different
               layers, representing the regions of the image that the AI focuses
-              on. As your image flows through the layers, the heatmaps highlight
-              basic features, then progress to capture higher-level concepts.
+              on. As your image flows through the layers, the network assigns
+              weights to different regions, ultimately leading to a
+              classification decision.
             </p>
             <br />
             <div className={styles.modalbody}>

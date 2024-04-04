@@ -4,9 +4,6 @@ import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { ImageAndVideoFormatOptions } from 'cloudinary';
 
-const serviceHost = process.env.SERVICE_HOST || 'localhost'; // Default to localhost if not set
-const serviceUrl = `http://${serviceHost}:5000`;
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -63,18 +60,12 @@ export async function POST(req: NextRequest) {
   try {
     const { urls, tag } = await req.json();
 
-    if (tag === 'featuremap_gif') {
-      await delay(1000);
-    }
-
     const objectKeys = urls.map((url: string) => {
       const startIndex = url.indexOf('.com') + 5;
       const endIndex = url.length;
       const substring = url.substring(startIndex, endIndex);
       return substring;
     });
-
-    console.log('Object keys:', objectKeys[0]);
 
     if (!objectKeys.length || !tag) {
       return new Response('Missing URLs', { status: 400 });
@@ -107,10 +98,8 @@ export async function POST(req: NextRequest) {
       format: 'gif' as ImageAndVideoFormatOptions,
     });
 
-    console.log(gifCreationResult.secure_url);
-
     // Delete uploaded images after creating the GIF
-    await cloudinary.api.delete_resources_by_tag(tag);
+    cloudinary.api.delete_resources_by_tag(tag);
     console.log('Uploaded images cleaned up successfully');
 
     // Return the URL of the created GIF

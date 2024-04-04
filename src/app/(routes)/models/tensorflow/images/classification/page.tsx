@@ -82,8 +82,6 @@ export default function Home() {
       .then((response) => {
         console.log('response:', response);
         setPredictionName(response.predictions.predicted_class_name);
-        // console.log('top5:', JSON.parse(response.top5.replace(/'/g, '"')));
-        // setTop5(JSON.parse(response.top5.replace(/'/g, '"')));
         setTop5(response.predictions.class_name_probabilities);
         setTime(response.time);
       })
@@ -128,48 +126,8 @@ export default function Home() {
       });
   }
 
-  function uploadGifs(urls: string[], tag: string) {
-    fetch('/models/actions/image/gifs/upload', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ urls, tag }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('response:', response);
-        // createGif(response.tag);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function createGif(tag: string) {
-    fetch('/models/actions/image/gifs/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ tag }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log('response:', response);
-        if (response.tag === 'heatmap_gif') {
-          setHGifURL(response.url);
-        } else {
-          setFGifURL(response.url);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function gif(urls: string[], tag: string) {
-    fetch('/models/actions/image/gifs/upload', {
+  function gifs(urls: string[], tag: string) {
+    fetch('/models/actions/image/gifs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -230,8 +188,6 @@ export default function Home() {
   }
 
   function formatString(inputString: string): string {
-    // Split the string by underscores, then map over each word,
-    // capitalizing the first letter of each and joining them back with a space.
     return inputString
       .split('_')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
@@ -275,14 +231,13 @@ export default function Home() {
 
   useEffect(() => {
     if (heatmapLinks.progressbars && !hGifURL) {
-      gif(heatmapLinks.progressbars as string[], 'heatmap_gif');
+      gifs(heatmapLinks.progressbars as string[], 'heatmap_gif');
     }
   }, [heatmapLinks, hGifURL]);
 
   useEffect(() => {
     if (featuremapLinks.progressbars && hGifURL && !fGifURL) {
-      console.log('featuremapLinks:', featuremapLinks.progressbars);
-      gif(featuremapLinks.progressbars as string[], 'featuremap_gif');
+      gifs(featuremapLinks.progressbars as string[], 'featuremap_gif');
     }
   }, [hGifURL, featuremapLinks, fGifURL]);
 
@@ -297,12 +252,20 @@ export default function Home() {
     }
   }, [top5]);
 
+  useEffect(() => {
+    if (fGifURL) {
+
+    let hGif = hGifURL;
+    setHGifURL('');
+    setHGifURL(hGif)
+    }
+  }
+  , [fGifURL, hGifURL]);
+
   const clearClick = () => {
     inputImage = undefined;
     setImgName('Browse...');
     setImgURL('');
-    // setFFilePath('');
-    // setHFilePath('');
     setFilePath('');
     setHGifURL('');
     setFGifURL('');
