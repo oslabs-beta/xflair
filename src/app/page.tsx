@@ -15,12 +15,11 @@ async function StartPage() {
       <div className='flex h-full w-full absolute justify-center items-center'>
         <div className='space-y-8 px-4 text-center'>
           <h1 className='text-white text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight'>
-            Easily understand your explanation data on{' '}
+            Enhance the user experience with AI integrations using{' '} 
             <span className='text-amber-300'>xFlair.</span>
           </h1>
           <p className='text-white text-base md:text-lg lg:text-xl'>
-            Import, capture, and analyze your images for your TensorFlow or
-            PyTorch models.
+            Provide meaningful, digestible, and real-time visualizations for AI models, from input to output.
           </p>
           <div className='h-50'></div>
           <Link
