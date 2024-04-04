@@ -7,7 +7,7 @@ import Head from "next/head";
 import tailwind from "tailwindcss";
 
 import { ReactNode, useState } from "react";
-import Sidenav from "./ui/Sidenav";
+import Sidenav from "./ui/navComponents/Sidenav";
 
 interface Props {
   children: ReactNode;
