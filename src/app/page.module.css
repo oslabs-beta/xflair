@@ -598,3 +598,42 @@
   width: 350x;
   object-fit: contain;
 }
+
+.table {
+  width: 60%; /* Full-width */
+  border-collapse: collapse; /* Collapses the border */
+  margin: 20px 0; /* Adds some space around the table */
+  font-size: 1.1em; /* Adjusts the font size */
+  font-family: sans-serif; /* Uses a sans-serif font for a modern look */
+  min-width: 400px; /* Ensures it doesn’t get too small */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Adds a subtle shadow for depth */
+}
+
+.table th,
+.table td {
+  padding: 12px 15px; /* Adds space inside each cell */
+  text-align: left; /* Aligns text to the left */
+  border-bottom: 1px solid #dddddd; /* Adds a light line between rows */
+}
+
+.table th {
+  background-color: goldenrod; /* A pleasant green for the header background */
+  color: #ffffff; /* White text for contrast */
+  text-transform: uppercase; /* Makes the header text uppercase */
+}
+
+
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid goldenrod; /* A thicker green line under the last row */
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 60%; /* Adjusts the width of the first column */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  text-align: center;
+  width: 40%; /* Adjusts the width of the second column, ensuring the total does not exceed 100% */
+}

@@ -9,18 +9,25 @@ interface Props {
 export default function Top5(props: Props) {
   const top5Table = [];
 
-  for (let key in props.top5) {
+  // Convert object into an array of [key, value] pairs
+  const sortedEntries = Object.entries(props.top5)
+    // Sort the array by value in descending order
+    .sort((a, b) => b[1] - a[1]);
+
+  // Iterate over sorted entries to generate table rows
+  for (let [key, value] of sortedEntries) {
     top5Table.push(
       <tr key={key}>
         <td>{key}</td>
-        <td>{(props.top5[key] * 100).toFixed(2)}%</td>
+        <td>{(value * 100).toFixed(2)}%</td>
       </tr>
     );
   }
+
   return (
     <div className={styles.slide}>
-      {Object.keys(props.top5).length > 0 && (
-        <table className='table'>
+      {sortedEntries.length > 0 && (
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>Class</th>

@@ -12,7 +12,11 @@ interface Props {
   preprocessFilePath: string[];
 }
 
+
+
+
 export default function NewModal(props: Props) {
+
   return (
     // modal main container
     <div className={styles.modalcontainer}>
