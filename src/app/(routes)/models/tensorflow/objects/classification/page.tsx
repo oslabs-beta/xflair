@@ -32,7 +32,7 @@ export default function Home() {
   const [fGifURL, setFGifURL] = useState('');
   const [time, setTime] = useState(0);
   const [top5, setTop5] = useState({});
-  const [preprocessFilePath, setPreprocessFilePath] = useState([]);
+  const [preprocessFilePath, setPreprocessFilePath] = useState<string[]>([]);
   const [filePath, setFilePath] = useState('');
   const [buttonState, setButtonState] = useState(0);
   const [heatmapLinks, setHeatmapLinks] = useState({} as Heatmaps);
