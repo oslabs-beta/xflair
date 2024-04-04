@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const preprocessResult = await preprocessResponse.json();
 
     const { preprocessed_images } = preprocessResult;
-    const bucketName = process.env.AWS_BUCKET_NAME as string;
+    const bucketName = process.env.AWS_S3_BUCKET_NAME as string;
     const expiresInSeconds = 60 * 5; // 5 minutes
 
     // Generate signed URLs for the preprocessed images
