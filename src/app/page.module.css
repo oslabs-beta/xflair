@@ -1,0 +1,684 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: black;
+  /* border: 1px solid white; */
+  /* padding: ; */
+  /* min-height: 100vh; */
+  /* background-image: url(/public/ai-generated-7914562_1920.jpg); */
+}
+
+.Logo {
+  display: flex;
+  flex-direction: column;
+  object-fit: contain;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 20%;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid white; */
+  height: 30vh;
+}
+
+.majorDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  /* border: 1px solid white; */
+  height: 100px;
+  width: 1vh;
+  margin-left: 5%;
+}
+
+.title {
+  font-size: xx-large;
+  display: flex;
+  flex-direction: row;
+  /* align-items: row; */
+  background-color: #f3ec78;
+  background-image: linear-gradient(15deg, #af4261, #f3ec78);
+  background-size: 50%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  /* border: 1px solid white; */
+  margin-bottom: 2%;
+}
+
+.titleImg {
+  height: 200px;
+  width: 300px;
+  object-fit: contain;
+}
+
+.inputBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px; /* This height must be enough to contain the fixed-size background */
+  /* width: 100%; Adjust width as needed */
+  /* border: 1px solid white; */
+  background-image: url(/backgroundFlareBW.avif);
+  background-position: -6px;
+  background-repeat: no-repeat;
+  background-size: cover; /* or 'cover' if you want it to fill the entire container */
+  /* border-radius: 5px; */
+  /* background-image: linear-gradient(
+    130deg,
+    hsl(28deg 52% 53%) 0%,
+    hsl(26deg 51% 53%) 8%,
+    hsl(24deg 48% 54%) 15%,
+    hsl(21deg 46% 54%) 22%,
+    hsl(19deg 44% 54%) 28%,
+    hsl(17deg 41% 54%) 34%,
+    hsl(15deg 38% 54%) 40%,
+    hsl(13deg 35% 53%) 45%,
+    hsl(11deg 32% 53%) 50%,
+    hsl(9deg 29% 52%) 55%,
+    hsl(7deg 26% 52%) 59%,
+    hsl(6deg 25% 51%) 63%,
+    hsl(5deg 24% 52%) 67%,
+    hsl(4deg 23% 52%) 71%,
+    hsl(4deg 22% 52%) 75%,
+    hsl(3deg 21% 52%) 78%,
+    hsl(3deg 20% 52%) 82%,
+    hsl(2deg 19% 52%) 86%,
+    hsl(2deg 18% 52%) 89%,
+    hsl(1deg 17% 52%) 93%,
+    hsl(1deg 16% 53%) 96%,
+    hsl(0deg 15% 53%) 100%
+  ); */
+  /* box-shadow: 0px 0px 10px white; */
+  /* height: 60vh; */
+  /* padding: 5%; */
+  width: 70vw;
+
+  min-height: 500px;
+}
+
+.hide {
+  /* background-image: url(/public/backgroundFlareBW.avif); */
+  display: none;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically if there's extra space */
+  margin: 10px; /* Add some space around each grid item */
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+}
+
+.gridItem div {
+  margin-bottom: 10px; /* Space between title and image */
+  color: white; /* Assuming you want the text white as per modal theme */
+  font-size: 1em; /* Adjust based on your design */
+}
+
+.placeholderText {
+  font-size: 30px;
+  font-weight: bolder;
+  color: white;
+  /* background-color: #f3ec78;
+  background-image: linear-gradient(
+    180deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 36%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent; */
+  padding-top: 5%;
+  margin-bottom: 2%;
+}
+
+.primaryBtn:active {
+  color: white;
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.altBtn {
+  display: inline-block;
+  font-family: 'Hanken Grotesk', sans-serif;
+  text-align: left;
+  color: white;
+  font-size: medium;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  /* background-image: linear-gradient(
+    220deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 18%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  );    */
+  padding: 10px;
+  margin: 10px;
+}
+
+.altBtn:hover {
+  color: white;
+  /* background-color: rgba(200, 200, 200, 0.5); */
+  background-image: linear-gradient(
+    220deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 18%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  );
+}
+
+.altBtn:active {
+  color: white;
+  /* background-color: rgba(100, 100, 100, 0.5); */
+  background-image: linear-gradient(
+    220deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 18%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  );
+}
+
+.uploadImg {
+  height: 150px;
+  width: 150px;
+  object-fit: contain;
+}
+
+.imgInput,
+.primaryBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+  height: 11em;
+  width: 11em;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: medium;
+  position: relative;
+}
+
+.imgInput:hover,
+.primaryBtn:hover {
+  box-shadow: 0 0 0 5px white inset;
+}
+
+.browseText {
+  color: white;
+}
+
+/* .imgInput {
+  /* border: 1px solid #ccc; 
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  /* background-color: transparent; */
+/* background-image: url(/backgroundFlareBW.avif); 
+  padding: 10px;
+  margin: 10px;
+
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: medium;
+  text-align: center;
+}
+.imgInput:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(200, 200, 200, 0.5); 
+  background-image: radial-gradient(
+    #f5f5f5 100%,
+    #6b6b6b 90%,
+    rgb(42, 42, 42) 50%,
+    rgb(0, 0%, 0%) 00%,
+  ); 
+  background-image: linear-gradient(
+    220deg,
+    hsl(0deg 100% 100%) 0%,
+    hsl(17deg 100% 78%) 18%,
+    hsl(26deg 83% 53%) 59%,
+    hsl(15deg 95% 47%) 78%,
+    hsl(2deg 80% 53%) 92%,
+    hsl(0deg 75% 58%) 100%
+  ); 
+} */
+
+/* .imgInput:active {
+  color: white;
+  background-color: rgba(100, 100, 100, 0.5);
+} */
+
+.buttonBox {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center buttons horizontally */
+  justify-content: center;
+  border-radius: 50%; /* Center the .buttonBox vertically within its container */
+  width: 100%; /* Take full width to center content properly */
+}
+
+/* MODAL */
+.exitmodalbutton {
+  background-color: black; /* Green */
+  border: none;
+  position: sticky;
+  top: 5%;
+  left: 95%;
+  color: white;
+  max-height: 1rem;
+  max-width: 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  /* margin: 4px 2px; */
+  z-index: 20;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.exitmodalbutton:hover {
+  background-color: #e92a04;
+}
+
+.custom-button:hover {
+  background-color: #45a049;
+}
+
+.modalclosed {
+  display: none;
+}
+
+.modalcontainer {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  max-width: 80vw;
+  max-height: 100vh;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../../public/modal-background-1.jpg);
+  background-size: cover;
+  background-position: -15px center;
+  z-index: 10;
+  box-shadow: inset 0 0 16px 16px #000000;
+  overflow: scroll;
+  /* box-sizing: border-box; */
+}
+
+.slide {
+  border: 1px solid goldenrod;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  position: relative;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  width: 80vw;
+  min-height: 80vh;
+  max-height: 80vh;
+  /* padding: 20px; */
+  font-family: 'Roboto', sans-serif;
+}
+
+.slideRow {
+  margin-top: 20px;
+  border: 1px solid goldenrod;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 80vw;
+  min-height: 80vh;
+  max-height: 80vh;
+  /* padding: 20px; */
+  font-family: 'Roboto', sans-serif;
+}
+
+.modalcontainertext {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 40vw;
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.modalcontainertext h1 {
+  font-size: 1.75em;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-family: 'RobotoSlab', sans-serif;
+}
+
+.modalcontainertext h2 {
+  font-size: 1.25em;
+}
+
+.modalcontainertext p {
+  font-size: 1em;
+}
+
+/* Style for Chrome, Safari, and Opera */
+.modalcontainer::-webkit-scrollbar {
+  width: 12px; /* Adjust the width of the scrollbar */
+}
+
+.modalcontainer::-webkit-scrollbar-track {
+  background: #000; /* Track color */
+}
+
+.modalcontainer::-webkit-scrollbar-thumb {
+  background-color: #555; /* Thumb color */
+  border-radius: 6px; /* Roundness of the scrollbar thumb */
+  border: 3px solid #000; /* Creates padding around the scroll thumb */
+}
+
+/* Style for Firefox */
+.modalcontainer {
+  scrollbar-width: thin; /* Can be 'auto', 'thin', or 'none' */
+  scrollbar-color: #555 #000; /* Thumb and track color */
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox (where applicable) */
+.modalcontainer {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.modalcontainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.modalheader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.modalbody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* .modalcontainer {
+  border: 1px solid blue;
+  position: fixed !important;
+  background: rgba(20, 20, 20, 0.98);
+  color: white;
+  z-index: 10;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 100vh;
+  padding: 20px;
+  overflow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  box-shadow: inset 0 0 30px 10px gray;
+} */
+
+/* .modalcontents {
+  border: 1px solid green;
+  overflow: scroll;
+} */
+
+.modaltitlecontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  width: 100%;
+  padding: 10px;
+}
+
+.startJourneyButton {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.modaltitle {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  font-size: 2.5em;
+  font-weight: 1000;
+  position: sticky;
+  font-family: 'RobotoSlab', sans-serif;
+}
+
+/* CAROUSEL */
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  width: 50vw;
+  height: 50vh;
+}
+.embla__slide {
+  flex: 0 0 80%;
+  min-width: 0;
+  margin-right: 10px;
+  margin-left: 10px;
+  border: 1px solid white;
+}
+
+.embla__controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  /* margin-right: calc((2.6rem - 1.4rem) / 2 * -1); */
+}
+
+.embla__dot {
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: black;
+  /* background-image: url(/public/ai-generated-7914562_1920.jpg); */
+  border: 0.2rem solid gray;
+}
+.embla__dot:hover {
+  border-color: white;
+}
+.embla__dot--selected {
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  border: 0.2rem solid white;
+}
+
+/* .test {
+  border: 1px solid white;
+} */
+
+.otherImg {
+  height: 350px;
+  width: 350x;
+  object-fit: contain;
+}
+
+.table {
+  width: 60%; /* Full-width */
+  border-collapse: collapse; /* Collapses the border */
+  margin: 20px 0; /* Adds some space around the table */
+  font-size: 1.1em; /* Adjusts the font size */
+  font-family: sans-serif; /* Uses a sans-serif font for a modern look */
+  min-width: 400px; /* Ensures it doesn’t get too small */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Adds a subtle shadow for depth */
+}
+
+.table th,
+.table td {
+  padding: 12px 15px; /* Adds space inside each cell */
+  text-align: left; /* Aligns text to the left */
+  border-bottom: 1px solid #dddddd; /* Adds a light line between rows */
+}
+
+.table th {
+  background-color: goldenrod; /* A pleasant green for the header background */
+  color: #ffffff; /* White text for contrast */
+  text-transform: uppercase; /* Makes the header text uppercase */
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid goldenrod; /* A thicker green line under the last row */
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 60%; /* Adjusts the width of the first column */
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  text-align: center;
+  width: 40%; /* Adjusts the width of the second column, ensuring the total does not exceed 100% */
+}
+.gifContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gifDisplay {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.gifSlide {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.gifTitle {
+  margin: 10%;
+  font-size: x-large;
+  font-weight: 400;
+}
+
+.gifDescription {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-family: 'Roboto', sans-serif;
+}

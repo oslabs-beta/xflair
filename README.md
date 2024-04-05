@@ -1,1 +1,1 @@
-# ExplAI
+xFlair is still under development. More info coming soon!
