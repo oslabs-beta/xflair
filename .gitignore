@@ -48,5 +48,4 @@ venv/
 .vscode
 /public/renderTest
 /public/RP Data
-package-lock.json
 
