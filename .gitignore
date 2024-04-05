@@ -48,4 +48,5 @@ venv/
 .vscode
 /public/renderTest
 /public/RP Data
+/public/heatmap_data.csv
 
