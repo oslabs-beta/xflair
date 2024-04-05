@@ -42,9 +42,10 @@ venv/
 /Models/TensorFlow/.env
 /Models/TensorBoard/logs/*
 /Models/TensorFlow/app/assets/*
-
+/Models/TensorBoard/logs/*
 
 .env
 .vscode
 /public/renderTest
 /public/RP Data
+
