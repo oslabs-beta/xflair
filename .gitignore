@@ -37,7 +37,6 @@ next-env.d.ts
 
 # venv
 venv/
-```
 
 # env
 /Models/TensorFlow/.env
@@ -46,3 +45,6 @@ venv/
 
 
 .env
+.vscode
+/public/renderTest
+/public/RP Data
