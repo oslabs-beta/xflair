@@ -43,7 +43,7 @@ venv/
 /Models/TensorBoard/logs/*
 /Models/TensorFlow/app/assets/*
 /Models/TensorBoard/logs/*
-
+/Models/TensorFLow/logs/*
 .env
 .vscode
 /public/renderTest
