@@ -43,13 +43,13 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
     <div
       ref={sidebar}
       id='docs-sidebar'
-      className={`fixed inset-y-0 left-0 transform ${
+      className={`fixed w-64 inset-y-0 left-0 transform ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-300 flex flex-col`}
+      } transition-transform duration-300 flex flex-col bg-black border-r-2 border-gray-900`}
     >
       <div className='px-6 pt-5'>
         <p
-          className='flex-grow text-xl font-semibold dark:text-white'
+          className='flex-grow text-xl font-semibold text-white'
           aria-label='Brand'
         >
           xFlair
@@ -62,7 +62,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
         <ul className='space-y-1.5'>
           <li>
             <Link
-              className='flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100'
               href={'/'}
             >
               <svg
@@ -113,7 +113,7 @@ export default function Sidenav({ sidebarOpen, setSidebarOpen }: props) {
           />
           <li>
             <Link
-              className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600'
+              className='flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-gray-100'
               href='/about-us'
             >
               <svg
