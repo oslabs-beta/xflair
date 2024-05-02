@@ -17,11 +17,17 @@ export default function Accordion(props: Props) {
   props.contents.forEach((el) => {
     if (el.type === 'Link') {
       contents.push(
-        <AccordionLink path={el.path as string} label={el.label} />
+        <AccordionLink
+          key={el.key}
+          path={el.path as string}
+          label={el.label}
+          name={el.key}
+        />
       );
     } else {
       contents.push(
         <Accordion
+          key={el.key}
           activeAccordion={props.activeAccordion}
           toggleAccordion={props.toggleAccordion}
           label={el.label}

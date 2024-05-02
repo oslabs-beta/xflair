@@ -291,15 +291,15 @@ export default function Home() {
         <div className='text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2'>
           <div className='flex flex-col items-center justify-center'></div>
           <img
-            className='h-20 w-30 object-contain'
+            className='short:hidden h-20 w-30 object-contain'
             src='/title.png'
             alt='titleText'
           />
         </div>
         {/* Contains Image, Class, Modal, Analysis and Clear Buttons */}
-        <div className='flex flex-col items-center min-h-[60vh] max-h-[70vh] min-w-[90vw] max-w-[90vw] sm:min-w-[60vw] sm:max-w-[60vw] relative'>
+        <div className='flex flex-col items-center min-h-[60vh] max-h-[70vh] min-w-[90vw] max-w-[90vw] md:min-w-[60vw] md:max-w-[60vw] short:min-h-[80vh] short:max-h-[90vh] relative'>
           {/* Contains Modal, Image, and Class */}
-          <div className='flex flex-col min-h-[50vh] min-w-[60vw] max-w-[50vw] max-h-[50vh]'>
+          <div className='flex flex-col min-h-[50vh] min-w-[60vw] max-w-[50vw] max-h-[50vh] short:min-w-[70vw] short:max-w-[80vw]'>
             {viz && (
               <NewModal
                 closeViz={closeViz}
@@ -310,7 +310,7 @@ export default function Home() {
               />
             )}{' '}
             {/* Contains Image and Class */}
-            <div className='flex-grow flex flex-col justify-around items-center'>
+            <div className='flex-grow flex flex-col short:flex-row justify-around items-center'>
               {imgURL && (
                 <img
                   className='max-w-[40vw] max-h-[40vh] object-contain'
@@ -319,34 +319,30 @@ export default function Home() {
                 />
               )}
               {vizState && (
-                <div>
-                  <h2 className='text-white'>
-                    Class: {formatString(predictionName)}
-                  </h2>
-                  <h2 className='text-white'>
-                    Time: {time.toFixed(2)} seconds
-                  </h2>
+                <div className='text-white short:pl-3'>
+                  <h2>Class: {formatString(predictionName)}</h2>
+                  <h2>Time: {time.toFixed(2)} seconds</h2>
                 </div>
               )}
             </div>
           </div>
           {/* Contains Analysis and Clear Buttons */}
           <div className='flex flex-row items-center w-full'>
-            <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] sm:w-[120px] sm:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
+            <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
               <img
-                className='h-[35px] w-[45px] sm:h-[65px] sm:w-[90px] object-contain'
+                className='h-[35px] w-[45px] md:h-[65px] md:w-[90px] object-contain'
                 src='/logoBlack.png'
                 alt='logo'
               ></img>
             </button>
             {!vizState && (
-              <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] sm:w-[120px] sm:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
+              <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
                 Analysis Visualization
               </button>
             )}
             {vizState && (
               <button
-                className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] sm:w-[120px] sm:h-[70px] rounded-full cursor-pointer bg-transparent text-xs text-transparent text-blue-500 p-2.5 m-2.5 border-2 border-[#f3ec78] hover:border-4 hover:text-[#f3ec78] hover:bg-black py-5'
+                className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer bg-transparent text-xs text-transparent text-blue-500 p-2.5 m-2.5 border-2 border-[#f3ec78] hover:border-4 hover:text-[#f3ec78] hover:bg-black py-5'
                 onClick={vizClick}
               >
                 {' '}
@@ -365,7 +361,7 @@ export default function Home() {
       </div>
       {/* Handles Browse/Upload/Reset Button */}
       {buttonState === 0 && (
-        <label className='absolute bottom-[2rem] flex justify-center items-center w-[6rem] h-[6rem] sm:w-[150px] sm:h-[150px] rounded-full cursor-pointer bg-black text-white p-2.5 m-2.5 border-2 border-white hover:border-green-500 hover:border-4 hover:text-green-300'>
+        <label className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-white p-2.5 m-2.5 border-2 border-white hover:border-green-500 hover:border-4 hover:text-green-300'>
           {imgName}
           <input
             className='hidden'
@@ -377,7 +373,7 @@ export default function Home() {
       )}
       {buttonState === 1 && (
         <button
-          className='absolute bottom-[2rem] flex justify-center items-center w-[6rem] h-[6rem] sm:w-[150px] sm:h-[150px] rounded-full cursor-pointer bg-black text-green-300 p-2.5 m-2.5 border-2 border-green-500 hover:border-purple-500 hover:border-4 hover:text-purple-300'
+          className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-green-300 p-2.5 m-2.5 border-2 border-green-500 hover:border-purple-500 hover:border-4 hover:text-purple-300'
           onClick={uploadClick}
         >
           Upload
@@ -385,7 +381,7 @@ export default function Home() {
       )}
       {buttonState === 2 && (
         <label
-          className='absolute bottom-[2rem] flex justify-center items-center w-[6rem] h-[6rem] sm:w-[150px] sm:h-[150px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300'
+          className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300'
           onClick={clearClick}
         >
           Reset

@@ -22,6 +22,7 @@ export interface Top5Obj {
 export interface AccordionContent {
   type: 'Link' | 'Accordion';
   label: string;
+  key: string;
   path?: string;
   id?: string[];
   icon?: 'gear' | 'book' | 'pages';
