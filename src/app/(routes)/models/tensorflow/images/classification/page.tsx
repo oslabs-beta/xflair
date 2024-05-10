@@ -254,13 +254,11 @@ export default function Home() {
 
   useEffect(() => {
     if (fGifURL) {
-
-    let hGif = hGifURL;
-    setHGifURL('');
-    setHGifURL(hGif)
+      let hGif = hGifURL;
+      setHGifURL('');
+      setHGifURL(hGif);
     }
-  }
-  , [fGifURL, hGifURL]);
+  }, [fGifURL, hGifURL]);
 
   const clearClick = () => {
     inputImage = undefined;
@@ -286,70 +284,65 @@ export default function Home() {
   };
 
   return (
-    <div className='flex-grow bg-black'>
-      <main className='flex flex-1 justify-center items-center w-full'>
-        <div className='relative flex flex-col items-center bg-transparent h-full w-full ml-5%'>
-          <div className='text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2'>
-            <div className='flex flex-col items-center justify-center'>
-              {/* Your image and logo components here */}
-            </div>
-            {/* <div className="w-full flex justify-center items-center bg-transparent"> */}
-            <img
-              className='h-20 w-30 object-contain'
-              src='/title.png'
-              alt='titleText'
-            />
-            {/* </div> */}
-          </div>
-          <div className='flex flex-col min-h-[60vh] min-w-[60vw] max-w-[60vw] max-h-[70vh] relative'>
-            <div className='flex flex-col min-h-[50vh] min-w-[60vw] max-w-[50vw] max-h-[50vh]'>
-              {viz && (
-                <NewModal
-                  closeViz={closeViz}
-                  hGifURL={hGifURL}
-                  fGifURL={fGifURL}
-                  top5={top5Formatted}
-                  preprocessFilePath={preprocessFilePath}
+    <main className='flex-grow bg-black flex flex-1 justify-center items-center w-full'>
+      {/* Contains everything except Browse/Upload/Reset Button */}
+      <div className='relative flex flex-col items-center bg-transparent h-full w-full ml-5%'>
+        {/* Contains Title Image */}
+        <div className='text-xxl flex flex-row bg-[#f3ec78] bg-gradient-to-r from-[#af4261] to-[#f3ec78] mb-2'>
+          <div className='flex flex-col items-center justify-center'></div>
+          <img
+            className='short:hidden h-20 w-30 object-contain'
+            src='/title.png'
+            alt='titleText'
+          />
+        </div>
+        {/* Contains Image, Class, Modal, Analysis and Clear Buttons */}
+        <div className='flex flex-col items-center min-h-[60vh] max-h-[70vh] min-w-[90vw] max-w-[90vw] md:min-w-[60vw] md:max-w-[60vw] short:min-h-[80vh] short:max-h-[90vh] relative'>
+          {/* Contains Modal, Image, and Class */}
+          <div className='flex flex-col min-h-[50vh] min-w-[60vw] max-w-[50vw] max-h-[50vh] short:min-w-[70vw] short:max-w-[80vw]'>
+            {viz && (
+              <NewModal
+                closeViz={closeViz}
+                hGifURL={hGifURL}
+                fGifURL={fGifURL}
+                top5={top5Formatted}
+                preprocessFilePath={preprocessFilePath}
+              />
+            )}{' '}
+            {/* Contains Image and Class */}
+            <div className='flex-grow flex flex-col short:flex-row justify-around items-center'>
+              {imgURL && (
+                <img
+                  className='max-w-[40vw] max-h-[40vh] object-contain'
+                  src={imgURL}
+                  alt='UploadedImage'
                 />
-              )}{' '}
-              <div className='flex-grow flex flex-col justify-end items-center '>
-                {imgURL && (
-                  <img
-                    className='max-w-[45vw] max-h-[45vh] object-contain'
-                    src={imgURL}
-                    alt='UploadedImage'
-                  />
-                )}
-                <div className='flex-grow flex flex-col justify-end items-center min-h-1 pt-5'></div>
-                {vizState && (
-                  <>
-                    <h2 className='text-white'>
-                      Class: {formatString(predictionName)}
-                    </h2>
-                    {time > 0 && (
-                      <h2 className='text-white'>
-                        Time: {time.toFixed(2)} seconds
-                      </h2>
-                    )}
-                  </>
-                )}
-              </div>
+              )}
+              {vizState && (
+                <div className='text-white short:pl-3'>
+                  <h2>Class: {formatString(predictionName)}</h2>
+                  <h2>Time: {time.toFixed(2)} seconds</h2>
+                </div>
+              )}
             </div>
-            <button className='absolute bottom-0 flex justify-center items-center w-[120px] h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
+          </div>
+          {/* Contains Analysis and Clear Buttons */}
+          <div className='flex flex-row items-center w-full'>
+            <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
               <img
-                className='h-[65px] w-[90px] object-contain'
+                className='h-[35px] w-[45px] md:h-[65px] md:w-[90px] object-contain'
                 src='/logoBlack.png'
                 alt='logo'
               ></img>
             </button>
             {!vizState && (
-              <button className='absolute bottom-0 flex justify-center items-center w-[120px] h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
+              <button className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer text-xs bg-black text-slate-600 p-2.5 m-2.5 border-2 border-slate-600 py-5'>
                 Analysis Visualization
               </button>
             )}
             {vizState && (
               <button
-                className='absolute bottom-0 flex justify-center items-center w-[120px] h-[70px] rounded-full cursor-pointer bg-transparent text-xs text-transparent text-blue-500 p-2.5 m-2.5 border-2  border-[#f3ec78] hover:border-4 hover:text-[#f3ec78] hover:bg-black py-5'
+                className='absolute bottom-0 flex justify-center items-center w-[95px] h-[25px] md:w-[120px] md:h-[70px] rounded-full cursor-pointer bg-transparent text-xs text-transparent text-blue-500 p-2.5 m-2.5 border-2 border-[#f3ec78] hover:border-4 hover:text-[#f3ec78] hover:bg-black py-5'
                 onClick={vizClick}
               >
                 {' '}
@@ -364,39 +357,36 @@ export default function Home() {
               Clear
             </button>
           </div>
-          <div className='flex items-center justify-center h-full bg-cover bg-no-repeat w-3/4'>
-            {/* <div> */}
-          </div>
-          {/* <div className='flex justify-center items-end'></div> */}
         </div>
-        {buttonState === 0 && (
-          <label className='absolute bottom-[2rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-black text-white p-2.5 m-2.5 border-2 border-white hover:border-green-500 hover:border-4 hover:text-green-300'>
-            {imgName}
-            <input
-              className='hidden'
-              type='file'
-              accept='image/*'
-              onChange={browse}
-            />
-          </label>
-        )}
-        {buttonState === 1 && (
-          <button
-            className='absolute bottom-[2rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-black text-green-300 p-2.5 m-2.5 border-2 border-green-500 hover:border-purple-500 hover:border-4 hover:text-purple-300'
-            onClick={uploadClick}
-          >
-            Upload
-          </button>
-        )}
-        {buttonState === 2 && (
-          <label
-            className='absolute bottom-[2rem] flex justify-center items-center w-[150px] h-[150px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300'
-            onClick={clearClick}
-          >
-            Reset
-          </label>
-        )}
-      </main>
-    </div>
+      </div>
+      {/* Handles Browse/Upload/Reset Button */}
+      {buttonState === 0 && (
+        <label className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-white p-2.5 m-2.5 border-2 border-white hover:border-green-500 hover:border-4 hover:text-green-300'>
+          {imgName}
+          <input
+            className='hidden'
+            type='file'
+            accept='image/*'
+            onChange={browse}
+          />
+        </label>
+      )}
+      {buttonState === 1 && (
+        <button
+          className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-green-300 p-2.5 m-2.5 border-2 border-green-500 hover:border-purple-500 hover:border-4 hover:text-purple-300'
+          onClick={uploadClick}
+        >
+          Upload
+        </button>
+      )}
+      {buttonState === 2 && (
+        <label
+          className='absolute bottom-[2rem] short:bottom-[0.5rem] flex justify-center items-center w-[6rem] h-[6rem] md:w-[150px] md:h-[150px] short:w-[90px] short:h-[90px] rounded-full cursor-pointer bg-black text-slate-500 p-2.5 m-2.5 border-2 border-slate-500 hover:border-red-500 hover:border-4 hover:text-red-300'
+          onClick={clearClick}
+        >
+          Reset
+        </label>
+      )}
+    </main>
   );
 }

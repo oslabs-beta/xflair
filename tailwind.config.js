@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     'node_modules/preline/dist/*.js',
   ],
   theme: {
-    extend: {    
+    extend: {
       colors: {
         palette: {
           light: '#F5F3FF',
@@ -20,13 +22,13 @@ module.exports = {
         secondary: ['Open Sans'],
         saira: ['Saira'],
       },
+      screens: {
+        short: { raw: '(max-height: 600px)' },
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [
-    require('preline/plugin'),
-  ],
-}
-
+  plugins: [require('preline/plugin')],
+};
